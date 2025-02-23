@@ -1,0 +1,19 @@
+{
+  "name": "frahmon",
+  "version": "1.0.0",
+  "main": "root.js",
+  "scripts": {
+    "start": "nodemon start root.js"
+  },
+  "author": "Frata",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "auto-bind": "^4.0.0",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "mongoose": "^8.10.1"
+  }
+}

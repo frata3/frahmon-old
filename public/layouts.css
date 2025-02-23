@@ -1,0 +1,179 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Vazir;
+    background-color: #FAFAFA;
+    color: #333;
+}
+
+.container {
+    width: 100%; 
+    max-width: 95%;
+    margin: 0 auto;
+}
+.middle-row{
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.205);
+    margin: 0 auto 2rem;
+}
+.container section{
+    padding: 1rem;
+    max-width: 95%;
+    margin: 0 auto 20px;
+    /* border: 1px solid rgba(5, 5, 5, 0.137);  */
+    border-radius: 16px;
+}
+
+/* تنظیمات هدر */
+.header {
+    padding: 3rem ; /* فاصله از بالا و پایین */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between; /* فاصله بین عناصر */
+    align-items: center; /* هم‌ترازی عمودی */
+    position: relative; /* برای مرکز کردن تصویر */
+}
+
+/* تنظیمات تصویر وسط */
+.header-center {
+    position: absolute; /* قرار دادن تصویر دقیقا وسط */
+    left: 50%;
+    top: 2px;
+    transform: translateX(-50%); /* مرکز کردن دقیق تصویر */
+    max-height: 60px; /* محدود کردن ارتفاع تصویر */
+    display: flex;
+    align-items: center; /* هم‌ترازی عمودی */
+}
+
+.header-center img {
+    max-height: 300px; /* بیشترین ارتفاع تصویر */
+    width: auto; /* تناسب عرض با ارتفاع */
+}
+
+/* منوی سمت چپ */
+.header-left .btn {
+    text-decoration: none;
+    color: #fff;
+    background-color: #007BFF;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.header-left .btn:hover {
+    background-color: #0056b3;
+}
+/* تنظیمات پایه */
+.menu, .submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* استایل کلی منو */
+.header-right .menu {
+    display: flex; /* منو به‌صورت افقی */
+    /*gap: 1.5rem;  */
+}
+
+.header-right .menu > li {
+    position: relative; /* برای موقعیت‌دهی زیرمنو */
+}
+
+/* لینک‌های منو */
+.header-right .menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.header-right .menu a:hover {
+    color: #007BFF; /* تغییر رنگ متن هنگام هاور */
+    background-color: rgba(0, 123, 255, 0.1); /* پس‌زمینه ملایم هنگام هاور */
+    border-radius: 5px;
+}
+
+/* استایل زیرمنو */
+.submenu {
+    position: absolute;
+    top: 100%; /* زیر منوی والد قرار گیرد */
+    right: 0;
+    width: 240px;
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    display: none; /* زیرمنو مخفی */
+    z-index: 100; /* بالاتر از دیگر عناصر */
+}
+
+.submenu li a {
+    padding: 0.5rem 1rem;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.submenu li a:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+/* نمایش زیرمنو هنگام هاور */
+.menu li.menu-has-child:hover > .submenu {
+    display: block; /* نمایش زیرمنو */
+}
+
+img{
+    max-width: min-content;
+    max-height: min-content;
+    /* width: 100px; */
+}
+/* سکشن تصویر و متن */
+.image-text-section {
+    display: flex; /* فعال‌سازی Flexbox */
+    justify-content: space-between; /* قرار دادن عناصر در دو سمت صفحه */
+    align-items: center; /* هم‌ترازی عمودی عناصر */
+    padding: 1rem 0; /* فاصله از بالا و پایین */
+}
+
+.image-text-section .image-box {
+    width: 450px; /* ثابت نگه‌داشتن عرض تصویر */
+    height: 350px; /* مربع کردن تصویر */
+    flex-shrink: 0; /* جلوگیری از کوچک شدن تصویر */
+}
+
+.image-text-section .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* تناسب تصویر */
+    border-radius: 8px; /* گوشه‌های ملایم */
+}
+
+.image-text-section .text-box {
+    max-width: 55%; /* عرض متن */
+    text-align: right; /* راست‌چین کردن متن */
+}
+
+
+.image-text-section .text-box h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    color: var(--title-color);
+}
+
+.image-text-section .text-box p {
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #555;
+}

@@ -1,0 +1,8 @@
+<h1>لیست مقالات</h1>
+<% posts.forEach(post => { %>
+  <post>
+    <h2><a href="/post/<%= post.titlePath %>"><%= post.title %></a></h2>
+    <p><%= post.description %></p>
+    <span>نویسنده: <%= post.author.name %></span>
+  </post>
+<% }) %>
