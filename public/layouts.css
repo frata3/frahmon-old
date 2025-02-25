@@ -53,15 +53,16 @@ body {
 }
 
 .header-center img {
-    max-height: 300px; /* بیشترین ارتفاع تصویر */
+    max-height: 100px; /* بیشترین ارتفاع تصویر */
     width: auto; /* تناسب عرض با ارتفاع */
+    border-radius: 10px;
 }
 
 /* منوی سمت چپ */
 .header-left .btn {
     text-decoration: none;
     color: #fff;
-    background-color: #007BFF;
+    background-color: #333;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     font-size: 0.9rem;

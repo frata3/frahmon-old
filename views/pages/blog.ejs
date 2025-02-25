@@ -7,12 +7,12 @@
         <% posts.forEach(post => { %>
         <!-- پست تکی -->
         <div class="blog-post">
-            <img src="<%= post.thumbnail || '/images/default-thumbnail.jpg' %>" alt="تصویر مقاله">
+            <img src="<%= post.thumbnail || '/blog/pictures/111.png' %>" alt="تصویر مقاله">
             <div class="blog-content">
                 <h3 class="blog-post-title"><%= post.title %></h3>
                 <p class="blog-post-description"><%= post.description %></p>
                 <div class="blog-post-footer">
-                    <a href="/blogs/<%= post.titlePath %>" class="read-more">ادامه مطلب</a>
+                    <a href="/blog/<%= post.titlePath %>" class="read-more">ادامه مطلب</a>
                     <span class="date">
                         <%= post.publishDate ? new Date(post.publishDate).toLocaleDateString('fa-IR') : 'منتشر نشده' %>
                     </span>

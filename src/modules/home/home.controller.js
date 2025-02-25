@@ -9,8 +9,7 @@ class HomeController {
       try {
         res.render("./pages/home", {
           title: "صفحه اصلی",
-          settings: res.locals.settings,
-        cssFile: "/home/style.css"
+          settings: res.locals.settings
       });
     } catch (error) {
       next(error);

@@ -26,10 +26,11 @@ class PostController {
       if (!post) {
         return res.status(404).send("پست مورد نظر یافت نشد.");
       }
-      res.render(`pages/website/post.ejs`, {
+      res.render(`pages/post.ejs`, {
         post,
-        layout: `layouts/website/main`,
+        layout: `layouts/main`,
         title: "صفحه اصلی",
+        cssFile: "/blog/post.css"
       });
     } catch (error) {
       next(error);
