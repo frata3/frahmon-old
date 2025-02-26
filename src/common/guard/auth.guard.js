@@ -1,26 +1,19 @@
-const userModel = require("../../modules/user/user.model");
+const UserService = require("../../modules/user/services/user.service");
 
 const Authorization = async (req, res, next) => {
   try {
-    if (!req.session.userId) {
+    if (!req.session.user || !req.session.user._id) {
       return res.redirect("/auth/login");
     }
-    const user = await userModel
-      .findById(req.session.user.id, { password: 0, __v: 0, updatedAt: 0 })
-      .lean();
+    const user = await UserService.findOne({ _id: req.session.user._id });
 
     if (!user) {
-      console.log("auth 3");
-
       return res.redirect("/auth/login");
     }
-    console.log("auth 4");
-
     req.session.user = user;
-    return next();
+    next();
   } catch (error) {
-    console.error("Authorization - Error:", error);
-    return res.redirect("/auth/login");
+    next(error);
   }
 };
 

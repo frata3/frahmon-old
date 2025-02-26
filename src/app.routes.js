@@ -3,7 +3,7 @@ const { Router } = require("express");
 // const marketplaceRoutes = require("./modules/marketplace/marketplace.routes");
 // const legalEntityRoutes = require("./modules/legal/legal.routes");
 const postRoutes = require("./modules/post/post.routes");
-const userRoutes = require("./modules/user/user.routes");
+const userRoutes = require("./modules/user/routes/user.routes");
 const Authorization = require("./common/guard/auth.guard");
 const authRoutes = require("./modules/auth/auth.routes");
 const settingsLoader = require("./common/middleware/settings");
@@ -14,9 +14,8 @@ const mainRouter = Router();
 mainRouter.use(settingsLoader);
 mainRouter.use("/seed", seedRoutes);
 
-const setDefaultLayout = (layoutPath,cssFile) => (req, res, next) => {
+const setDefaultLayout = (layoutPath) => (req, res, next) => {
   req.app.set("layout", layoutPath);
-  res.locals.cssFile = cssFile;
   next();
 };
 
@@ -24,9 +23,9 @@ mainRouter.get("/", setDefaultLayout("layouts/main","/home/style.css"), homeCont
 
 mainRouter.use("/blog", setDefaultLayout("layouts/main"), postRoutes);
 
-mainRouter.use("/nest", setDefaultLayout("layouts/main", "/auth/style.css"), Authorization, userRoutes);
+mainRouter.use("/nest", setDefaultLayout("layouts/nest/main"), Authorization, userRoutes);
 
-mainRouter.use("/auth", setDefaultLayout("layouts/main", "/auth/style.css"), authRoutes);
+mainRouter.use("/auth", setDefaultLayout("layouts/main"), authRoutes);
 
 // mainRouter.use("/panel", setDefaultLayout("layouts/panel/main"), Authorization, (req, res, next) => {
 //   try {

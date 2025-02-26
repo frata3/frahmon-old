@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/nest/style.css">
+    <% if (cssFile) { %>
+        <link rel="stylesheet" href="<%= cssFile %>">
+    <% } %>
+    <script defer src="/nest/script.js"></script>
+</head>
+<body>
+  <%- include("./header") %>  
+        <%- body %>
+  <%- include("./footer") %>
+
+</body>
+</html>

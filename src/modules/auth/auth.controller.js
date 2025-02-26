@@ -19,16 +19,22 @@ class AuthController {
   }
   async register(req, res, next) {
     try {
-      await this.#service.createUser(req.body);
-      res.redirect("/auth/auth/login");
+      const { fullname, password, email } = req.body;
+      await this.#service.createUser({ fullname, password, email });
+      res.redirect("/auth/login");
     } catch (error) {
-      next(error);
+      res.render("pages/auth/register", {
+        title: "ساخت حساب",
+        cssFile: "/auth/style.css",
+        errorMessage: error.message,
+      });
     }
   }
   async loginPage(req, res, next) {
     try {
       res.render("pages/auth/login", {
         title: "ورود به حساب",
+        cssFile: "/auth/style.css",
       });
     } catch (error) {
       next(error);
@@ -36,15 +42,16 @@ class AuthController {
   }
   async login(req, res, next) {
     try {
-      const user = await this.#service.authenticate(req.body);
-      req.session.user = {
-        id: user._id,
-        fullname: user.fullname,
-        email: user.email,
-      };
+      const { email, password } = req.body;
+      const user = await this.#service.authenticate({ email, password });
+      req.session.user = user;
       res.redirect("/nest");
     } catch (error) {
-      next(error);
+      res.render("pages/auth/login", {
+        title: "ورود",
+        cssFile: "/auth/style.css",
+        errorMessage: error.message,
+      });
     }
   }
   logout(req, res) {
@@ -53,5 +60,4 @@ class AuthController {
     });
   }
 }
-
 module.exports = new AuthController();

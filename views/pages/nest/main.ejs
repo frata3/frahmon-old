@@ -1,0 +1,21 @@
+<main class="main-content">
+    <section class="welcome-section">
+        <h2>خوش آمدید، <%= user.fullname %>!</h2>
+        <p>این ناحیه کاربری شماست. از امکانات آن لذت ببرید.</p>
+    </section>
+
+    <section class="info-section">
+        <div class="info-box">
+            <h3>اطلاعات حساب</h3>
+            <p>ایمیل: <%= user.email %></p>
+            <p>تاریخ عضویت: ۱۴۰۲/۰۱/۰۱</p>
+        </div>
+        <div class="info-box">
+            <h3>آخرین فعالیت‌ها</h3>
+            <ul>
+                <li>ورود موفق - ۱۴۰۲/۰۷/۱۵</li>
+                <li>تغییر رمز عبور - ۱۴۰۲/۰۷/۱۰</li>
+            </ul>
+        </div>
+    </section>
+</main>
