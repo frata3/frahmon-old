@@ -8,13 +8,17 @@ class PostService {
     this.#model = PostModel;
   }
   async getPosts() {
-    return await PostModel.find()
+    return await this.#model.find()
       .sort({ publishDate: -1 })
-      .populate("author category");
   }
   async getPostByTitlePath(titlePath) {
     const post = await this.#model.findOne({ titlePath: titlePath });
     return post;
+  }
+  async createPost(postData) {
+    const newPost = new this.#model(postData);
+    await newPost.save();
+    return newPost;
   }
 }
 module.exports = new PostService();

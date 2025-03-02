@@ -13,7 +13,9 @@ class PostController {
       res.render("pages/blog", {
         posts,
         title: "نگارستان",
-        cssFile: "/blog/style.css"
+        cssFile: "/blog/style.css",
+        user: req.session.user
+
       });
     } catch (error) {
       next(error);
@@ -30,7 +32,9 @@ class PostController {
         post,
         layout: `layouts/main`,
         title: "صفحه اصلی",
-        cssFile: "/blog/post.css"
+        cssFile: "/blog/post.css",
+        user: req.session.user
+
       });
     } catch (error) {
       next(error);

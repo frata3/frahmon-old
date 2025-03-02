@@ -9,5 +9,11 @@ router.get("/personal-info", UserController.personalInfoPage);
 router.post("/update-personal-info", UserController.updatePersonalInfo);
 router.post("/update-user-password", UserController.updateUserPassword);
 
+router.get("/blog/create-post", UserController.createPostPage);
+router.post("/blog/create-post", UserController.createPost);
+
+router.get("/store/add-item", UserController.createPostPage);
+router.post("/store/add-item", UserController.createPost);
+
 module.exports = router;
  

@@ -9,7 +9,9 @@ class HomeController {
       try {
         res.render("./pages/home", {
           title: "صفحه اصلی",
-          settings: res.locals.settings
+          settings: res.locals.settings,
+          cssFile: "home/style.css",
+          user: req.session.user
       });
     } catch (error) {
       next(error);

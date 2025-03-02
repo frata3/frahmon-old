@@ -19,7 +19,7 @@ const setDefaultLayout = (layoutPath) => (req, res, next) => {
   next();
 };
 
-mainRouter.get("/", setDefaultLayout("layouts/main","/home/style.css"), homeController.index);
+mainRouter.get("/", setDefaultLayout("layouts/main"), homeController.index);
 
 mainRouter.use("/blog", setDefaultLayout("layouts/main"), postRoutes);
 

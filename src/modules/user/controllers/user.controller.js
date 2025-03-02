@@ -1,6 +1,6 @@
 const autoBind = require("auto-bind");
 const UserService = require("../services/user.service");
-
+const bcrypt = require("bcrypt");
 class UserController {
   #service;
   constructor() {
@@ -11,7 +11,7 @@ class UserController {
     try {
       res.render("pages/nest/main", {
         title: "ناحیه کاربری",
-        // cssFile: "/nest/personal-info.css",
+        cssFile: "/nest/personal-info.css",
         user: req.session.user,
       });
     } catch (error) {
@@ -50,11 +50,15 @@ class UserController {
         }
       }
       if (field === "password") {
+        const isMatch = await bcrypt.compare(value, user.password);
+        if (isMatch) {
+          return res.status(400).json({
+            success: false,
+            message: "رمز عبور جدید نمی‌تواند همان رمز قبلی باشد.",
+          });
+        }
         user.password = await bcrypt.hash(value, 10);
-      } else {
-        user[field] = value;
       }
-
       if (!user) {
         return res
           .status(404)
@@ -90,6 +94,68 @@ class UserController {
       res
         .status(500)
         .json({ success: false, message: "خطا در دریافت رمز عبور" });
+    }
+  }
+  async createPostPage(req, res, next) {
+    try {
+      res.render("pages/nest/create-post", {
+        title: "ساخت پست بلاگ",
+        cssFile: "/nest/create-post.css",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async createPost(req, res, next) {
+    try {
+      const { title, titlePath, description, content, author } = req.body;
+      console.log(req.body);
+      if (!titlePath || !title || !description || !content || !author) {
+        throw new Error("تمام فیلدهای اجباری باید پر شوند!");
+      }
+      const postData = {
+        title,
+        titlePath,
+        description,
+        content,
+        author,
+      };
+
+      await this.#service.createPost(postData);
+      res.redirect("/nest");
+    } catch (error) {
+      next(error);
+    }
+  }
+  async addItemPage(req, res, next) {
+    try {
+      res.render("pages/nest/add-item", {
+        title: "ساخت پست بلاگ",
+        cssFile: "/nest/add-item.css",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async addItem(req, res, next) {
+    try {
+      const { title, titlePath, description, content, author } = req.body;
+      console.log(req.body);
+      if (!titlePath || !title || !description || !content || !author) {
+        throw new Error("تمام فیلدهای اجباری باید پر شوند!");
+      }
+      const postData = {
+        title,
+        titlePath,
+        description,
+        content,
+        author,
+      };
+
+      await this.#service.createPost(postData);
+      res.redirect("/nest");
+    } catch (error) {
+      next(error);
     }
   }
 }
