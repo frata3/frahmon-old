@@ -10,12 +10,11 @@ class PostController {
   async showPosts(req, res, next) {
     try {
       const posts = await this.#service.getPosts();
-      res.render("pages/blog", {
+      res.render("pages/blog/blog", {
         posts,
         title: "نگارستان",
-        cssFile: "/blog/style.css",
+        cssFile: "/assets/css/blog/style.css",
         user: req.session.user
-
       });
     } catch (error) {
       next(error);
@@ -30,9 +29,8 @@ class PostController {
       }
       res.render(`pages/post.ejs`, {
         post,
-        layout: `layouts/main`,
         title: "صفحه اصلی",
-        cssFile: "/blog/post.css",
+        cssFile: "/assets/css/blog/post.css",
         user: req.session.user
 
       });

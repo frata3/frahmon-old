@@ -11,7 +11,7 @@ class AuthController {
     try {
       res.render("pages/auth/register", {
         title: "ساخت حساب",
-        cssFile: "/auth/style.css",
+        cssFile: "/assets/css/auth/style.css",
       });
     } catch (error) {
       next(error);
@@ -25,7 +25,7 @@ class AuthController {
     } catch (error) {
       res.render("pages/auth/register", {
         title: "ساخت حساب",
-        cssFile: "/auth/style.css",
+        cssFile: "/assets/css/auth/style.css",
         errorMessage: error.message,
       });
     }
@@ -34,7 +34,7 @@ class AuthController {
     try {
       res.render("pages/auth/login", {
         title: "ورود به حساب",
-        cssFile: "/auth/style.css",
+        cssFile: "/assets/css/auth/style.css",
       });
     } catch (error) {
       next(error);
@@ -45,18 +45,18 @@ class AuthController {
       const { email, password } = req.body;
       const user = await this.#service.authenticate({ email, password });
       req.session.user = user;
-      res.redirect("/nest");
+      res.redirect("/user");
     } catch (error) {
       res.render("pages/auth/login", {
         title: "ورود",
-        cssFile: "/auth/style.css",
+        cssFile: "/assets/css/auth/style.css",
         errorMessage: error.message,
       });
     }
   }
   logout(req, res) {
     req.session.destroy(() => {
-      res.redirect("/auth/auth/login");
+      res.redirect("/");
     });
   }
 }

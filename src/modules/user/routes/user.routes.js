@@ -1,19 +1,27 @@
 const { Router } = require("express");
-const UserController = require("../controllers/user.controller");
-const Authorization = require("../../../common/guard/auth.guard");
+const userController = require("../controllers/user.account.controller");
+const userProfileRouter = require("./user.profile.routes");
+const userAccountRouter = require("./user.account.routes");
+const userBlogRouter = require("./user.blog.routes");
 
 const router = Router();
-router.use(Authorization);
-router.get("/", UserController.nestMainPage);
-router.get("/personal-info", UserController.personalInfoPage);
-router.post("/update-personal-info", UserController.updatePersonalInfo);
-router.post("/update-user-password", UserController.updateUserPassword);
+router.get("/", async (req, res, next) => {
+    try {
+      res.render("pages/user/main", {
+        title: "ناحیه کاربری",
+        user: req.session.user,
+      });
+    } catch (error) {
+      next(error);
+    }
+});
 
-router.get("/blog/create-post", UserController.createPostPage);
-router.post("/blog/create-post", UserController.createPost);
+router.use("/profile", userProfileRouter);
+router.use("/blog", userBlogRouter); 
+router.use("/account", userAccountRouter);
 
-router.get("/store/add-item", UserController.createPostPage);
-router.post("/store/add-item", UserController.createPost);
+router.post("/update-personal-info", userController.updatePersonalInfo);
+router.post("/update-user-password", userController.updateUserPassword);
 
 module.exports = router;
- 
+  

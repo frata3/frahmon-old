@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/assets/css/user/main.css">
+    <link rel="stylesheet" href="/assets/css/user/sidebar.css">
+    <% if (typeof cssFile !== 'undefined') { %>
+        <link rel="stylesheet" href="<%= cssFile %>">
+    <% } %>
+</head>
+<body>
+    <div class="user-container">
+        <%- include('./sidebar') %>
+        <main class="user-content">
+            <%- body %>
+        </main>
+    </div>
+</body>
+<script src="/scripts/script.js"></script>
+</html>

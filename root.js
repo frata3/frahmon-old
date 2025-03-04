@@ -30,14 +30,20 @@ async function main() {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-    app.use(express.static("public"));
-    app.set("view engine", "ejs");
+  app.use((req, res, next) => {
+    if (req.path.startsWith("/assets/css/dynamic")) {
+      return next();
+    }
+    express.static("public")(req, res, next);
+  });
+  
+  app.set("view engine", "ejs");
   app.set("views", "./views");
   app.use(expressEjsLayouts);
-
-  app.set("layout", "./layouts/default"); 
+  app.set("layout", "./layouts/default");
 
   app.use(mainRouter);
+
   notFoundHandler(app);
   allExceptionHandler(app);
   app.listen(port, () => {

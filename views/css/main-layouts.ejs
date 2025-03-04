@@ -1,0 +1,11 @@
+<style>
+:root {
+    --background-color: '#333' ;
+    --primary-color: <%= settings.colors?.primaryColor || '#3498db' %>;
+    --secondary-color: "<%= settings.colors?.secondaryColor || '#2ecc71' %>";
+}
+body{
+    background-color: var(--background-color);
+    font-family: Vazir;
+}
+</style>

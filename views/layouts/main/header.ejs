@@ -1,0 +1,42 @@
+<header class="header">
+    <div class="container header-content">
+        <!-- منوی سمت راست -->
+         <nav class="header-right">
+            <ul class="menu">
+                <li><a href="/">خانه</a></li>
+                <li><a href="/blog">نگارستان</a></li>
+
+            </ul>
+        </nav> 
+        <% if (settings.navbar > 0) { %>
+        <nav class="header-right">
+            <ul class="menu">
+              <% settings.navbar.forEach(menu => { %>
+                <li class="<%= menu.submenu.length > 0 ? 'menu-has-child' : '' %>">
+                  <a href="<%= menu.link %>"> <%= menu.title %> </a>
+                  <% if (menu.submenu.length > 0) { %>
+                    <ul class="submenu">
+                      <% menu.submenu.forEach(sub => { %>
+                        <li><a href="<%= sub.link %>"> <%= sub.title %> </a></li>
+                      <% }) %>
+                    </ul>
+                  <% } %>
+                </li>
+              <% }) %>
+            </ul>
+        </nav>
+        <% } %>
+          
+        <!-- تصویر وسط -->
+        <div class="header-center">
+            <a href="/"><img src="/assets/pictures/header.jpg" alt="لوگو سایت" /></a>
+        </div>
+
+        <!-- منوی سمت چپ -->
+        <div class="header-left">
+          <a href="/user" class="btn">
+            <%= (typeof user !== 'undefined') ? user.fullname : "حساب کاربری" %>
+        </a>        
+        </div>
+    </div>
+</header> 

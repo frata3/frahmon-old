@@ -1,44 +1,46 @@
 const { Router } = require("express");
-// const forumRoutes = require("./modules/forum/forum.routes");
-// const marketplaceRoutes = require("./modules/marketplace/marketplace.routes");
-// const legalEntityRoutes = require("./modules/legal/legal.routes");
 const postRoutes = require("./modules/post/post.routes");
 const userRoutes = require("./modules/user/routes/user.routes");
 const Authorization = require("./common/guard/auth.guard");
 const authRoutes = require("./modules/auth/auth.routes");
 const settingsLoader = require("./common/middleware/settings");
-const homeController = require("./modules/home/home.controller");
-const seedRoutes = require("./modules/seed/seed.routes");
+const setLayout = require("./common/middleware/setLayout");
 const mainRouter = Router();
 
 mainRouter.use(settingsLoader);
-mainRouter.use("/seed", seedRoutes);
 
-const setDefaultLayout = (layoutPath) => (req, res, next) => {
-  req.app.set("layout", layoutPath);
-  next();
-};
+mainRouter.get("/assets/css/dynamic/main-layouts.css", async (req, res) => {
+  try {
+    res.set("Content-Type", "text/css");
+    res.render("./css/main-layouts.ejs", {
+      settings: res.locals.settings,
+      title: "صفحه اصلی",
+     });
+  } catch (error) {
+    console.log("خطا در تولید فایل CSS:", error);
+    res.status(500).send("خطا در پردازش فایل CSS");
+  }
+});
 
-mainRouter.get("/", setDefaultLayout("layouts/main"), homeController.index);
 
-mainRouter.use("/blog", setDefaultLayout("layouts/main"), postRoutes);
+mainRouter.get("/", setLayout("layouts/main/main"), async (req, res) => {
+  res.render("./pages/home", {
+    title: "صفحه اصلی",
+    settings: res.locals.settings,
+    cssFile: "/assets/css/home/style.css",
+    user: req.session.user,
+  });
+});
 
-mainRouter.use("/nest", setDefaultLayout("layouts/nest/main"), Authorization, userRoutes);
+mainRouter.use("/blog", setLayout("layouts/main/main"), postRoutes);
 
-mainRouter.use("/auth", setDefaultLayout("layouts/main"), authRoutes);
+mainRouter.use(
+  "/user",
+  setLayout("layouts/user/main"),
+  Authorization,
+  userRoutes
+);
 
-// mainRouter.use("/panel", setDefaultLayout("layouts/panel/main"), Authorization, (req, res, next) => {
-//   try {
-//     res.render("pages/panel/index", { user: req.session.user });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-// mainRouter.use(websiteSettings);
-
-// mainRouter.use("/forum", forumRoutes);
-// mainRouter.use("/marketplace", marketplaceRoutes);
-// mainRouter.use("/legal", legalEntityRoutes);
+mainRouter.use("/auth", setLayout("layouts/main"), authRoutes);
 
 module.exports = mainRouter;
