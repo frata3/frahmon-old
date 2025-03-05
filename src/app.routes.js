@@ -9,12 +9,12 @@ const mainRouter = Router();
 
 mainRouter.use(settingsLoader);
 
-mainRouter.get("/assets/css/dynamic/main-layouts.css", async (req, res) => {
+mainRouter.get("/assets/css/dynamic/:file", async (req, res) => {
   try {
     res.set("Content-Type", "text/css");
-    res.render("./css/main-layouts.ejs", {
+    res.render(`./css/${req.params.file}.ejs`, {
       settings: res.locals.settings,
-      title: "صفحه اصلی",
+      layout: false
      });
   } catch (error) {
     console.log("خطا در تولید فایل CSS:", error);
