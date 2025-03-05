@@ -27,7 +27,7 @@ class PostController {
       if (!post) {
         return res.status(404).send("پست مورد نظر یافت نشد.");
       }
-      res.render(`pages/post.ejs`, {
+      res.render(`pages/blog/post.ejs`, {
         post,
         title: "صفحه اصلی",
         cssFile: "/assets/css/blog/post.css",

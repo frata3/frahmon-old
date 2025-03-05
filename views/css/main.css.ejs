@@ -1,9 +1,5 @@
 :root {
-    --background-color: #333 ;
+    --background-color: <%= settings.colors?.backgroundColor || '#181a1b' %> ;
     --primary-color: <%= settings.colors?.primaryColor || '#3498db' %>;
     --secondary-color: "<%= settings.colors?.secondaryColor || '#2ecc71' %>";
-}
-body{
-    background-color: #633;
-    font-family: Vazir;
 }

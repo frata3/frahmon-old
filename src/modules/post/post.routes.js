@@ -4,6 +4,6 @@ const router = Router();
 
 
 router.get("/", postController.showPosts);
-router.get("/:titlePath", postController.getPost);
+router.get("/post/:titlePath", postController.getPost);
 
 module.exports = router;

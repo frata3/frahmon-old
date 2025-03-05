@@ -1,0 +1,10 @@
+<h1>دسته‌بندی: <%= category.name %></h1>
+<ul>
+  <% topics.forEach(topic => { %>
+    <li>
+      <a href="/category/<%= category.slug %>/topic/<%= topic.slug %>">
+        <%= topic.name %>
+      </a>
+    </li>
+  <% }); %>
+</ul>
