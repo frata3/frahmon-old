@@ -19,8 +19,8 @@ class AuthController {
   }
   async register(req, res, next) {
     try {
-      const { fullname, password, email } = req.body;
-      await this.#service.createUser({ fullname, password, email });
+      const { fullname, password, email, username } = req.body;
+      await this.#service.createUser({ fullname, password, email, username });
       res.redirect("/auth/login");
     } catch (error) {
       res.render("pages/auth/register", {
@@ -45,7 +45,7 @@ class AuthController {
       const { email, password } = req.body;
       const user = await this.#service.authenticate({ email, password });
       req.session.user = user;
-      res.redirect("/user");
+      res.redirect("/me");
     } catch (error) {
       res.render("pages/auth/login", {
         title: "ورود",

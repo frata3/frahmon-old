@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+const {Schema, model} = require('mongoose');
 
-const settingsSchema = new mongoose.Schema({
-  colors: { type: mongoose.Schema.Types.ObjectId, ref: 'SettingColors' },
-  icons: { type: mongoose.Schema.Types.ObjectId, ref: 'SettingIcons' },
+const settingsSchema = new Schema({
+  colors: { type: Schema.Types.ObjectId, ref: 'Colors' },
+  icons: { type: Schema.Types.ObjectId, ref: 'Icons' },
 });
 
 
 
-module.exports = mongoose.model('Settings', settingsSchema);
+module.exports = model('Settings', settingsSchema);

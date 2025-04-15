@@ -9,9 +9,9 @@ class UserController {
   }
   async userMainPage(req, res, next) {
     try {
-      res.render("pages/user/main", {
+      res.render("pages/me/main", {
         title: "ناحیه کاربری",
-        cssFile: "/user/personal-info.css",
+        cssFile: "/me/personal-info.css",
         user: req.session.user,
       });
     } catch (error) {
@@ -20,9 +20,9 @@ class UserController {
   }
   async personalInfoPage(req, res, next) {
     try {
-      res.render("pages/user/account", {
+      res.render("pages/me/account", {
         title: "ناحیه کاربری",
-        cssFile: "/assets/css/user/account.css",
+        cssFile: "/assets/css/me/account.css",
         user: req.session.user,
       });
     } catch (error) {
@@ -46,6 +46,15 @@ class UserController {
           return res.status(400).json({
             success: false,
             message: "این ایمیل قبلاً استفاده شده است.",
+          });
+        }
+      }
+      if (field === "username") {
+        const existingUser = await this.#service.findOne({ username: value });
+        if (existingUser && existingUser._id.toString() !== userId) {
+          return res.status(400).json({
+            success: false,
+            message: "این نام کاربری قبلاً استفاده شده است.",
           });
         }
       }
@@ -94,68 +103,6 @@ class UserController {
       res
         .status(500)
         .json({ success: false, message: "خطا در دریافت رمز عبور" });
-    }
-  }
-  async createPostPage(req, res, next) {
-    try {
-      res.render("pages/user/create-post", {
-        title: "ساخت پست بلاگ",
-        cssFile: "/user/create-post.css",
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
-  async createPost(req, res, next) {
-    try {
-      const { title, titlePath, description, content, author } = req.body;
-      console.log(req.body);
-      if (!titlePath || !title || !description || !content || !author) {
-        throw new Error("تمام فیلدهای اجباری باید پر شوند!");
-      }
-      const postData = {
-        title,
-        titlePath,
-        description,
-        content,
-        author,
-      };
-
-      await this.#service.createPost(postData);
-      res.redirect("/user");
-    } catch (error) {
-      next(error);
-    }
-  }
-  async addItemPage(req, res, next) {
-    try {
-      res.render("pages/user/add-item", {
-        title: "اضافه کردن محصول",
-        cssFile: "/user/add-item.css",
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
-  async addItem(req, res, next) {
-    try {
-      const { title, titlePath, description, content, author } = req.body;
-      console.log(req.body);
-      if (!titlePath || !title || !description || !content || !author) {
-        throw new Error("تمام فیلدهای اجباری باید پر شوند!");
-      }
-      const postData = {
-        title,
-        titlePath,
-        description,
-        content,
-        author,
-      };
-
-      await this.#service.createPost(postData);
-      res.redirect("/user");
-    } catch (error) {
-      next(error);
     }
   }
 }

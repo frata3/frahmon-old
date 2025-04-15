@@ -1,10 +1,11 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require("mongoose");
 
-const tagSchema = new mongoose.Schema({
+
+const tagSchema = new Schema({
     name: { type: String, required: true },
-    slug: { type: String, required: true, unique: true },
-    topics: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Topic' }],
+    slug: { type: String, required: true, unique: true }, 
+    topic: [{ type: Schema.Types.ObjectId, ref: 'Topic' }],
   });
   
-  module.exports = mongoose.model('Tag', tagSchema);
+  module.exports = model('Tag', tagSchema);
   

@@ -12,9 +12,9 @@ class PostController {
       const posts = await this.#service.getPosts();
       res.render("pages/blog/blog", {
         posts,
-        title: "نگارستان",
+        title: "بلاگ",
         cssFile: "/assets/css/blog/style.css",
-        user: req.session.user
+        user: req.session.user,
       });
     } catch (error) {
       next(error);
@@ -22,17 +22,18 @@ class PostController {
   }
   async getPost(req, res, next) {
     try {
-      const { titlePath } = req.params;
-      const post = await this.#service.getPostByTitlePath(titlePath);
+      const { slug } = req.params;
+      const post = await this.#service.getPostBySlug(slug);
       if (!post) {
         return res.status(404).send("پست مورد نظر یافت نشد.");
       }
-      res.render(`pages/blog/post.ejs`, {
+      // console.log("testGetPost : \n   "+ JSON.stringify(post, null, 2));
+      res.render("pages/blog/post.ejs", {
         post,
+        authorName: post.author?.fullname || "کاربر ناشناس",
         title: "صفحه اصلی",
         cssFile: "/assets/css/blog/post.css",
-        user: req.session.user
-
+        user: req.session.user,
       });
     } catch (error) {
       next(error);

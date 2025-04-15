@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const expressEjsLayouts = require("express-ejs-layouts");
-const mainRouter = require("./src/app.routes");
+const appRouter = require("./src/app.routes");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const notFoundHandler = require("./src/common/exception/not-found.handler");
@@ -42,7 +42,7 @@ async function main() {
   app.use(expressEjsLayouts);
   app.set("layout", "./layouts/default");
 
-  app.use(mainRouter);
+  app.use(appRouter);
 
   notFoundHandler(app);
   allExceptionHandler(app);

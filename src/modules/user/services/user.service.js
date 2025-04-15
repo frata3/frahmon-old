@@ -1,13 +1,13 @@
 const autoBind = require("auto-bind");
 const UserModel = require("../models/user.model");
-const postModel = require("../../post/post.model")
+const postService = require("../../post/post.service");
 class UserService {
   #userModel;
-  #postModel;
+  #postService;
   constructor() {
     autoBind(this);
     this.#userModel = UserModel;
-    this.#postModel = postModel;
+    this.#postService = postService;
   }
 
   async findOne(query) {
@@ -17,18 +17,16 @@ class UserService {
   async create(userData) {
     const user = new this.#userModel(userData);
     await user.save();
-    return user
+    return user;
   }
   async findById(id) {
     return await this.#userModel.findById(id);
   }
+  async findPosts(id) {
+    return await this.#postService.getPostsByUser(id);
+  }
   async createPost(postData) {
-    const existingPost = await this.#postModel.findOne({ path: postData.titlePath });
-    if (existingPost) {
-      throw new Error("این آدرس پست قبلا ثبت شده");
-    }
-    return this.#postModel.create(postData);
+    return await this.#postService.create(postData);
   }
 }
-
 module.exports = new UserService();

@@ -5,8 +5,9 @@
 }
 
 body {
-    background-color: var(--background-color);
+    background-color: var(--body-background-color);
     color: var(--primary-color); 
+    font-family: Vazir;
 }
 
 .container {
@@ -30,8 +31,9 @@ body {
 
 /* تنظیمات هدر */
 .header {
+        background-color: var(--container-background-color);
+
     padding: 3rem ; /* فاصله از بالا و پایین */
-    background-color: #f3c2e362;
     border-radius: 10px;
     margin: 20px;
 }
@@ -60,19 +62,20 @@ body {
     border-radius: 10px;
 }
 
-/* منوی سمت چپ */
 .header-left .btn {
     text-decoration: none;
     color: var(--secondary-color);
-    /* color: aqua; */
     background-color: #333;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     font-size: 0.9rem;
+    border: 1px solid;
+
 }
 
 .header-left .btn:hover {
-    background-color: var(--secondary-color);
+    opacity: .7;
+    border-color: var(--secondary-color);
 }
 /* تنظیمات پایه */
 .menu, .submenu {
@@ -85,6 +88,8 @@ body {
 .header-right .menu {
     display: flex; /* منو به‌صورت افقی */
     /*gap: 1.5rem;  */
+    
+
 }
 
 .header-right .menu > li {
@@ -103,8 +108,7 @@ body {
 }
 
 .header-right .menu a:hover {
-    color: #007BFF; /* تغییر رنگ متن هنگام هاور */
-    background-color: rgba(0, 123, 255, 0.1); /* پس‌زمینه ملایم هنگام هاور */
+    color: var(--primary-color); /* تغییر رنگ متن هنگام هاور */
     border-radius: 5px;
 }
 
@@ -149,6 +153,7 @@ img{
     justify-content: space-between; /* قرار دادن عناصر در دو سمت صفحه */
     align-items: center; /* هم‌ترازی عمودی عناصر */
     padding: 1rem 0; /* فاصله از بالا و پایین */
+
 }
 
 .image-text-section .image-box {
@@ -198,7 +203,7 @@ h1 {
 }
 .card {
     flex: 1;
-    background: white;
+    background-color: var(--nav-background-color);
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);

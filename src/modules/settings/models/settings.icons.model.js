@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const {Schema, model} = require('mongoose');
 
-const iconsSchema = new mongoose.Schema({
+const iconsSchema = new Schema({
   logo: { type: String, default: './' },
   favicon: { type: String, default: './' },
 });
 
-module.exports = mongoose.model('SettingIcons', iconsSchema);
+module.exports = model('Icons', iconsSchema);

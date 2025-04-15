@@ -25,14 +25,14 @@ class SettingsService {
   async colorsFindOne() {
     return await this.#colorsModel.findOne();
   }
-  async createInColors(data) {
+  async createColors(data) {
     return await this.#colorsModel.create(data);
   }
 
   async iconsFindOne() {
     return await this.#iconsModel.findOne();
   }
-  async createInIcons(data) {
+  async createIcons(data) {
     return await this.#iconsModel.create(data);
   }
 }

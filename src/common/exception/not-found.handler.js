@@ -3,6 +3,7 @@ function notFoundHandler(app) {
     // res.status(404).json({
     //   message: "not found route",
     // });
+    
     res.render('./errors/404.ejs', { layout: './errors/404'});
   });
 }

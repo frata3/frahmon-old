@@ -11,7 +11,7 @@ const Authorization = async (req, res, next) => {
       return res.redirect("/auth/login");
     }
     req.session.user = user;
-    next();
+    return next();
   } catch (error) {
     next(error);
   }
