@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const postRoutes = require("./modules/post/post.routes");
 const threadRoutes = require("./modules/thread/thread.routes");
-const meRoutes = require("./modules/user/routes/user.routes");
-const userRoutes = require("./modules/user/routes/user.routes");
+const userRoutes = require("./modules/user/routes/user.routes.js");
+const userPublicRoutes = require("./modules/user/routes/user.public.routes");
 const Authorization = require("./common/guard/auth.guard");
 const contentRoutes = require("./modules/content/routes/content.routes");
 const authRoutes = require("./modules/auth/auth.routes");
@@ -29,9 +29,8 @@ appRouter.use(setLayout("layouts/main/main"), contentRoutes);
 //   next();
 // });
 appRouter.use("/auth", setLayout("layouts/main/main"), authRoutes);
-appRouter.use("/me", setLayout("layouts/me/main"), Authorization, meRoutes);
-appRouter.use("/@:username", setLayout("pages/me/main"), userRoutes);
-
+appRouter.use("/me", setLayout("layouts/user/main"), Authorization, userRoutes);
+appRouter.use("/@:username", setLayout("layouts/main/main"), userPublicRoutes);
 appRouter.get("/", setLayout("layouts/main/main"), async (req, res) => {
   res.render("./pages/home", {
     title: "صفحه اصلی",
@@ -43,4 +42,3 @@ appRouter.get("/", setLayout("layouts/main/main"), async (req, res) => {
 appRouter.use("/blog", setLayout("layouts/main/main"), postRoutes);
 
 module.exports = appRouter;
- 

@@ -9,9 +9,9 @@ class UserController {
   }
   async userMainPage(req, res, next) {
     try {
-      res.render("pages/me/main", {
+      res.render("pages/user/memain", {
         title: "ناحیه کاربری",
-        cssFile: "/me/personal-info.css",
+        cssFile: "/user/personal-info.css",
         user: req.session.user,
       });
     } catch (error) {
@@ -20,9 +20,9 @@ class UserController {
   }
   async personalInfoPage(req, res, next) {
     try {
-      res.render("pages/me/account", {
+      res.render("pages/user/me/account", {
         title: "ناحیه کاربری",
-        cssFile: "/assets/css/me/account.css",
+        cssFile: "/assets/css/user/account.css",
         user: req.session.user,
       });
     } catch (error) {

@@ -30,7 +30,8 @@ class PostController {
       // console.log("testGetPost : \n   "+ JSON.stringify(post, null, 2));
       res.render("pages/blog/post.ejs", {
         post,
-        authorName: post.author?.fullname || "کاربر ناشناس",
+        authorName: post.author?.fullname,
+        authorUsername: post.author?.username,
         title: "صفحه اصلی",
         cssFile: "/assets/css/blog/post.css",
         user: req.session.user,

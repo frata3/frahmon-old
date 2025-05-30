@@ -19,7 +19,7 @@ class PostService {
     return await this.#model
       .findOne({ slug })
       .populate({ path: "tags", select: "name _id" })
-      .populate({ path: "author", select: "fullname _id" })
+      .populate({ path: "author", select: "fullname username" })
       .lean();
   }  
   async getPostByTag(tag) {

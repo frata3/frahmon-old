@@ -13,7 +13,17 @@ class UserService {
   async findOne(query) {
     return await this.#userModel.findOne(query);
   }
-
+  async findForPublic(username) {
+    const user = await this.#userModel
+      .findOne({ username })
+      .select("username fullname createdAt");
+    if (!user) return null;
+    return {
+      username: user.username,
+      fullname: user.fullname,
+      joined: user.createdAt,
+    };
+  }
   async create(userData) {
     const user = new this.#userModel(userData);
     await user.save();
@@ -24,6 +34,12 @@ class UserService {
   }
   async findPosts(id) {
     return await this.#postService.getPostsByUser(id);
+  }
+  async findPublicPosts(username) {
+    const user = await this.#userModel.findOne({ username }).select("_id");
+    if (!user) return [];
+
+    return await this.#postService.getPostsByUser(user._id);
   }
   async createPost(postData) {
     return await this.#postService.create(postData);

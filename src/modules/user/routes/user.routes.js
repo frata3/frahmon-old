@@ -7,7 +7,7 @@ const userBlogRouter = require("./user.blog.routes");
 const router = Router();
 router.get("/", async (req, res, next) => {
     try {
-      res.render("pages/me/main", {
+      res.render("pages/user/me/main", {
         title: "ناحیه کاربری",
         user: req.session.user,
       });

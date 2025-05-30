@@ -3,7 +3,7 @@
       <header class="post-header">
           <h1><%= post.title %></h1>
           <p class="post-meta">
-              <span>نویسنده: <%= authorName || "نویسنده"%>"%></span> | 
+              <span>نویسنده: <a href="/@<%= authorUsername %>"><%= authorName || "نویسنده"%></a></span> | 
               <span>دسته‌بندی: <%= post.category || "دسته بندی"%></span> | 
               <span>تاریخ انتشار: <%= new Date(post.publishDate).toLocaleDateString('fa-IR') || "تاریخ انتشار"%></span>
           </p>

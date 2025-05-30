@@ -11,10 +11,10 @@ class UserController {
       const userId = req.session.user._id;
       const posts = await this.#service.findPosts(userId);
       console.log("test 1 : "+ posts);
-      res.render("./pages/me/blog", {
+      res.render("./pages/user/me/blog", {
         posts,
         title: "ناحیه کاربری",
-        cssFile: "/assets/css/me/posts.css",
+        cssFile: "/assets/css/user/posts.css",
         user: req.session.user,
       });
     } catch (error) {
@@ -23,9 +23,9 @@ class UserController {
   }
   async createPostPage(req, res, next) {
     try {
-      res.render("pages/me/create-post", {
+      res.render("pages/user/me/create-post", {
         title: "ساخت پست بلاگ",
-        cssFile: "/assets/css/me/create-post.css",
+        cssFile: "/assets/css/user/create-post.css",
         userId: req.session.user._id,
         // userName: req.se
       });
