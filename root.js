@@ -3,9 +3,11 @@ const dotenv = require("dotenv");
 const expressEjsLayouts = require("express-ejs-layouts");
 const appRouter = require("./src/app.routes");
 const session = require("express-session");
+const flash = require("connect-flash");
 const MongoStore = require("connect-mongo");
 const notFoundHandler = require("./src/common/exception/not-found.handler");
 const allExceptionHandler = require("./src/common/exception/all-exception.handler");
+
 dotenv.config();
 
 async function main() {
@@ -25,7 +27,7 @@ async function main() {
       },
     })
   );
-
+  app.use(flash());
   require("./src/config/mongoose.config");
 
   app.use(express.json());

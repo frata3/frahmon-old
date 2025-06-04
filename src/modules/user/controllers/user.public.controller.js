@@ -30,7 +30,6 @@ class UserController {
     try {
       const username = req.params.username;
       const posts = await this.#service.findPublicPosts(username);
-      console.log("test 1 : "+ posts);
       res.render("./pages/user/me/blog", {
         posts,
         title: username,

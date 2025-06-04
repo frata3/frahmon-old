@@ -10,7 +10,6 @@ class UserController {
     try {
       const userId = req.session.user._id;
       const posts = await this.#service.findPosts(userId);
-      console.log("test 1 : "+ posts);
       res.render("./pages/user/me/blog", {
         posts,
         title: "ناحیه کاربری",
@@ -49,9 +48,8 @@ class UserController {
       };
       const newPost = await this.#service.createPost(postData);
       res.redirect("/blog/post/" + newPost.slug);
-    } catch (error) {
-      console.log(error);
-      next(error);
+    } catch (err) {
+      next(err);
     }
   }
 }

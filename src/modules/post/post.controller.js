@@ -27,7 +27,6 @@ class PostController {
       if (!post) {
         return res.status(404).send("پست مورد نظر یافت نشد.");
       }
-      // console.log("testGetPost : \n   "+ JSON.stringify(post, null, 2));
       res.render("pages/blog/post.ejs", {
         post,
         authorName: post.author?.fullname,

@@ -9,11 +9,14 @@ const authRoutes = require("./modules/auth/auth.routes");
 const settingsLoader = require("./common/middleware/settings");
 const settingsRoutes = require("./modules/settings/routes/settings.routes");
 const setLayout = require("./common/middleware/setLayout");
+const { graphqlHTTP } = require("express-graphql");
+const schema = require("./graphQL/index");
 const appRouter = Router();
 
 appRouter.use(settingsLoader);
 appRouter.use(settingsRoutes);
 appRouter.use(setLayout("layouts/main/main"), contentRoutes);
+appRouter.use( "/graphql", graphqlHTTP({ schema, graphiql: true, }));
 
 // mainRouter.use((req, res, next) => {
 //   if (req.method === 'GET') {

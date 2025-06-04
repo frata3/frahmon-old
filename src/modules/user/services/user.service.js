@@ -24,14 +24,29 @@ class UserService {
       joined: user.createdAt,
     };
   }
+  async findById(id) {
+    return await this.#userModel.findById(id);
+  }
+
+  async isEmailTaken(email) {
+    return await this.#userModel.findOne({ email });
+  }
+
+  async isUsernameTaken(username) {
+    return await this.#userModel.findOne({ username });
+  }
+
+  async update(user, field, value) {
+    user[field] = value;
+    await user.save();
+    return user;
+  }
+
   async create(userData) {
     const user = new this.#userModel(userData);
     await user.save();
     return user;
-  }
-  async findById(id) {
-    return await this.#userModel.findById(id);
-  }
+  } 
   async findPosts(id) {
     return await this.#postService.getPostsByUser(id);
   }

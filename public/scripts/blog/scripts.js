@@ -2,106 +2,91 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedCategory = null;
   let selectedTopic = null;
   let selectedTags = [];
-  // جستجوی دسته‌بندی
-  document
-    .getElementById("categoryInput")
-    .addEventListener("input", async function () {
-      const query = this.value.trim();
-      if (query.length < 2) return;
 
-      const response = await fetch(`/categories/search?query=${query}`);
-      const categories = await response.json();
-      console.log(typeof categories);
-      console.log("test 1 : "+query+" --- "+" --- "+ categories)
-      const suggestions = categories
-        .map(
-          (c) =>
-            `<div class="suggestItems" onclick="selectCategory('${c._id}', '${c.name}')">${c.name}</div>`
-        )
-        .join("");
-      document.getElementById("categorySuggestions").innerHTML = suggestions;
+  const inputMap = [
+    {
+      inputId: "categoryInput",
+      suggestionBoxId: "categorySuggestions",
+      api: (query) => `/categories/search?query=${query}`,
+      onSelect: (id, name) => {
+        selectedCategory = id;
+        document.getElementById("selectedCategory").value = id;
+        document.getElementById("topicInput").disabled = false;
+      },
+    },
+    {
+      inputId: "topicInput",
+      suggestionBoxId: "topicSuggestions",
+      api: (query) =>
+        `/topics/search?query=${query}&categoryId=${selectedCategory}`,
+      onSelect: (id, name) => {
+        selectedTopic = id;
+        document.getElementById("selectedTopic").value = id;
+        document.getElementById("tagInput").disabled = false;
+      },
+    },
+    {
+      inputId: "tagInput",
+      suggestionBoxId: "tagSuggestions",
+      api: (query) => `/tags/search?query=${query}&topicId=${selectedTopic}`,
+      onSelect: (id, name) => {
+        if (!selectedTags.some((t) => t.id === id)) {
+          selectedTags.push({ id, name });
+          updateTagList();
+        }
+      },
+    },
+  ];
+
+  inputMap.forEach(({ inputId, suggestionBoxId, api, onSelect }) => {
+    const input = document.getElementById(inputId);
+    const suggestionBox = document.getElementById(suggestionBoxId);
+
+    input.addEventListener("input", async () => {
+      const query = input.value.trim();
+      if (query.length < 2) return (suggestionBox.innerHTML = "");
+
+      try {
+        const res = await axios.get(api(query));
+        const items = res.data;
+
+        suggestionBox.innerHTML = items
+          .map(
+            (item) =>
+              `<div class="suggest-item" onclick="selectItem('${inputId}', '${item._id}', '${item.name}')">${item.name}</div>`
+          )
+          .join("");
+      } catch (err) {
+        suggestionBox.innerHTML = `<div class="suggest-item error">خطا در دریافت اطلاعات</div>`;
+      }
     });
+  });
 
-  window.selectCategory = function (id, name) {
-    selectedCategory = id;
-    document.getElementById("selectedCategory").value = id;
-    document.getElementById("categoryInput").value = name;
-    document.getElementById("categorySuggestions").innerHTML = "";
-    document.getElementById("topicInput").disabled = false;
-  };
+  window.selectItem = function (inputId, id, name) {
+    const input = document.getElementById(inputId);
+    input.value = name;
 
-  // جستجوی موضوع
-  document
-    .getElementById("topicInput")
-    .addEventListener("input", async function () {
-      const query = this.value.trim();
-      if (query.length < 2 || !selectedCategory) return;
-
-      const response = await fetch(
-        `/topics/search?query=${query}&categoryId=${selectedCategory}`
-      );
-      const topics = await response.json();
-      console.log(typeof topics);
-      console.log("test 1 : "+query+" --- "+" --- "+ topics)
-      const suggestions = topics
-        .map(
-          (t) =>
-            `<div class="suggestItems" onclick="selectTopic('${t._id}', '${t.name}')">${t.name}</div>`
-        )
-        .join("");
-      document.getElementById("topicSuggestions").innerHTML = suggestions;
-    });
-
-  window.selectTopic = function (id, name) {
-    selectedTopic = id;
-    document.getElementById("selectedTopic").value = id;
-    document.getElementById("topicInput").value = name;
-    document.getElementById("topicSuggestions").innerHTML = "";
-    document.getElementById("tagInput").disabled = false;
-  };
-
-  // جستجوی تگ‌ها
-  document
-    .getElementById("tagInput")
-    .addEventListener("input", async function () {
-      const query = this.value.trim();
-      if (query.length < 2 || !selectedTopic) return;
-
-      const response = await fetch(
-        `/tags/search?query=${query}&topicId=${selectedTopic}`
-      );
-      const tags = await response.json();
-
-      const suggestions = tags
-        .map(
-          (t) =>
-            `<div class="suggestItems" onclick="selectTag('${t._id}', '${t.name}')">${t.name}</div>`
-        )
-        .join("");
-      document.getElementById("tagSuggestions").innerHTML = suggestions;
-    });
-
-  window.selectTag = function (id, name) {
-    if (!selectedTags.some((tag) => tag.id === id)) {
-      selectedTags.push({ id, name });
-      updateTagList();
+    const item = inputMap.find((i) => i.inputId === inputId);
+    if (item) {
+      document.getElementById(item.suggestionBoxId).innerHTML = "";
+      item.onSelect(id, name);
     }
+  };
+
+  window.removeTag = function (id) {
+    selectedTags = selectedTags.filter((tag) => tag.id !== id);
+    updateTagList();
   };
 
   function updateTagList() {
     document.getElementById("selectedTagsList").innerHTML = selectedTags
       .map(
         (tag) =>
-          `<li class="suggestItems">${tag.name} <span onclick="removeTag('${tag.id}')">❌</span></li>`
+          `<li class="tag-item">${tag.name} <span class="remove-tag" onclick="removeTag('${tag.id}')">×</span></li>`
       )
       .join("");
     document.getElementById("selectedTags").value = selectedTags
-      .map((tag) => tag.id)
+      .map((t) => t.id)
       .join(",");
   }
-
-  window.removeTag = function (id) {
-    selectedTags = selectedTags.filter((tag) => tag.id !== id);
-    updateTagList();
-  };
 });

@@ -2,7 +2,6 @@
   <h2 class="blog-title">آخرین مقالات</h2>
   <div class="blog-grid">
     <% posts.forEach(post => { %>
-    <!-- پست تکی -->
     <div class="blog-post">
       <img src="<%= post.thumbnail || '/assets/pictures/111.png' %>" alt="تصویر مقاله">
       <div class="blog-content">
@@ -10,9 +9,13 @@
         <p class="blog-post-description"><%= post.description %></p>
         <div class="blog-post-footer">
           <a href="/blog/post/<%= post.slug %>" class="read-more">ادامه مطلب</a>
-          <span class="date">
-            <%= post.publishDate ? new Date(post.publishDate).toLocaleDateString('fa-IR') : 'منتشر نشده' %>
-          </span>
+          <div class="tags">
+            <% if(post.tags && post.tags.length > 0) { %>
+              <% post.tags.forEach(tag => { %>
+                <a href="/tag/<%= tag.slug %>"><%= tag.name %> <br></a>
+              <% }) %>
+            <% } %>
+          </div>
         </div>
       </div>
     </div>

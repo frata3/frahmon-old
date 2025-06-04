@@ -7,10 +7,18 @@ class PostService {
     autoBind(this);
     this.#model = PostModel;
   }
+  // async getPosts() {
+  //   return await this.#model.find()
+  //     .sort({ publishDate: -1 })
+  // }
   async getPosts() {
-    return await this.#model.find()
-      .sort({ publishDate: -1 })
+    return await this.#model
+      .find({})
+      .populate({ path: "tags", select: "name _id slug" })
+      .populate({ path: "author", select: "fullname username" })
+      .lean();
   }
+  
   async getPostsByUser(id) {
     return await this.#model.find({author: id})
       .sort({ createdAt: -1 })
@@ -23,10 +31,7 @@ class PostService {
       .lean();
   }  
   async getPostByTag(tag) {
-    console.log("test 1 :", tag);
     const post = await this.#model.find( tag ).populate("tags").sort({ createdAt: -1 }).lean();
-    console.log("test 2 :", post);
-    
     return post;
   }
   async create(postData) {
