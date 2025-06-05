@@ -1,7 +1,7 @@
 const autoBind = require("auto-bind");
 const ContentService = require("../services/content.service");
 
-class PostController {
+class ContentController {
   #service;
   constructor() {
     autoBind(this);
@@ -46,7 +46,6 @@ class PostController {
       next(error);
     }
   }
-
   async getTopic(req, res, next) {
     try {
       const { topicSlug } = req.params;
@@ -125,4 +124,4 @@ class PostController {
   }
 }
 
-module.exports = new PostController();
+module.exports = new ContentController();

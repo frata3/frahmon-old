@@ -3,6 +3,7 @@ const userController = require("../controllers/user.account.controller");
 const userProfileRouter = require("./user.profile.routes");
 const userAccountRouter = require("./user.account.routes");
 const userBlogRouter = require("./user.blog.routes");
+const userContentRouter = require("./user.content.routes");
 
 const router = Router();
 router.get("/", async (req, res, next) => {
@@ -19,6 +20,7 @@ router.get("/", async (req, res, next) => {
 router.use("/profile", userProfileRouter);
 router.use("/blog", userBlogRouter); 
 router.use("/account", userAccountRouter);
+router.use("/content", userContentRouter); 
 
 router.post("/update-personal-info", userController.updatePersonalInfo);
 router.post("/update-user-password", userController.updateUserPassword);
