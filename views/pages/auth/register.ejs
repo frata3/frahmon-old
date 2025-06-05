@@ -1,0 +1,20 @@
+<main class="auth-container">
+  <div class="auth-box">
+    <h2>ثبت‌نام در سایت</h2>
+    <form action="/auth/register" method="POST">
+      <label for="fullname">نام و نام خانوادگی</label>
+      <input type="text" name="fullname" required />
+      <label for="username">نام کاربری</label>
+      <input type="username" name="username" required />
+      <label for="email">ایمیل</label>
+      <input type="email" name="email" required />
+      <label for="password">رمز عبور</label>
+      <input type="password" name="password" required />
+      <button type="submit">ثبت‌نام</button>
+    </form>
+    <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+      <p class="warning"> <%=  errorMessage  %></p>
+    <% } %>
+    <p>قبلاً ثبت‌نام کرده‌اید؟ <a href="/auth/login">ورود</a></p>
+  </div>
+</main>

@@ -1,0 +1,16 @@
+<main class="auth-container">
+  <div class="auth-box">
+    <h2>ورود به حساب کاربری</h2>
+    <form action="/auth/login" method="POST">
+      <label for="email">ایمیل</label>
+      <input type="email" name="email" required />
+      <label for="password">رمز عبور</label>
+      <input type="password" name="password" required />
+      <button type="submit">ورود</button>
+    </form>
+    <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+      <p class="warning"> <%=  errorMessage  %></p>
+    <% } %>
+    <p>حساب کاربری ندارید؟ <a href="/auth/register">ثبت‌نام</a></p>
+  </div>
+</main>

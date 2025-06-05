@@ -1,0 +1,14 @@
+<main>
+  <h1><%= category.name %></h1>
+
+  <section>
+      <h2>شاخه‌های این دسته:</h2>
+      <ul>
+          <% topics.forEach(topic => { %>
+              <li>
+                  <a href="/topic/<%= topic.slug %>"><%= topic.name %></a>
+              </li>
+          <% }); %>
+      </ul>
+  </section>
+</main>

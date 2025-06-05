@@ -1,0 +1,67 @@
+.container {
+    max-width: 90%;
+    margin: auto;
+    padding: 2rem;
+    font-family: sans-serif;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .profile-form label {
+    font-weight: bold;
+  }
+  
+  .profile-form input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .profile-form button {
+    align-self: flex-start;
+    padding: 0.4rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .profile-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .msg {
+    margin-top: 0.5rem;
+    text-align: right;
+    font-size: 0.9rem;
+    padding: 0.4rem;
+    border-radius: 6px;
+    display: none;
+  }
+  
+  .msg.success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .msg.error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
