@@ -13,7 +13,7 @@ class ContentController {
       const categoriesWithTopics = await Promise.all(
         categories.map(async (category) => {
           const topics = await this.#service.exploreTopics({
-            category: category._id,
+            categories: category._id,
           });
           return { ...category, topics };
         })
@@ -36,7 +36,7 @@ class ContentController {
           .render("errors/404", { title: "دسته‌بندی پیدا نشد" });
       }
 
-      const topics = await this.#service.findTopics({ category: category._id });
+      const topics = await this.#service.findTopics({ categories: category._id });
       res.render("pages/content/category", {
         title: category.name,
         category,
@@ -56,7 +56,7 @@ class ContentController {
           .render("errors/404", { title: "شاخه پیدا نشد" });
       }
 
-      const tags = await this.#service.findTags({ topic: topic._id });
+      const tags = await this.#service.findTags({ topics: topic._id });
       res.render("pages/content/topic", {
         title: topic.name,
         topic,

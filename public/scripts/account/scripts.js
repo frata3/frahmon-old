@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   const forms = document.querySelectorAll(".profile-form");
-
   forms.forEach((form) => {
     const msgBox = form.querySelector(".msg");
 

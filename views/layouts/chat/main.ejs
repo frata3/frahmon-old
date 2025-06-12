@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/assets/css/dynamic/main.css">
+    <link rel="stylesheet" href="/assets/css/main/style.css">
+    <link rel="stylesheet" href="/assets/css/chat/style.css">
+    <% if (typeof cssFile !== 'undefined') { %>
+        <link rel="stylesheet" href="<%= cssFile %>">
+    <% } %>
+</head>
+<body dir="rtl">
+    <%- include("../nav/nav") %>
+    <%- include("../nav/nav-left") %>
+    <main>
+        <%- body %>
+    </main>
+    <footer>
+        
+    </footer>
+</body>
+
+<script src="/socket.io/socket.io.js" defer></script>
+<script src="/scripts/chat/socket.js" defer></script>
+<script src="/scripts/chat/chat.js" defer></script>
+
+<script src="/scripts/axios.min.js" defer></script>
+
+</html>

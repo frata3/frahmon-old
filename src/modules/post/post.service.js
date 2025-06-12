@@ -26,10 +26,13 @@ class PostService {
   async getPostBySlug(slug) {
     return await this.#model
       .findOne({ slug })
-      .populate({ path: "tags", select: "name _id" })
-      .populate({ path: "author", select: "fullname username" })
+      .populate([
+        { path: "tags", select: "name slug" },
+        { path: "author", select: "fullname username" }
+      ])
       .lean();
-  }  
+  }
+   
   async getPostByTag(tag) {
     const post = await this.#model.find( tag ).populate("tags").sort({ createdAt: -1 }).lean();
     return post;

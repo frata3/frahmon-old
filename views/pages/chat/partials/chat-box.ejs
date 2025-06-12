@@ -1,0 +1,20 @@
+<section>
+<div id="chat-box" class="chat-box" data-chat-id="<%= chatId %>" data-chat-username="<%= chatName %>">
+  <div class="chat-header">
+    <p><%= targetUser.fullname || targetUser.username %></p>
+  </div>
+
+  <div class="chat-messages" id="messages">
+    <% messages.forEach(msg => { %>
+      <div class="message <%= msg.sender._id.toString() === currentUserId.toString() ? 'sent' : 'received' %>">
+        <%= msg.content %>
+      </div>
+    <% }) %>
+  </div>
+
+  <form id="message-form" class="message-form">
+    <input type="text" id="messageInput" placeholder="پیام بنویسید..." autocomplete="off" />
+    <button type="submit">ارسال</button>
+  </form>
+</div>
+</section>

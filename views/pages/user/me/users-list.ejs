@@ -1,0 +1,69 @@
+<h2>لیست کاربران</h2>
+<table>
+  <thead>
+    <tr>
+      <th>پیام</th>
+      <th>نام</th>
+      <th>ایمیل</th>
+  </thead>
+  <tbody>
+    <% users.forEach(user => { %>
+    <tr>
+      <td class="truncate" title="<%= user.username %>"><a href="/chat?to=<%= user.username %>" target="_blank">✉</a></td>
+      <td class="truncate" title="<%= user.username %>"><a href="/@<%= user.username %>" target="_blank"><%= user.fullname %></a></td>
+      <td class="truncate" title="<%= user.email %>"><%= user.email %></td>
+
+      <% }) %>
+    </tr>
+
+  </tbody>
+</table>
+<style>
+  h2 {
+    text-align: center;
+  }
+
+  table {
+    margin: auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  th,
+  td {
+    padding: 10px 30px;
+    text-align: center;
+    border-bottom: 1px solid lavender;
+    margin: 0 50px;
+
+  }
+
+  .truncate {
+    overflow: hidden;
+
+  }
+
+  th {
+    color: white;
+
+  }
+
+  thead {
+    background-color: salmon;
+  }
+
+  tr:nth-child(even) {
+    background-color: lavender;
+  }
+
+  tr:hover {
+    background-color: #fff;
+  }
+
+  td {
+    color: #333;
+  }
+</style>

@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const { Schema, model, Types } = require("mongoose"); 
 const bcrypt = require("bcrypt");
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     username: { type: String, required: true, unique: true },
     fullname: { type: String, required: true },
-    password: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
@@ -18,4 +18,5 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-module.exports = mongoose.model("User", UserSchema);
+const UserModel = model("User", UserSchema);
+module.exports = UserModel;

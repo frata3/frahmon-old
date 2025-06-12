@@ -1,0 +1,117 @@
+<div class="chat-container">
+
+  <!-- Sidebar - لیست چت‌ها -->
+  <div class="chat-sidebar">
+    <div class="chat-header">گفت‌وگوها</div>
+    <ul class="chat-list">
+      <% chats.forEach(chat => { 
+          const target = chat.members.find(m => m._id.toString() !== currentUserId.toString());
+        %>
+      <li>
+        <a href="/chat/<%= target.username %>">
+          <div class="chat-item">
+            <div class="chat-avatar">
+              <img src="<%= target.avatar || '/images/default-avatar.png' %>" alt="avatar" />
+            </div>
+            <div class="chat-info">
+              <div class="chat-name"><%= target.fullname || target.username %></div>
+              <div class="chat-last-message">
+                <%= chat.lastMessage?.content?.slice(0, 30) || '...' %>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <!-- Main Chat Area -->
+  <div class="chat-main">
+    <div class="empty-state">
+      <p>یک چت را از لیست انتخاب کنید</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .chat-container {
+    display: flex;
+    height: 100vh;
+  }
+
+  .chat-sidebar {
+    width: 30%;
+    background-color: #ffffff;
+    border-left: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .chat-header {
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .chat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .chat-list li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .chat-item {
+    display: flex;
+    padding: 0.75rem;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+  }
+
+  .chat-item:hover {
+    background-color: #f2f2f2;
+  }
+
+  .chat-avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-left: 1rem;
+  }
+
+  .chat-info {
+    flex: 1;
+  }
+
+  .chat-name {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+  }
+
+  .chat-last-message {
+    color: #777;
+    font-size: 0.9rem;
+  }
+
+  .chat-main {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eaeaea;
+  }
+
+  .empty-state {
+    color: #666;
+    font-size: 1.1rem;
+  }
+</style>

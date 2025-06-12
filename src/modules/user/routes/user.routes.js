@@ -4,6 +4,8 @@ const userProfileRouter = require("./user.profile.routes");
 const userAccountRouter = require("./user.account.routes");
 const userBlogRouter = require("./user.blog.routes");
 const userContentRouter = require("./user.content.routes");
+const userUsersRouter = require("./user.users.routes");
+const userConnectionRouter = require("./user.connection.routes");
 
 const router = Router();
 router.get("/", async (req, res, next) => {
@@ -21,9 +23,9 @@ router.use("/profile", userProfileRouter);
 router.use("/blog", userBlogRouter); 
 router.use("/account", userAccountRouter);
 router.use("/content", userContentRouter); 
+router.use("/users", userUsersRouter); 
 
 router.post("/update-personal-info", userController.updatePersonalInfo);
-router.post("/update-user-password", userController.updateUserPassword);
 
 module.exports = router;
   

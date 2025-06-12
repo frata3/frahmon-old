@@ -1,0 +1,20 @@
+<div class="flex h-screen">
+  <!-- Sidebar -->
+  <div class="w-1/3 border-r overflow-y-auto bg-gray-100">
+    <% chats.forEach(chat => { %>
+      <div class="chat-item cursor-pointer p-4 hover:bg-gray-200" data-chatid="<%= chat._id %>">
+        <div class="font-bold">
+          <%= chat.members.find(m => m._id != user._id).fullname || chat.members.find(m => m._id != user._id).username %>
+        </div>
+        <div class="text-sm text-gray-500 last-message">
+          <%= chat.lastMessage ? chat.lastMessage.content : "شروع گفتگو..." %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <!-- Chat Window -->
+  <div id="chat-window" class="w-2/3 p-4 overflow-y-auto">
+    <p class="text-gray-400">یکی از گفتگوها را انتخاب کنید</p>
+  </div>
+</div>

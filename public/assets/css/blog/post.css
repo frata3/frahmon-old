@@ -1,100 +1,70 @@
-.post-container {
-    max-width: 800px;
-    width: 100%;
-    margin: 2rem auto;
-    background: #fff;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.post-page {
+    /* background-color: lavender; */
+    min-height: 100vh;
+    padding: 0;
 }
 
-.post-header {
+/* هدر بالای پست */
+.post-hero {
+    background: url("/assets/pictures/111.png") center/cover no-repeat;
+    height: 250px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    /* border-bottom: 4px solid #00796b; */
+}
+
+.post-hero-overlay {
+    background-color: rgba(0, 79, 79, 0.6);
+    padding: 2rem;
+    border-radius: 12px;
     text-align: center;
 }
 
-.post-header h1 {
-    font-size: 2rem;
-    margin: 0.5rem 0;
+.post-title {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
 }
 
 .post-meta {
     font-size: 0.9rem;
-    color: #666;
+    color: #e0f2f1;
 }
 
-.post-thumbnail {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    height: 400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f0f0f0;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.post-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
+/* محتوای اصلی پست */
 .post-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
 }
 
-.post-content .description {
-    font-size: 1.1rem;
-    color: #555;
+.post-body p {
+    line-height: 2;
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+    color: #333;
 }
 
-.post-content article {
-    line-height: 1.8;
-    text-align: justify;
+.post-body h2 {
+    font-size: 1.4rem;
+    margin: 2rem 0 1rem;
+    color: #004d4d;
+    border-bottom: 2px solid #b2dfdb;
+    display: inline-block;
 }
 
-.post-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    border-top: 1px solid #ddd;
-    padding-top: 1rem;
-}
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.tags h3 {
-    flex-basis: 100%;
-    margin-bottom: 0.5rem;
-}
-
-.tags li {
-    background: #eee;
-    color: #555;
-    padding: 0.3rem 0.6rem;
+.post-body blockquote {
+    background-color: #f1f8e9;
+    border-right: 4px solid #c5e1a5;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    font-style: italic;
+    color: #33691e;
     border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-.tags li:hover {
-    background: #ddd;
-}
-
-.post-footer p {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #666;
 }

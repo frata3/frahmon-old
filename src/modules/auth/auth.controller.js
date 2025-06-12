@@ -29,6 +29,20 @@ class AuthController {
         errorMessage: error.message,
       });
     }
+    // try {
+    //   const users = Array.isArray(req.body) ? req.body : [req.body];
+  
+    //   const createdUsers = await Promise.all(
+    //     users.map(({ fullname, password, email, username }) =>
+    //       this.#service.createUser({ fullname, password, email, username })
+    //     )
+    //   );
+  
+    //   res.status(201).json({ users: createdUsers });
+    // } catch (err) {
+    //   console.error("❌ createUsers error:", err);
+    //   res.status(500).json({ message: "خطا در ایجاد کاربران" });
+    // }
   }
   async loginPage(req, res, next) {
     try {

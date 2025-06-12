@@ -1,4 +1,38 @@
-<h1>@<%= profile.username %></h1>
-<p><%= profile.fullname %></p>
-<small>Joined on <%= profile.joined.toDateString() %></small>
-<a href="@<%= profile.username %>/posts">پست ها</a>
+<section class="profile-container">
+  <h1><%= targetUser.fullname %> (@<%= targetUser.username %>)</h1>
+  <small>Joined on <%= targetUser.joined.toDateString() %></small>
+
+  <p>تعداد دنبال‌کننده‌ها: <span id="followers-count"><%= followersCount %></span></p>
+
+  <% if (isMe) { %>
+  <p>این پروفایل شماست.</p>
+  <% } else { %>
+  <button id="follow-btn" data-following="<%= isFollowing %>" data-user-id="<%= targetUser.userId %>">
+    <%= isFollowing ? "آنفالو" : "دنبال کردن" %>
+  </button>
+  <% } %>
+  <h3 id="message"></h3>
+  <br>
+  <a href="@<%= targetUser.username %>/posts">پست ها</a>
+  <br>
+
+  <a href="/chat?username=<%= targetUser.username %>">پیام به کاربر</a>
+
+
+</section>
+<style>
+  section {
+    margin: auto;
+    text-align: center;
+  }
+
+  button {
+    text-decoration: none;
+    color: teal;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: large;
+    border: 1px solid salmon;
+    font-family: vazir;
+  }
+</style>

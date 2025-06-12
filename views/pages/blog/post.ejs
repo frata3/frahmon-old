@@ -1,35 +1,39 @@
+<section class="post-page">
+  <!-- بخش هدر تصویری -->
+  <section class="post-hero" style="background-image: url('<%= post.thumbnail || "/assets/pictures/111.png" %>');">
+    <div class="post-hero-overlay">
+      <h1 class="post-title"><%= post.title %></h1>
+      <p class="post-meta">
+        ✍️ <a href="/@<%= authorUsername %>"><%= authorName || "نویسنده" %></a> |
+        🏷️ <%= post.category || "دسته‌بندی" %> |
+        🗓️ <%= new Date(post.publishDate).toLocaleDateString('fa-IR') || "تاریخ" %>
+      </p>
+    </div>
+  </section>
 
-  <div class="post-container">
-      <header class="post-header">
-          <h1><%= post.title %></h1>
-          <p class="post-meta">
-              <span>نویسنده: <a href="/@<%= authorUsername %>"><%= authorName || "نویسنده"%></a></span> | 
-              <span>دسته‌بندی: <%= post.category || "دسته بندی"%></span> | 
-              <span>تاریخ انتشار: <%= new Date(post.publishDate).toLocaleDateString('fa-IR') || "تاریخ انتشار"%></span>
-          </p>
-      </header>
-  
-      <div class="post-thumbnail">
-          <img src="<%= post.thumbnail || "/assets/pictures/111.png"%>"%>" alt="<%= post.title %>">
+  <!-- محتوای پست -->
+  <article class="post-content">
+    <div class="post-body">
+      <% if (post.description) { %>
+      <p><strong><%= post.description %></strong></p>
+      <% } %>
+
+      <%- post.content %>
+    </div>
+
+    <!-- برچسب‌ها و بازدید -->
+    <footer class="post-footer">
+      <% if (post.tags && post.tags.length > 0) { %>
+      <div class="tags">
+        <h3>برچسب‌ها:</h3>
+        <ul>
+          <% post.tags.forEach(tag => { %>
+          <li><a href="/tag/<%= tag.slug %>"><%= tag.name %></a></li>
+          <% }) %>
+        </ul>
       </div>
-  
-      <div class="post-content">
-          <p class="description"><%= post.description %></p>
-          <article>
-              <%= post.content %>
-          </article>
-      </div>
-  
-      <footer class="post-footer">
-        
-        <div class="tags">
-            <h3>برچسب‌ها:</h3>
-            <ul>
-                <% post.tags.forEach(tag => { %>
-                    <li><a href="/tag/<%= tag.slug %>"><%= tag.name %></a></li>
-                <% }) %>
-            </ul>
-        </div>
-          <p>تعداد بازدید: <%= post.views || "1/"%></p>
-      </footer>
-  </div>
+      <% } %>
+      <p>👁️ تعداد بازدید: <%= post.views || "1" %></p>
+    </footer>
+  </article>
+</section> 

@@ -86,24 +86,5 @@ class UserController {
       next(error);
     }
   }
-  async updateUserPassword(req, res, next) {
-    try {
-      const userId = req.session.user._id;
-      const user = await this.#service.findById(userId);
-
-      if (!user) {
-        return res
-          .status(404)
-          .json({ success: false, message: "کاربر یافت نشد" });
-      }
-
-      res.json({ success: true, password: user.password });
-    } catch (error) {
-      console.error(error);
-      res
-        .status(500)
-        .json({ success: false, message: "خطا در دریافت رمز عبور" });
-    }
-  }
 }
 module.exports = new UserController();

@@ -19,17 +19,19 @@
   }
   
   .blog-post {
-    background-color: #fff;
+    background-color: lavender;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     flex: 1 1 calc(33.33% - 1rem); /* عرض هر پست برابر با یک سوم */
     max-width: 300px; /* حداکثر عرض هر پست */
+    border: 1.5px solid salmon;
+    
   }
   
   .blog-post:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
   }
   
@@ -45,7 +47,7 @@
   
   .blog-post-title {
     font-size: 1.2rem;
-    color: #222;
+    color: teal;
     margin-bottom: 0.5rem;
   }
   
@@ -64,7 +66,7 @@
   
   .read-more {
     text-decoration: none;
-    color: #9b00ff;
+    color: salmon;
     font-weight: bold;
     transition: color 0.3s ease;
   }
