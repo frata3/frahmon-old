@@ -1,0 +1,193 @@
+footer {
+    display: none;
+}
+
+main {
+    /* height: calc(100vh - 0.8rem); */
+
+    /* border-bottom-left-radius: 0px; */
+    overflow-y: hidden;
+
+}
+
+.chat-container {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-sidebar {
+    width: 22%;
+    border-left: 1px solid #a8a8a8;
+    /* background: #dbd3ff; */
+    background: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: teal transparent;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.chat-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+
+}
+
+.chat-user {
+    padding: 0 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #a8a8a8;
+    border-top: 1px solid #a8a8a8;
+}
+.chat-user p {
+    margin: 0 auto;
+    color: teal;
+}
+
+.chat-user.active {
+    background-color: #f0f0f0;
+    border-right: 3px solid #007bff;
+  }
+  
+.chat-user:hover {
+    background: #eee;
+    border: 1px solid transparent;
+}
+
+.chat-panel {
+    flex: 1;
+    position: relative;
+    background: url("/assets/pictures/chatBackground.jpg") no-repeat;
+    background-size: cover;
+}
+
+.placeholder {
+    text-align: center;
+    color: #aaa;
+    margin-top: 100px;
+}
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chat-header {
+    font-weight: bold;
+    padding-right: 5px;
+    background-color: #dbd3ff;
+}
+
+.chat-header p {
+    margin: 10px;
+}
+
+.chat-messages {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 7rem);
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-color: teal transparent;
+    scrollbar-width: thin;
+}
+ 
+/* #messages {
+    overflow-y: auto;
+    max-height: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+} 
+
+#messages::-webkit-scrollbar-button,
+#messages::-webkit-scrollbar-button:single-button {
+    padding: 0;
+    margin: 0;
+    border: none;
+    display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+#messages:hover {
+    scrollbar-color: teal transparent;
+}
+
+#messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+#messages::-webkit-scrollbar-thumb {
+    background-color: teal;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#messages:hover::-webkit-scrollbar-thumb {
+    opacity: 1;
+}
+
+#messages::-webkit-scrollbar-button {
+    display: none;
+} */
+
+.message {
+    padding: 8px 12px;
+    margin-top: 5px;
+    border-radius: 14px;
+    line-height: 1.5;
+    position: relative;
+    word-wrap: break-word;
+    transition: transform 0.2s ease;
+    max-width: 80%;
+
+}
+
+.message.sent {
+    align-self: flex-start;
+    background-color: teal;
+    color: #dbd3ff;
+    border-bottom-right-radius: 2px;
+}
+
+.message.received {
+    align-self: flex-end;
+    background-color: #dbd3ff;
+    color: #181a1b;
+    border-bottom-left-radius: 2px;
+}
+
+
+.message-form {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    background-color: #dbd3ff;
+    border-bottom-left-radius: 0px;
+}
+
+.message-form input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.message-form button {
+    padding: 8px 16px;
+    border: none;
+    background: #2196f3;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}

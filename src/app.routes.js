@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const postRoutes = require("./modules/post/post.routes");
 const userRoutes = require("./modules/user/routes/user.routes.js");
-const chatRoutes = require("./modules/chat/chat.routes.js");
+const weRoutes = require("./modules/we/routes/we.routes.js");
 const userPublicRoutes = require("./modules/user/routes/user.public.routes");
 const Authorization = require("./common/guard/auth.guard");
 const contentRoutes = require("./modules/content/routes/content.routes");
@@ -20,7 +20,7 @@ appRouter.use("/graphql", graphqlHTTP({ schema, graphiql: true }));
 appRouter.use("/auth", setLayout("layouts/main/main"), authRoutes);
 appRouter.use("/me", setLayout("layouts/main/main"), Authorization, userRoutes);
 appRouter.use("/@:username", setLayout("layouts/main/main"), userPublicRoutes);
-appRouter.use("/chat", setLayout("layouts/chat/main"), Authorization, chatRoutes);
+appRouter.use("/we", setLayout("layouts/we/main"), Authorization, weRoutes);
 appRouter.use("/blog", setLayout("layouts/main/main"), postRoutes);
 appRouter.get("/", setLayout("layouts/main/main"), async (req, res) => {
   res.render("./pages/home", {

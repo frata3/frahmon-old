@@ -1,0 +1,37 @@
+<script>
+  window.currentUserId = "<%= currentUserId %>";
+  let temp = "<%= toUsername %>";
+  if (temp.length > 1) {
+    window.toUsername = "<%= toUsername %>";
+  }
+</script>
+
+<div class="chat-container">
+  <div class="chat-sidebar">
+    <h2 class="chat-title">گفت‌وگوها</h2>
+    <% if (chats.length === 0) { %>
+      <p class="no-chat">گفت‌وگویی یافت نشد.</p>
+    <% } %>
+    <% chats.forEach((chat) => { 
+        const otherUser = chat.members.find((m) => m._id.toString() !== currentUserId.toString()); 
+    %>
+      <div class="chat-user" data-username="<%= otherUser.username %>" data-chat-id="<%= chat._id %>">
+        <div>
+          <p><%= otherUser.fullname || otherUser.username %></p>
+          <small>
+            <span class="chat-last-message">
+              <%= chat.lastMessage ? chat.lastMessage.content.slice(0, 30) : "پیامی نیست" %>
+            </span><br />
+            <span class="chat-last-time">
+              <%= chat.lastMessage ? new Date(chat.lastMessage.createdAt).toLocaleTimeString("fa-IR", { hour: "2-digit", minute: "2-digit" }) : "" %>
+            </span>
+          </small>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <div class="chat-panel" id="chat-panel"></div>
+  <div class="chat-sidebar"></div>
+
+</div>

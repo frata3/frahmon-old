@@ -7,9 +7,11 @@
   <title><%= title %></title>
   <link rel="stylesheet" href="/assets/css/dynamic/main.css">
   <link rel="stylesheet" href="/assets/css/main/style.css">
+  <link rel="stylesheet" href="/assets/css/we/style.css">
   <% if (typeof cssFile !== 'undefined') { %>
   <link rel="stylesheet" href="<%= cssFile %>">
   <% } %>
+
 </head>
 
 <body dir="rtl">
@@ -18,19 +20,20 @@
   <%- include("../nav/nav-right") %>
   <span class="bottom-border-frame-radius"></span>
   <span class="bottom-border-frame"></span>
+  <%- include("../nav/nav-left") %>
   <main>
     <%- body %>
-    <footer>
-        
-    </footer>
   </main>
-  <%- include("../nav/nav-left") %>
-  
-</body>
-<script src="/scripts/account/scripts.js" defer></script>
-<script src="/scripts/blog/scripts.js" defer></script>
-<script src="/scripts/axios.min.js"></script>
+  <footer>
 
-<script src="/scripts/public/profile.js"></script>
+  </footer>
+</body>
+
+<script src="/socket.io/socket.io.js" ></script>
+
+<script type="module"  src="/scripts/we/socket.js" defer></script>
+<script type="module" src="/scripts/we/index.js" defer></script>
+
+<script src="/scripts/axios.min.js" defer></script>
 
 </html>

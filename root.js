@@ -2,17 +2,19 @@ const express = require("express");
 const dotenv = require("dotenv");
 const expressEjsLayouts = require("express-ejs-layouts");
 const appRouter = require("./src/app.routes");
+const connectToDB = require("./src/config/mongoose.config");
 const session = require("express-session");
 const flash = require("connect-flash");
 const MongoStore = require("connect-mongo");
 const notFoundHandler = require("./src/common/exception/not-found.handler");
 const allExceptionHandler = require("./src/common/exception/all-exception.handler");
 const http = require("http");
-const ChatSocket = require("./src/modules/chat/chat.socket");
+const WeSocket = require("./src/modules/we/socket/we.socket");
 
 dotenv.config();
 
 async function main() {
+  await connectToDB();
   const app = express();
   const port = process.env.PORT || 3000;
   const server = http.createServer(app);
@@ -31,7 +33,7 @@ async function main() {
 
   app.use(sessionMiddleware);
   app.use(flash());
-
+  
   const io = require("socket.io")(server, {
     cors: {
       origin: "*",
@@ -39,15 +41,13 @@ async function main() {
     },
   });
   app.set("io", io);
-  const chatSocket = new ChatSocket(io);
-  chatSocket.init();
-
+  
   io.use((socket, next) => {
     sessionMiddleware(socket.request, {}, next);
   });
-
-  require("./src/config/mongoose.config");
-
+  const weSocket = new WeSocket(io);
+  weSocket.init();
+  
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 

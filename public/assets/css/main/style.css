@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
 }
-
 html,
 body {
   font-family: Vazir;
@@ -10,54 +9,84 @@ body {
   height: 100%;
   overflow: hidden;
   /* scrollbar-color: teal lavender; */
-  background-color: lavender;
+  background-color: lavender
   /* background-color: #2A2A2A; */
-
 }
-
+.top-border-frame{
+  position: fixed;
+  right: 0.5rem;
+  top: 0.4rem;
+  border-top: 2px solid salmon;
+  border-right: 2px solid salmon;
+  border-top-right-radius: 8px;
+  width: 1rem;
+  height: 5rem;
+  
+}
+.bottom-border-frame{
+  position: fixed;
+  right: 0.5rem;
+  bottom: 0.4rem;
+  border-bottom: 2px solid salmon;
+  border-right: 2px solid salmon;
+  border-bottom-right-radius: 8px;
+  width: 1rem;
+  height: 5rem;
+}
+.top-border-frame-radius{
+  position: fixed;
+  right: -0.4rem;
+  top: 4rem;
+  border-bottom: 2px solid salmon;
+  border-left: 2px solid salmon;
+  border-bottom-left-radius: 8px;
+  width: 1rem;
+  height: 2rem;
+}
+.bottom-border-frame-radius{
+  position: fixed;
+    right: -0.4rem;
+    bottom: 4rem;
+    border-top: 2px solid salmon;
+    border-left: 2px solid salmon;
+    border-top-left-radius: 8px;
+    width: 1rem;
+    height: 2rem;
+}
 main {
   display: flow-root;
-  margin: 0.5rem 0;
-  margin-right: 5.2rem;
-  margin-left: 5.2rem;
-  /* border: 2px solid lavender; */
-  height: calc(100vh - 1rem);
-  outline: 2px solid salmon;
+  background-color: #fff;
+  /* background-color: #181a1b; */
+  height: calc(100vh - 0.8rem);
+  margin: 0.4rem 0;
+  margin-right: 5rem;
+  margin-left: 5rem;
+  border: 2px solid teal;
+  border-left: none;
+  /* outline: 2px solid teal; */
+  /* box-shadow: 0px 2px 0px 0px teal, 2px -2px 0px 0px teal; */
   border-radius: 8px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  background-color: #ffffff;
   direction: rtl;
   overflow-y: scroll;
-  scrollbar-color: teal transparent;
+  scrollbar-color: salmon transparent;
   scrollbar-width: thin;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
 }
 
-footer {
-  outline: 2px solid salmon;
-  /* border: 2px solid lavender; */
-  margin-right: 5.2rem;
-  margin-left: 5.2rem;
-  height: 5rem;
-  border-bottom: 0;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  direction: rtl;
-}
 
 .right-nav {
   position: fixed;
-  top: 5rem;
-  bottom: 5rem;
+  top: 50%;
   right: 0.5rem;
+  transform: translateY(-50%);
   width: 4rem;
-  background-color: teal;
-  border: 2px solid lavender;
-  outline: 2px solid teal;
-  color: lavender;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  /* border: 1px solid #181a1b; */
+  background-color: #fff;
+  /* border-style: double; */
+  /* box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); */
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -72,6 +101,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 15% 0;
 }
 
 .nav-item {
@@ -88,10 +118,12 @@ footer {
 .nav-item a {
   text-decoration: none;
   color: lavender;
+  color: #181a1b;
+  /* color: teal; */
   font-size: 1.2rem;
 }
 .nav-item a:hover {
-  color: white;
+  color: teal;
 }
 
 .submenu {
@@ -156,14 +188,17 @@ footer {
 
 .left-nav {
   position: fixed;
-  top: 0.5rem;
-  bottom: 0.5rem;
-  left: 0.5rem;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  left: 0.4rem;
   width: 4rem;
-  background-color: #ffffff;
+  background-color: #fff;
+  /* background-color: #181a1b; */
   border-left: 2px solid teal;
   border-bottom: 2px solid teal;
-  outline: 2px solid salmon;
+  border-top: 2px solid teal;
+  /* outline: 2px solid salmon; */
+  /* box-shadow: -2px 2px 0px 0px teal, 0px -2px 0px 0px teal; */
   color: lavender;
   /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); */
   border-radius: 8px;
@@ -273,4 +308,15 @@ footer {
 .h3Text {
   margin: 2%;
   color: #333333;
+}
+footer {
+  outline: 2px solid salmon;
+  border: 2px solid lavender;
+  margin-right: 5.2rem;
+  margin-left: 5.2rem;
+  height: 5rem;
+  border-bottom: 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  direction: rtl;
 }
