@@ -1,52 +1,23 @@
 <nav class="right-nav">
-  <div class="nav-wrapper">
-    <div class="nav-item">
-      <% if(typeof user !=='undefined' ){ %>
-        <a href="/@<%= user.username %>" title="<%= user.username %>">👤</a>
-        <div class="submenu-bridge"></div>
-        <div class="submenu">
-          <a href="/me/users" title="کاربران">👩🏼‍🤝‍🧑🏼</a>
-          <a href="/me/profile" title="تنظیمات">🔧</a>
-          <a href="/me/chats" title="گفتگو">✉</a>
-          <a href="/auth/logout" title="خروج">🚪</a>
-        </div>
-        <% } else{ %>
-          <a href="/me"> ورود</a>
-          <%} %>
-    </div>
-  </div>
-  <div class="nav-wrapper">
-    <div class="nav-item">
-      <a href="/blog">بلاگ</a>
-    </div>
-    <div class="submenu-bridge"></div>
-    <div class="submenu">
-      <a href="/me/blog/new" title="جدید">➕</a>
-    </div>
-  </div>
-  <div class="nav-wrapper">
-    <div class="nav-item">
-      <a href="/we">چت</a>
-    </div>
-    <div class="submenu-bridge"></div>
+  %>
+  <% if(currentSection === 'we' ){ %>
+    <a href="/we" class="<%= subSection === null ? 'active' : 'inactive' %>" >خانه</a>
+    <a href="#" class="<%= currentSection === 'blog' ? 'active' : 'inactive' %>">گروه</a>
+    <a href="#" class="<%= currentSection === 'forum' ? 'active' : 'inactive' %>">اعلانات</a>
+    <a href="#" class="<%= currentSection === 'store' ? 'active' : 'inactive' %>">صدا</a>
+  <% } else { %>
+    <a href="/" class="<%= currentSection === null ? 'active' : 'inactive' %>" >خانه</a>
+    <a href=" /blog" class="<%= currentSection === 'blog' ? 'active' : 'inactive' %>">بلاگ</a>
+    <a href=" /forum" class="<%= currentSection === 'forum' ? 'active' : 'inactive' %>">فروم</a>
+    <a href="/store" class="<%= currentSection === 'store' ? 'active' : 'inactive' %>">تجارت</a>
+  <% } %>
 
-  </div>
-  <div class="nav-wrapper">
-    <div class="nav-item">
-      <a href="/me/content">محتوا</a>
-    </div>
-    <div class="submenu-bridge"></div>
-    <div class="submenu">
-      <a href="/me/content/create" title="جدید">➕</a>
-    </div>
-  </div>
-  <div class="nav-wrapper">
-    <div class="nav-item">
-      <a href="/">خانه</a>
-    </div>
-    <div class="submenu-bridge"></div>
-    <div class="submenu">
-      <!-- <a href="/me/blog/new" title="جدید">➕</a> -->
-    </div>
-  </div>
+  <% if(typeof user !=='undefined' ){ %>
+
+  <a href="/@<%= user?.username %>" title="<%= user.username %>" class="<%= currentSection === 'me' ? 'active' : 'inactive' %>">👤</a>
+
+  <% } else { %>
+  <a href="/me"> ورود</a>
+  <% } %>
+
 </nav>

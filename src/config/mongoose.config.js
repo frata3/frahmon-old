@@ -1,4 +1,3 @@
-// src/config/mongoose.config.js
 const { default: mongoose } = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -6,9 +5,9 @@ dotenv.config();
 async function connectToDB() {
   try {
     await mongoose.connect(process.env.MONGODB_URL);
-    console.log("connected to DataBase");
+    console.log("Connected to MongoDB via Mongoose");
   } catch (err) {
-    console.log(err?.message ?? "DB connection failed");
+    console.error("Mongoose DB connection failed :", err?.message ?? err);
     throw err;
   }
 }

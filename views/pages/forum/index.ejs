@@ -1,0 +1,25 @@
+<section class="container">
+<h1>📝 پست‌های فروم</h1>
+
+<a href="/forum/create" class="btn">➕ ایجاد پست جدید</a>
+
+<ul class="post-list">
+  <% if (posts.length === 0) { %>
+    <li>هیچ پستی وجود ندارد.</li>
+  <% } %>
+  <% posts.forEach(post => { %>
+    <li class="post-item">
+      <a href="">
+        <h3><%= post.title %></h3>
+        <p><%= post.content %></p>
+      </a>
+      <small>
+        <a href="/@<%= post.author?.username %>"><%= post.author?.fullname || "نویسنده" %></a>
+      </small>
+      
+      <hr>
+    </li>
+  <% }) %>
+</ul>
+
+</section>

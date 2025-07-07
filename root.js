@@ -1,8 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const expressEjsLayouts = require("express-ejs-layouts");
-const appRouter = require("./src/app.routes");
-const connectToDB = require("./src/config/mongoose.config");
+const router = require("./src/app.routes");
+const connectToMongoDB = require("./src/config/mongoose.config");
+const { connectToDB: connectToForumDB } = require("./src/config/prisma.config");
+// const { connectToDB: connectToShopDB } = require("./src/config/sequelize.config");
 const session = require("express-session");
 const flash = require("connect-flash");
 const MongoStore = require("connect-mongo");
@@ -14,7 +16,9 @@ const WeSocket = require("./src/modules/we/socket/we.socket");
 dotenv.config();
 
 async function main() {
-  await connectToDB();
+  await connectToMongoDB();
+  await connectToForumDB();
+  // await connectToShopDB();
   const app = express();
   const port = process.env.PORT || 3000;
   const server = http.createServer(app);
@@ -33,7 +37,7 @@ async function main() {
 
   app.use(sessionMiddleware);
   app.use(flash());
-  
+
   const io = require("socket.io")(server, {
     cors: {
       origin: "*",
@@ -41,13 +45,13 @@ async function main() {
     },
   });
   app.set("io", io);
-  
+
   io.use((socket, next) => {
     sessionMiddleware(socket.request, {}, next);
   });
   const weSocket = new WeSocket(io);
   weSocket.init();
-  
+
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
@@ -63,7 +67,7 @@ async function main() {
   app.use(expressEjsLayouts);
   app.set("layout", "./layouts/default");
 
-  app.use(appRouter);
+  app.use(router);
 
   notFoundHandler(app);
   allExceptionHandler(app);

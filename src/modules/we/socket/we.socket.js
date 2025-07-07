@@ -19,7 +19,7 @@ class ChatSocket {
   init() {
     this.#io.on("connection", (socket) => {
       const user = socket.request.session?.user;
-      console.log(`socket session connected: @${user.username}`);
+      console.log(`socket session connected: @${user?.username}`);
       if (!user) return socket.disconnect();
 
       socket.join(user._id.toString());

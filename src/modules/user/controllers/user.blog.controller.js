@@ -26,6 +26,8 @@ class UserController {
         title: "ساخت پست بلاگ",
         cssFile: "/assets/css/user/create-post.css",
         userId: req.session.user._id,
+        user: req.session.user
+
         // userName: req.se
       });
     } catch (error) {
@@ -45,6 +47,7 @@ class UserController {
         content,
         author: req.session.user._id,
         tags,
+        user: req.session.user
       };
       const newPost = await this.#service.createPost(postData);
       res.redirect("/blog/post/" + newPost.slug);

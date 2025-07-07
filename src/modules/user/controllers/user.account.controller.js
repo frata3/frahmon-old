@@ -1,5 +1,6 @@
 const autoBind = require("auto-bind");
 const UserService = require("../services/user.service");
+const { syncUserToAllModules } = require("../../../common/utils/syncUser.util");
 const bcrypt = require("bcrypt");
 class UserController {
   #service;
@@ -63,7 +64,7 @@ class UserController {
         if (isMatch) {
           return res.status(400).json({
             success: false,
-            message: "رمز عبور جدید نمی‌تواند همان رمز قبلی باشد.",
+            message: "رمز عبور جدید نمی‌تواند همان رمز قبلی باشد.", 
           });
         }
         user.password = await bcrypt.hash(value, 10);
@@ -76,7 +77,7 @@ class UserController {
       await user.save();
       user[field] = value;
       await user.save();
-
+      await syncUserToAllModules(user);
       res.json({ success: true, message: "اطلاعات با موفقیت بروزرسانی شد." });
     } catch (error) {
       console.error(error);

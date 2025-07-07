@@ -1,4 +1,12 @@
-
+:root {
+  --bg-body:linear-gradient(to bottom left, #e6e6fa, #c8b8e2);
+  --bg-light: #f9f9f9;
+  --bg-dark: #1f1f27;
+  --font-light: #f5f5f5;
+  --font-dark: #1a1a1a;
+  --teal-light: #00bfbf;
+  --teal-dark: #008080; 
+}
 .blog-container {
     width: 90%;
     max-width: 1200px;
@@ -19,7 +27,7 @@
   }
   
   .blog-post {
-    background-color: lavender;
+    background: var(--bg-light);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

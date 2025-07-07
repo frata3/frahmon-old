@@ -22,7 +22,7 @@
     </div>
 
     <!-- برچسب‌ها و بازدید -->
-    <footer class="post-footer">
+    <div class="post-footer">
       <% if (post.tags && post.tags.length > 0) { %>
       <div class="tags">
         <h3>برچسب‌ها:</h3>
@@ -34,6 +34,6 @@
       </div>
       <% } %>
       <p>👁️ تعداد بازدید: <%= post.views || "1" %></p>
-    </footer>
+    </div>
   </article>
 </section> 

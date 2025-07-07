@@ -1,46 +1,29 @@
 <nav class="left-nav">
-  <!-- <div class="nav-wrapper-left">
-    <div class="nav-item-left">
-      <% if(typeof user !=='undefined' ){ %>
-        <a href="/@<%= user.username %>">👤</a>
-        <div class="submenu-bridge-left"></div>
-        <div class="submenu-left">
-          <a href="/me/profile" title="تنظیمات">🔧</a>
-          <a href="/me/users" title="تنظیمات">🔧</a>
-          <a href="/auth/logout" title="خروج">🚪</a>
-        </div>
-        <% } else{ %>
-          <a href="/me"> ورود</a>
-          <%} %>
-    </div>
-  </div>
+  <% if(currentSection === 'we' ){ %>
+    <a href="/" class="<%= subSection === null ? 'active' : 'inactive' %>" >خانه</a>
+  <% } else { %>
+    <a href="/we">چت</a>
 
-  <div class="nav-wrapper-left">
-    <div class="nav-item-left">
-      <a href="/blog">بلاگ</a>
-    </div>
-    <div class="submenu-bridge-left"></div>
-    <div class="submenu-left">
-      <a href="/me/blog/new" title="جدید">➕</a>
-    </div>
-  </div>
-  <div class="nav-wrapper-left">
-    <div class="nav-item-left">
-      <a href="/me/content">محتوا</a>
-    </div>
-    <div class="submenu-bridge-left"></div>
-    <div class="submenu-left">
-      <a href="/me/content/create" title="جدید">➕</a>
-    </div>
-  </div>
-  <div class="nav-wrapper-left">
-    <div class="nav-item-left">
-      <a href="/">خانه</a>
-    </div>
-    <div class="submenu-bridge-left"></div>
-    <div class="submenu-left">
-       <a href="/me/blog/new" title="جدید">➕</a> 
-    </div>
-  </div> -->
-  
-</nav >
+    <% } %>
+  <hr>
+
+  <% if(typeof user !=='undefined' ){ %>
+
+    <a href="/@<%= user.username %>/posts" class="<%= subSection === 'posts' ? 'active' : 'inactive' %>">پست‌ها</a>
+    
+  <% } else { %>
+    <a href="/me"> ورود</a>
+  <% } %>
+  <span></span>
+  <a href="/me/users" class="<%= subSection === 'users' ? 'active' : 'inactive' %>" title="کاربران">👩🏼‍🤝‍🧑🏼</a>
+  <span></span>
+
+  <a href="/me/profile" class="<%= subSection === 'profile' ? 'active' : 'inactive' %>" title="تنظیمات">🔧</a>
+  <span></span>
+  <% if(typeof user !=='undefined' ){ %>
+  <a href="/auth/logout" title="خروج">🚪</a>
+  <% } %>
+
+  <span></span>
+  <a href="">1</a><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a><a href="">6</a><a href="">7</a><a href="">8</a><a href="">9</a><a href="">10</a><a href="">11</a><a href="">12</a><a href="">13</a><a href="">14</a><a href="">15</a><a href="">16</a><a href="">17</a><a href="">18</a><a href="">19</a><a href="">20</a>
+</nav>
