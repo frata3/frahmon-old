@@ -1,0 +1,94 @@
+
+.post-feed, .post-view {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  
+  .post-card, .post-main {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px #ccc;
+  }
+  
+  .author span {
+    color: gray;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+  
+  .content {
+    font-size: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #888;
+  }
+  
+  .quote {
+    background: #eee;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .replies {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px #ccc;
+  }
+  
+  .reply {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+  }
+  .create-post-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px #ccc;
+  }
+  
+  .create-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .create-post-form input[type="text"],
+  .create-post-form textarea {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+  }
+  
+  .create-post-form textarea {
+    height: 150px;
+    resize: vertical;
+  }
+  
+  .create-post-form button {
+    background-color: teal;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .create-post-form button:hover {
+    background-color: #007777;
+  }

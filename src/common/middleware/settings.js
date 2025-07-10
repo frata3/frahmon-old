@@ -1,4 +1,4 @@
-const SettingsService = require("../../modules/settings/services/settings.service");
+import SettingsService from '../../modules/settings/services/settings.service.js';
 
 async function settingsLoader(req, res, next) {
   try {
@@ -10,4 +10,4 @@ async function settingsLoader(req, res, next) {
   }
 }
 
-module.exports = settingsLoader;
+export default settingsLoader;

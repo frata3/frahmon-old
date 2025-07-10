@@ -1,7 +1,7 @@
-const autoBind = require("auto-bind");
-const ChatModel = require("../models/we.model");
-const ChatMessageModel = require("../models/we.message.model");
-const UserService = require("../../user/services/user.service");
+import autoBind from 'auto-bind';
+import ChatModel from '../models/we.model.js';
+import ChatMessageModel from '../models/we.message.model.js';
+import UserService from '../../user/services/user.service.js';
 class ChatService {
   #chatModel;
   #messageModel;
@@ -76,4 +76,4 @@ class ChatService {
       
   }
 }
-module.exports = new ChatService();
+export default new ChatService();

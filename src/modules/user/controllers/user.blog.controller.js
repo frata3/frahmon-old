@@ -1,5 +1,5 @@
-const autoBind = require("auto-bind");
-const UserService = require("../services/user.service");
+import autoBind from 'auto-bind';
+import UserService from '../services/user.service.js';
 class UserController {
   #service;
   constructor() {
@@ -13,7 +13,6 @@ class UserController {
       res.render("./pages/user/me/blog", {
         posts,
         title: "ناحیه کاربری",
-        cssFile: "/assets/css/user/posts.css",
         user: req.session.user,
       });
     } catch (error) {
@@ -24,7 +23,6 @@ class UserController {
     try {
       res.render("pages/user/me/create-post", {
         title: "ساخت پست بلاگ",
-        cssFile: "/assets/css/user/create-post.css",
         userId: req.session.user._id,
         user: req.session.user
 
@@ -56,4 +54,4 @@ class UserController {
     }
   }
 }
-module.exports = new UserController();
+export default new UserController();

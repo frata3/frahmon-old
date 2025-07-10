@@ -1,7 +1,7 @@
-const autoBind = require("auto-bind");
-const { prisma } = require("../../../config/prisma.config");
-// const { nanoid } = require('nanoid');
-const generateSlug = require("../../../common/utils/slugify.util");
+import autoBind from "auto-bind";
+import { prisma } from "../../../config/prisma.config.js";
+import generateSlug from "../../../common/utils/slugify.util.js";
+
 class ForumService {
   #prisma;
   constructor() {
@@ -9,32 +9,36 @@ class ForumService {
     this.#prisma = prisma;
   }
 
-  async createPost({ title, content, userInfo }) {
-    const { _id, username, fullname } = userInfo;
-    const userExisting = await this.#prisma.user.findUnique({
-      where: { id: _id },
-    });
-    if (!userExisting) {
-      await this.#prisma.user.create({
-        data: { id: _id, username, fullname },
-      });
-    }
-
-    const baseSlug = generateSlug(title);
-    let slug = baseSlug;
-    let counter = 1;
-    while (await prisma.post.findUnique({ where: { slug } })) {
-      slug = `${baseSlug}-${counter++}`;
+  async createPost({
+    id,
+    title,
+    content,
+    userId,
+    parentId,
+    quoteId,
+    repostId,
+  }) {
+    let slug = null;
+    if (title) {
+      const baseSlug = generateSlug(title);
+      slug = baseSlug;
+      let counter = 1;
+      while (await this.#prisma.post.findUnique({ where: { slug } })) {
+        slug = `${baseSlug}-${counter++}`;
+      }
     }
 
     return await this.#prisma.post.create({
-      data: { id: nanoid(10), title, slug, content, authorId: _id },
-    });
-  }
-
-  async getAllPosts() {
-    return await this.#prisma.post.findMany({
-      orderBy: { createdAt: "desc" },
+      data: {
+        id,
+        title,
+        slug,
+        content,
+        authorId: userId,
+        parentId,
+        quoteId,
+        repostId,
+      },
       include: {
         author: {
           select: {
@@ -46,6 +50,121 @@ class ForumService {
       },
     });
   }
+
+  async getAllPosts() {
+    const posts = await this.#prisma.post.findMany({
+      where: {
+        parentId: null,
+      },
+      orderBy: { createdAt: "desc" },
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            fullname: true,
+          },
+        },
+        quote: {
+          include: {
+            author: {
+              select: {
+                id: true,
+                username: true,
+                fullname: true,
+              },
+            },
+          },
+        },
+        repost: {
+          include: {
+            author: {
+              select: {
+                id: true,
+                username: true,
+                fullname: true,
+              },
+            },
+          },
+        },
+        likes: true,
+      },
+    });
+  
+    return posts.map(post => ({
+      ...post,
+      likeCount: post.likes.length,
+    }));
+  }
+  
+
+  async getPost(id) {
+    const post = await this.#prisma.post.findUnique({
+      where: { id },
+      include: {
+        author: { select: { id: true, username: true, fullname: true } },
+        quote: {
+          include: {
+            author: { select: { id: true, username: true, fullname: true } },
+          },
+        },
+        repost: {
+          include: {
+            author: { select: { id: true, username: true, fullname: true } },
+          },
+        },
+        replies: {
+          orderBy: { createdAt: "asc" },
+          include: {
+            author: { select: { id: true, username: true, fullname: true } },
+            likes: true,
+          },
+        },
+        likes: true,
+      },
+    });
+
+    return {
+      ...post,
+      likeCount: post.likes.length,
+      replies: post.replies.map((r) => ({
+        ...r,
+        likeCount: r.likes.length,
+      })),
+    };
+  }
+
+  async toggleLike(postId, userId) {
+    const existing = await this.#prisma.like.findUnique({
+      where: {
+        postId_userId: {
+          postId,
+          userId,
+        },
+      },
+    });
+  
+    if (existing) {
+      await this.#prisma.like.delete({
+        where: {
+          postId_userId: {
+            postId,
+            userId,
+          },
+        },
+      });
+      return { liked: false };
+    } else {
+      await this.#prisma.like.create({
+        data: {
+          postId,
+          userId,
+        },
+      });
+      return { liked: true };
+    }
+  }
+  
 }
 
-module.exports = new ForumService();
+export default new ForumService();

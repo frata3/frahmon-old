@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require("mongoose");
+import { Schema, model, Types } from 'mongoose';
 
 const ConnectionSchema = new Schema({
   source: { type: Types.ObjectId, ref: "User", required: true },
@@ -32,4 +32,4 @@ const ConnectionSchema = new Schema({
 ConnectionSchema.index({ source: 1, target: 1, type: 1 }, { unique: true });
 
 const Connection = model("Connection", ConnectionSchema);
-module.exports = Connection;
+export default Connection;

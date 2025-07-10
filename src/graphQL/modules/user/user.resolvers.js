@@ -1,6 +1,6 @@
-const bcrypt = require("bcrypt");
-const userService = require("../../../modules/user/services/user.service");
-const connectionService = require("../../../modules/user/services/user.connection.service");
+import bcrypt from 'bcrypt';
+import userService from '../../../modules/user/services/user.service.js';
+import connectionService from '../../../modules/user/services/user.connection.service.js';
 
 const userResolvers = {
   Query: {
@@ -95,4 +95,4 @@ const userResolvers = {
   },
 };
 
-module.exports = userResolvers;
+export default userResolvers;

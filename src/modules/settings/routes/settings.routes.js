@@ -1,4 +1,4 @@
-const { Router } = require("express");
+import { Router } from 'express';
 const router = Router();
 
 router.get("/assets/css/dynamic/:file", async (req, res) => {
@@ -14,4 +14,4 @@ router.get("/assets/css/dynamic/:file", async (req, res) => {
     }
   });
 
-module.exports = router;
+export default router;

@@ -1,5 +1,5 @@
-const autoBind = require("auto-bind");
-const ContentService = require("../services/content.service");
+import autoBind from 'auto-bind';
+import ContentService from '../services/content.service.js';
 
 class ContentController {
   #service;
@@ -124,4 +124,4 @@ class ContentController {
   }
 }
 
-module.exports = new ContentController();
+export default new ContentController();

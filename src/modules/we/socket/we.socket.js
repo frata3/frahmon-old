@@ -1,10 +1,10 @@
 // src/modules/we/socket/we.socket.js
-const autoBind = require("auto-bind");
-const service = require("../services/we.service");
-const { handleSendMessage } = require("./handlers/sendMessage");
+import autoBind from 'auto-bind';
 
-const handleJoinRoom = require("./handlers/joinRoom");
-const handleCreatePrivateChat = require("./handlers/createPrivateChat");
+import service from '../services/we.service.js';
+import  handleSendMessage  from './handlers/sendMessage.js';
+import handleJoinRoom from './handlers/joinRoom.js';
+import handleCreatePrivateChat from './handlers/createPrivateChat.js';
 
 class ChatSocket {
   #io;
@@ -56,4 +56,4 @@ class ChatSocket {
   }
 }
 
-module.exports = ChatSocket;
+export default ChatSocket;

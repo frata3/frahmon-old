@@ -1,4 +1,4 @@
-const UserService = require("../../modules/user/services/user.service");
+import UserService from '../../modules/user/services/user.service.js';
 
 const Authorization = async (req, res, next) => {
   try {
@@ -17,4 +17,4 @@ const Authorization = async (req, res, next) => {
   }
 };
 
-module.exports = Authorization;
+export default Authorization;

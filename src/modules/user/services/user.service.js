@@ -1,6 +1,6 @@
-const autoBind = require("auto-bind");
-const UserModel = require("../models/user.model");
-const postService = require("../../post/post.service");
+import autoBind from 'auto-bind';
+import UserModel from '../models/user.model.js';
+import postService from '../../post/post.service.js';
 class UserService {
   #userModel;
   #postService;
@@ -60,4 +60,4 @@ class UserService {
     return await this.#postService.create(postData);
   }
 }
-module.exports = new UserService();
+export default new UserService();

@@ -34,4 +34,4 @@ const userTypeDefs = `
   }
 `;
 
-module.exports = userTypeDefs;
+export default userTypeDefs;

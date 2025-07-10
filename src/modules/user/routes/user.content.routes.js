@@ -1,7 +1,7 @@
-const { Router } = require("express");
+import { Router } from 'express';
 const router = Router();
-const userContentController = require("../controllers/user.content.controller");
-const seedContent = require("../../content/services/content.service");
+import userContentController from '../controllers/user.content.controller.js';
+import seedContent from '../../content/services/content.service.js';
 
 router.get("/", userContentController.getContentPage);
 router.get('/create', userContentController.renderCreateContentForm);
@@ -13,4 +13,4 @@ router.get("/contentseed", async (req, res) => {
     console.log("seed run shod");
     await seedContent.seedInitialContent();
   });
-module.exports = router;
+export default router;

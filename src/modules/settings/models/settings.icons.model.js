@@ -1,8 +1,8 @@
-const {Schema, model} = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 const iconsSchema = new Schema({
   logo: { type: String, default: './' },
   favicon: { type: String, default: './' },
 });
 
-module.exports = model('Icons', iconsSchema);
+export default model('Icons', iconsSchema);

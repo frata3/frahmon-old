@@ -1,5 +1,5 @@
-const autoBind = require("auto-bind");
-const ConnectionModel = require("../models/user.connection.model");
+import autoBind from 'auto-bind';
+import ConnectionModel from '../models/user.connection.model.js';
 class ConnectionService {
   #Model;
   constructor() {
@@ -116,4 +116,4 @@ class ConnectionService {
     return { success: true, message: "درخواست رد شد." };
   }
 }
-module.exports = new ConnectionService();
+export default new ConnectionService();

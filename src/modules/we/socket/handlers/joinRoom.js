@@ -1,4 +1,4 @@
-const ChatModel = require("../../models/we.model");
+import ChatModel from '../../models/we.model.js';
 
 const joinRoomHandler = (socket) => async (chatId) => {
   try {
@@ -12,4 +12,4 @@ const joinRoomHandler = (socket) => async (chatId) => {
   }
 };
 
-module.exports = { joinRoomHandler };
+export default { joinRoomHandler };

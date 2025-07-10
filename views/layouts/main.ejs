@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="icon" href="data:,">
+
+  <link rel="stylesheet" href="/assets/css/dynamic/main.css">
+  <link rel="stylesheet" href="/assets/css/main/style.css">
+  <% if (cssFiles && cssFiles.length) { %>
+    <% cssFiles.forEach(function(file) { %>
+      <link 
+        rel="<%= file.rel || 'stylesheet' %>" 
+        href="<%= file.href %>" 
+        <% if (file.media) { %> media="<%= file.media %>" <% } %>
+        <% if (file.type) { %> type="<%= file.type %>" <% } %>
+        <% if (file.crossorigin) { %> crossorigin="<%= file.crossorigin %>" <% } %>
+      />
+    <% }) %>
+  <% } %>
+  
+</head>
+
+<body dir="rtl">
+  <span class="top-border-frame"></span>
+  <span class="top-border-frame-radius"></span>
+  <%- include("./nav-right") %>
+  <span class="bottom-border-frame-radius"></span>
+  <span class="bottom-border-frame"></span>
+  <%- include("./nav-left") %>
+
+  <main id="main-content">
+    <%- body %>
+    <footer></footer>
+  </main>
+  
+</body>
+<script src="/scripts/axios.min.js"></script>
+
+<% if (jsFiles && jsFiles.length) { %>
+  <% jsFiles.forEach(function(file) { %>
+    <script 
+      src="<%= file.src %>"
+      <% if (file.type) { %> type="<%= file.type %>" <% } %>
+      <% if (file.defer) { %> defer <% } %>
+      <% if (file.async) { %> async <% } %>
+      <% if (file.nomodule) { %> nomodule <% } %>
+      <% if (file.crossorigin) { %> crossorigin="<%= file.crossorigin %>" <% } %>
+    ></script>
+  <% }) %>
+<% } %>
+
+
+</html>

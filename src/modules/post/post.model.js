@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require("mongoose");
+import { Schema, model, Types } from 'mongoose';
 
 const postSchema = new Schema(
   {
@@ -21,4 +21,4 @@ postSchema.pre("save", function (next) {
 });
 
 const blogPost = model("posts", postSchema);
-module.exports = blogPost;
+export default blogPost;

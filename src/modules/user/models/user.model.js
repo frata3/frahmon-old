@@ -1,5 +1,6 @@
-const { Schema, model, Types } = require("mongoose"); 
-const bcrypt = require("bcrypt");
+import { Schema, model } from 'mongoose';
+import bcrypt from 'bcrypt';
+import syncUserToAllModules from '../../../common/utils/syncUser.util.js';
 
 const UserSchema = new Schema(
   {
@@ -18,5 +19,9 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
+UserSchema.post("save", async function (doc) {
+  await syncUserToAllModules(doc);
+});
+
 const UserModel = model("User", UserSchema);
-module.exports = UserModel;
+export default UserModel;

@@ -1,4 +1,4 @@
-const chatService = require("../../services/we.service");
+import chatService from '../../services/we.service.js';
 
 async function handleCreatePrivateChat(socket, io, username, user) {
   try {
@@ -30,7 +30,7 @@ async function handleCreatePrivateChat(socket, io, username, user) {
   }
 }
 
-module.exports = handleCreatePrivateChat;
+export default handleCreatePrivateChat;
 
 // module.exports = async function handleCreatePrivateChat(socket, io, username, user) {
 //   console.log("[4] Handling private chat creation for:", username); // ✅ اینجا

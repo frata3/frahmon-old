@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 const settingsSchema = new Schema({
   colors: { type: Schema.Types.ObjectId, ref: 'Colors' },
@@ -7,4 +7,4 @@ const settingsSchema = new Schema({
 
 
 
-module.exports = model('Settings', settingsSchema);
+export default model('Settings', settingsSchema);

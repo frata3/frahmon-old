@@ -7,4 +7,4 @@ function allExceptionHandler(app) {
     });
   });
 }
-module.exports = allExceptionHandler;
+export default allExceptionHandler;

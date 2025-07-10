@@ -1,10 +1,8 @@
-const { prisma } = require("../../config/prisma.config");
+import  {prisma}  from '../../config/prisma.config.js';
 
 async function syncUserToAllModules(user) {
   if (!user || !user._id) return;
-
   const userId = user._id.toString();
-
   const exists = await prisma.user.findUnique({ where: { id: userId } });
 
   if (!exists) {
@@ -26,4 +24,4 @@ async function syncUserToAllModules(user) {
   }
 }
 
-module.exports = { syncUserToAllModules };
+export default  syncUserToAllModules ;

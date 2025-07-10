@@ -1,38 +1,100 @@
-const { Router } = require("express");
-const userRoutes = require("./modules/user/routes/user.routes.js");
-const Authorization = require("./common/guard/auth.guard");
-const postRoutes = require("./modules/post/post.routes");
-const weRoutes = require("./modules/we/routes/we.routes.js");
-const forumRoutes = require("./modules/forum/routes/forum.routes")
-const userPublicRoutes = require("./modules/user/routes/user.public.routes");
-const contentRoutes = require("./modules/content/routes/content.routes");
-const authRoutes = require("./modules/auth/auth.routes");
-const setLayoutContext = require("./common/middleware/setLayoutContext")
-const settingsLoader = require("./common/middleware/settings");
-const settingsRoutes = require("./modules/settings/routes/settings.routes");
-const setLayout = require("./common/middleware/setLayout");
-const { graphqlHTTP } = require("express-graphql");
-const schema = require("./graphQL/index");
-const rooter = Router();
+import { Router } from "express";
+import userRoutes from "./modules/user/routes/user.routes.js";
+import Authorization from "./common/guard/auth.guard.js";
+import postRoutes from "./modules/post/post.routes.js";
+import homeRoutes from "./modules/home/home.routes.js";
+import weRoutes from "./modules/we/routes/we.routes.js";
+import forumRoutes from "./modules/forum/routes/forum.routes.js";
+import userPublicRoutes from "./modules/user/routes/user.public.routes.js";
+import contentRoutes from "./modules/content/routes/content.routes.js";
+import authRoutes from "./modules/auth/auth.routes.js";
+import setCurrentPath from "./common/middleware/setCurrentPath.js";
+import settingsLoader from "./common/middleware/settings.js";
+import settingsRoutes from "./modules/settings/routes/settings.routes.js";
+import setAssets, { js, css } from "./common/middleware/setAssets.js";
+import { graphqlHTTP } from "express-graphql";
+import schema from "./graphQL/index.js";
 
-rooter.use(setLayoutContext);
-rooter.use(settingsLoader);
-rooter.use(settingsRoutes);
-rooter.use(setLayout("layouts/main/main"), contentRoutes);
-rooter.use("/graphql", graphqlHTTP({ schema, graphiql: true }));
-rooter.use("/auth", setLayout("layouts/main/main"), authRoutes);
-rooter.use("/me", setLayout("layouts/main/main"), Authorization, userRoutes);
-rooter.use("/@:username", setLayout("layouts/main/main"), userPublicRoutes);
-rooter.use("/we", setLayout("layouts/we/main"), Authorization, weRoutes);
-rooter.use("/forum", setLayout("layouts/main/main"), forumRoutes);
-rooter.use("/blog", setLayout("layouts/main/main"), postRoutes);
-rooter.get("/", setLayout("layouts/main/main"), async (req, res) => {
-  res.render("./pages/home", {
-    title: "صفحه اصلی",
-    settings: res.locals.settings,
-    user: req.session.user,
-  });
-});
+const mainRouter = Router();
 
+mainRouter.use(setCurrentPath);
+mainRouter.use(settingsLoader);
+mainRouter.use(settingsRoutes);
+mainRouter.use((req, res, next) => {
+  res.locals.user = req.session?.user || null;
+  next();
+})
+mainRouter.use(
+  setAssets({}),
+  contentRoutes // ########################### routes ###########################
+);
 
-module.exports = rooter;
+mainRouter.use("/graphql", graphqlHTTP({ schema, graphiql: true }));
+
+mainRouter.use(
+  "/auth",
+  setAssets({
+    css: [css("/assets/css/auth/style.css")],
+    js: [],
+  }),
+  authRoutes // ########################### routes ###########################
+);
+
+mainRouter.use(
+  "/me",
+  setAssets({
+    css: [css("/assets/css/user/account.css"),css("/assets/css/user/create-post.css")],
+    js: [js("/scripts/account/scripts.js")],
+  }),
+  Authorization,
+  userRoutes // ########################### routes ###########################
+);
+
+mainRouter.use(
+  "/@:username",
+  setAssets({
+    css: [css("/assets/css/user/")],
+    js: [js("/scripts/public/profile.js")],
+  }),
+  userPublicRoutes // ########################### routes ###########################
+);
+
+mainRouter.use(
+  "/we",
+  setAssets({
+    css: [css("/assets/css/we/style.css")],
+      js: [
+        js("/socket.io/socket.io.js"),
+        js("/scripts/we/index.js", { type: "module", defer: true }),
+        js("/scripts/we/socket.js", { type: "module", defer: true }),
+    ],
+  }),
+  Authorization,
+  weRoutes // ########################### routes ###########################
+);
+
+mainRouter.use(
+  "/forum",
+  setAssets({
+    css: [css("/assets/css/forum/style.css")],
+    js: [js("/scripts/forum/main.js")],
+  }),
+  forumRoutes // ########################### routes ###########################
+);
+
+mainRouter.use(
+  "/blog",
+  setAssets({
+    css: [css("/assets/css/blog/style.css"),css("/assets/css/blog/post.css")],
+    js: [js("/scripts/blog/scripts.js")],
+  }),
+  postRoutes // ########################### routes ###########################
+);
+
+mainRouter.use(
+  "/",
+  setAssets({}),
+  homeRoutes // ########################### routes ###########################
+);
+
+export default mainRouter;

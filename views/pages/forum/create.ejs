@@ -1,17 +1,12 @@
-<section class="container">
+<section class="create-post-container">
+  <form action="/forum/create" method="POST" class="create-post-form">
+    <input type="text" name="title" placeholder="عنوان (اختیاری)" />
+    <textarea name="content" placeholder="متن پست..." required></textarea>
 
-<h1>🆕 ایجاد پست جدید</h1>
+    <input type="hidden" name="parentId" value="<%= parentId || '' %>">
+    <input type="hidden" name="quoteId" value="<%= quoteId || '' %>">
+    <input type="hidden" name="repostId" value="<%= repostId || '' %>">
 
-<form action="/forum/create" method="POST" class="post-form">
-  <label for="title">عنوان:</label>
-  <input type="text" name="title" id="title" required />
-
-  <label for="content">محتوا:</label>
-  <textarea name="content" id="content" rows="6" required></textarea>
-
-  <button type="submit">ثبت پست</button>
-</form>
-
-<a href="/forum">⬅ بازگشت به لیست پست‌ها</a>
-
+    <button type="submit">ارسال</button>
+  </form>
 </section>

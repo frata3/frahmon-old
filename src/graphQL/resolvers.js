@@ -1,6 +1,6 @@
-const { mergeResolvers } = require("@graphql-tools/merge");
-const userResolvers = require("./modules/user/user.resolvers");
+import { mergeResolvers } from '@graphql-tools/merge';
+import userResolvers from './modules/user/user.resolvers.js';
 
 const resolvers = mergeResolvers([userResolvers]);
 
-module.exports = resolvers;
+export default resolvers;

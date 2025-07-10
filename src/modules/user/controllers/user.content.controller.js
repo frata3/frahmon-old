@@ -1,6 +1,6 @@
-const autoBind = require("auto-bind");
-const UserService = require("../services/user.service");
-const ContentService = require("../../content/services/content.service");
+import autoBind from 'auto-bind';
+import UserService from '../services/user.service.js';
+import ContentService from '../../content/services/content.service.js';
 class UserController {
   #userService;
   #contentService;
@@ -92,4 +92,4 @@ class UserController {
   }
   
 }
-module.exports = new UserController();
+export default new UserController();

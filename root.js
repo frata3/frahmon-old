@@ -1,17 +1,20 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const expressEjsLayouts = require("express-ejs-layouts");
-const router = require("./src/app.routes");
-const connectToMongoDB = require("./src/config/mongoose.config");
-const { connectToDB: connectToForumDB } = require("./src/config/prisma.config");
+import express from "express";
+import dotenv from "dotenv";
+import expressEjsLayouts from "express-ejs-layouts";
+import router from "./src/app.routes.js";
+import connectToMongoDB from "./src/config/mongoose.config.js";
+import { connectToDB as connectToForumDB } from "./src/config/prisma.config.js";
+
 // const { connectToDB: connectToShopDB } = require("./src/config/sequelize.config");
-const session = require("express-session");
-const flash = require("connect-flash");
-const MongoStore = require("connect-mongo");
-const notFoundHandler = require("./src/common/exception/not-found.handler");
-const allExceptionHandler = require("./src/common/exception/all-exception.handler");
-const http = require("http");
-const WeSocket = require("./src/modules/we/socket/we.socket");
+import session from "express-session";
+
+import flash from "connect-flash";
+import MongoStore from "connect-mongo";
+import notFoundHandler from "./src/common/exception/not-found.handler.js";
+import allExceptionHandler from "./src/common/exception/all-exception.handler.js";
+import http from "http";
+import { Server as SocketIOServer } from "socket.io";
+import WeSocket from "./src/modules/we/socket/we.socket.js";
 
 dotenv.config();
 
@@ -38,12 +41,13 @@ async function main() {
   app.use(sessionMiddleware);
   app.use(flash());
 
-  const io = require("socket.io")(server, {
+  const io = new SocketIOServer(server, {
     cors: {
       origin: "*",
       methods: ["GET", "POST"],
     },
   });
+
   app.set("io", io);
 
   io.use((socket, next) => {
@@ -65,7 +69,7 @@ async function main() {
   app.set("view engine", "ejs");
   app.set("views", "./views");
   app.use(expressEjsLayouts);
-  app.set("layout", "./layouts/default");
+  app.set("layout", "./layouts/main");
 
   app.use(router);
 

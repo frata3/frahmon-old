@@ -1,5 +1,5 @@
-const autoBind = require("auto-bind");
-const PostModel = require("./post.model");
+import autoBind from 'auto-bind';
+import PostModel from './post.model.js';
 
 class PostService {
   #model;
@@ -49,4 +49,4 @@ class PostService {
     return this.#model.create({ ...postData, tags: tagIds });
   }
 }
-module.exports = new PostService();
+export default new PostService();

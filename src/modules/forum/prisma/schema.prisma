@@ -8,54 +8,48 @@ datasource db {
 }
 
 model User {
-  id       String @id
-  username String
+  id       String @id @default(uuid())
+  username String @unique
   fullname String
 
-  posts   Post[]  @relation("UserPosts")
-  replies Reply[] @relation("UserReplies")
-  likes   Like[]  @relation("UserLikes")
+  posts Post[] @relation("UserPosts")
+  likes Like[] @relation("UserLikes")
 }
 
 model Post {
   id        String   @id
-  title     String
-  slug      String   @unique
   content   String
-  authorId  String
-  author    User     @relation("UserPosts", fields: [authorId], references: [id])
+  title     String?
+  slug      String?  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  likeCount   Int      @default(0)
-  replyCount  Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  authorId String
+  author   User   @relation("UserPosts", fields: [authorId], references: [id])
 
-  replies Reply[]
-  likes   Like[]
+  parentId String?
+  parent   Post?   @relation("PostReplies", fields: [parentId], references: [id])
+  replies  Post[]  @relation("PostReplies")
+
+  quoteId String?
+  quote   Post?   @relation("PostQuotes", fields: [quoteId], references: [id])
+  quotes  Post[]  @relation("PostQuotes")
+
+  repostId String?
+  repost   Post?   @relation("PostReposts", fields: [repostId], references: [id])
+  reposts  Post[]  @relation("PostReposts")
+
+  likes Like[]
 
   @@index([slug])
 }
 
-
-model Reply {
-  id        String   @id @default(uuid())
-  content   String
-  createdAt DateTime @default(now())
-
-  postId String
-  post   Post   @relation(fields: [postId], references: [id])
-
-  authorId String
-  author   User   @relation("UserReplies", fields: [authorId], references: [id])
-}
-
 model Like {
-  id     String @id @default(uuid())
   postId String
   post   Post   @relation(fields: [postId], references: [id])
 
-  authorId String
-  author   User   @relation("UserLikes", fields: [authorId], references: [id])
+  userId String
+  user   User   @relation("UserLikes", fields: [userId], references: [id])
 
-  @@unique([postId, authorId])
+  @@unique([postId, userId])
 }

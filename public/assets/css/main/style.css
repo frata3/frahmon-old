@@ -6,13 +6,15 @@
   --font-dark: #1a1a1a;
   --teal-light: #00bfbf;
   --teal-dark: #008080;
-  --border-radius: 8px;
+  --border-radius: 12px;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -24,8 +26,6 @@ a {
 html,
 body {
   font-family: Vazir;
-  margin: 0;
-  padding: 0;
   height: 100%;
   /* background-color: lavender; */
   background: var(--bg-body);

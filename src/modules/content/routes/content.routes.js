@@ -1,5 +1,5 @@
-const { Router } = require("express");
-const contentController = require("../controllers/content.controller");
+import { Router } from 'express';
+import contentController from '../controllers/content.controller.js';
 const router = Router();
 
 router.get("/explore", contentController.getExplore);
@@ -10,7 +10,7 @@ router.get("/tag/:tagSlug", contentController.getTagContents);
 router.get("/categories/search", contentController.searchCategories)
 router.get("/topics/search", contentController.searchTopics)
 router.get("/tags/search", contentController.searchTags)
-  
 
-module.exports = router;
+
+export default router;
   

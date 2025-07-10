@@ -29,4 +29,4 @@ async function handleSendMessage(socket, io, data, user, chatService) {
   }
 }
 
-module.exports = { handleSendMessage };
+export default  handleSendMessage;

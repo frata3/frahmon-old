@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from 'mongoose';
 
 
 const topicSchema = new Schema({
@@ -8,6 +8,6 @@ const topicSchema = new Schema({
   description: { type: String },
 });
 
-  
-  module.exports = model('Topic', topicSchema);
+
+export default model('Topic', topicSchema);
   

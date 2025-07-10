@@ -1,5 +1,5 @@
-const autoBind = require("auto-bind");
-const PostService = require("./post.service");
+import autoBind from 'auto-bind';
+import PostService from './post.service.js';
 
 class PostController {
   #service;
@@ -13,7 +13,6 @@ class PostController {
       res.render("pages/blog/blog", {
         posts,
         title: "بلاگ",
-        cssFile: "/assets/css/blog/style.css",
         user: req.session.user,
       });
     } catch (error) {
@@ -32,7 +31,6 @@ class PostController {
         authorName: post.author?.fullname,
         authorUsername: post.author?.username,
         title: "صفحه اصلی",
-        cssFile: "/assets/css/blog/post.css",
         user: req.session.user,
       });
     } catch (error) {
@@ -41,4 +39,4 @@ class PostController {
   }
 }
 
-module.exports = new PostController();
+export default new PostController();

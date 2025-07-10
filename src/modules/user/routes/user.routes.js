@@ -1,11 +1,11 @@
-const { Router } = require("express");
-const userController = require("../controllers/user.account.controller");
-const userProfileRouter = require("./user.profile.routes");
-const userAccountRouter = require("./user.account.routes");
-const userBlogRouter = require("./user.blog.routes");
-const userContentRouter = require("./user.content.routes");
-const userUsersRouter = require("./user.users.routes");
-const userConnectionRouter = require("./user.connection.routes");
+import { Router } from 'express';
+import userController from '../controllers/user.account.controller.js';
+import userProfileRouter from './user.profile.routes.js';
+import userAccountRouter from './user.account.routes.js';
+import userBlogRouter from './user.blog.routes.js';
+import userContentRouter from './user.content.routes.js';
+import userUsersRouter from './user.users.routes.js';
+import userConnectionRouter from './user.connection.routes.js';
 
 const router = Router();
 router.get("/", async (req, res, next) => {
@@ -20,12 +20,12 @@ router.get("/", async (req, res, next) => {
 });
 
 router.use("/profile", userProfileRouter);
-router.use("/blog", userBlogRouter); 
+router.use("/blog", userBlogRouter);
 router.use("/account", userAccountRouter);
-router.use("/content", userContentRouter); 
-router.use("/users", userUsersRouter); 
+router.use("/content", userContentRouter);
+router.use("/users", userUsersRouter);
 
 router.post("/update-personal-info", userController.updatePersonalInfo);
 
-module.exports = router;
+export default router;
   

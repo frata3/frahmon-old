@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from 'mongoose';
 
 
 const tagSchema = new Schema({
@@ -7,6 +7,6 @@ const tagSchema = new Schema({
   topics: [{ type: Schema.Types.ObjectId, ref: 'Topic' }],
 });
 
-  
-  module.exports = model('Tag', tagSchema);
+
+export default model('Tag', tagSchema);
   

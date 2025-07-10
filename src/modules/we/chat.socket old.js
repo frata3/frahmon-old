@@ -1,5 +1,5 @@
-const autoBind = require("auto-bind");
-const service = require("./chat.service");
+import autoBind from 'auto-bind';
+import service from './chat.service.js';
 
 class ChatSocket {
   #io;
@@ -56,7 +56,7 @@ class ChatSocket {
   
 }
 
-module.exports = ChatSocket;
+export default ChatSocket;
 
 // const ip = socket.handshake.address;
 //     const userAgent = socket.handshake.headers['user-agent'];

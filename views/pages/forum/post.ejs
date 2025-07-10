@@ -1,0 +1,51 @@
+<section class="post-view">
+  <article class="post-main">
+    <header>
+      <a href="/@<%= post.author.username %>" class="author">
+        <%= post.author.fullname %> <span>@<%= post.author.username %></span>
+      </a>
+      <time><%= post.createdAt.toLocaleString() %></time>
+    </header>
+
+    <% if (post.quote) { %>
+    <blockquote class="quote">
+      <%= post.quote.content %>
+      <footer>— <%= post.quote.author.fullname %></footer>
+    </blockquote>
+    <% } %>
+    <hr>
+    <p class="title"><%= post.title %></p>
+    <p class="content"><%= post.content %></p>
+    <hr>
+
+    <div class="actions">
+      <span>💬 <%= post.replyCount %></span>
+      <span>🔁 <%= post.repostCount %></span>
+      <button class="like-btn" data-post-id="<%= post.id %>">
+        ❤️ <span class="like-count"><%= post.likeCount %></span>
+      </button>
+
+    </div>
+  </article>
+
+  <form id="reply-form" method="post" action="/forum/create">
+    <textarea name="content" placeholder="پاسخ شما..." required></textarea>
+    <input type="hidden" name="parentId" value="<%= post.id %>">
+    <button type="submit">ارسال پاسخ</button>
+  </form>
+
+  <div id="replies-list">
+    <% post.replies.forEach(reply => { %>
+      <div class="reply">
+        <strong><%= reply.author.fullname %></strong>
+        <p><%= reply.content %></p>
+        <button 
+          class="like-btn" 
+          data-post-id="<%= reply.id %>">
+          ❤️ <span class="like-count"><%= reply.likeCount %></span>
+        </button>
+      </div>
+    <% }) %>
+  </div>
+
+</section>

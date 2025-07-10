@@ -1,8 +1,8 @@
-const { Router } = require("express");
+import { Router } from 'express';
 const router = Router({ mergeParams: true });
-const userPublicController = require("../controllers/user.public.controller");
+import userPublicController from '../controllers/user.public.controller.js';
 
 router.get("/", userPublicController.getUserProfile);
 router.get("/posts", userPublicController.getUserPosts);
 
-module.exports = router;
+export default router;

@@ -1,7 +1,6 @@
-const autoBind = require("auto-bind");
-const UserService = require("../services/user.service");
-const { syncUserToAllModules } = require("../../../common/utils/syncUser.util");
-const bcrypt = require("bcrypt");
+import autoBind from 'auto-bind';
+import UserService from '../services/user.service.js';
+import bcrypt from 'bcrypt';
 class UserController {
   #service;
   constructor() {
@@ -12,7 +11,6 @@ class UserController {
     try {
       res.render("pages/user/memain", {
         title: "ناحیه کاربری",
-        cssFile: "/user/personal-info.css",
         user: req.session.user,
       });
     } catch (error) {
@@ -23,7 +21,6 @@ class UserController {
     try {
       res.render("pages/user/me/account", {
         title: "ناحیه کاربری",
-        cssFile: "/assets/css/user/account.css",
         user: req.session.user,
       });
     } catch (error) {
@@ -77,7 +74,6 @@ class UserController {
       await user.save();
       user[field] = value;
       await user.save();
-      await syncUserToAllModules(user);
       res.json({ success: true, message: "اطلاعات با موفقیت بروزرسانی شد." });
     } catch (error) {
       console.error(error);
@@ -88,4 +84,4 @@ class UserController {
     }
   }
 }
-module.exports = new UserController();
+export default new UserController();

@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from 'mongoose';
 
 const colorsSchema = new Schema({
   bodyBackgroundColor: { type: String, default: "#ffffff" },
@@ -9,4 +9,4 @@ const colorsSchema = new Schema({
   secondaryColor: { type: String, default: "#2ecc71" },
 });
 
-module.exports = model("Colors", colorsSchema);
+export default model("Colors", colorsSchema);

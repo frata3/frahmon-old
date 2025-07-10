@@ -1,7 +1,7 @@
-const autoBind = require("auto-bind");
-const MainSettingsModel = require("../models/settings.main.model");
-const ColorsSettingsModel = require("../models/settings.colors.model");
-const IconsSettingsModel = require("../models/settings.icons.model");
+import autoBind from 'auto-bind';
+import MainSettingsModel from '../models/settings.main.model.js';
+import ColorsSettingsModel from '../models/settings.colors.model.js';
+import IconsSettingsModel from '../models/settings.icons.model.js';
 
 class SettingsService {
   #mainModel;
@@ -37,4 +37,4 @@ class SettingsService {
   }
 }
 
-module.exports = new SettingsService();
+export default new SettingsService();

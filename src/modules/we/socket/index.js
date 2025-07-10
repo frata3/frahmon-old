@@ -1,7 +1,7 @@
 // src/modules/we/socket/index.js
-const ChatSocket = require("./we.socket");
+import ChatSocket from './we.socket.js';
 
-module.exports = function(io) {
+export default function(io) {
   const chatSocket = new ChatSocket(io);
   chatSocket.init();
 };

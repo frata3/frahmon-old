@@ -1,6 +1,6 @@
-const autoBind = require("auto-bind");
-const UserService = require("../user/services/user.service");
-const bcrypt = require("bcrypt");
+import autoBind from 'auto-bind';
+import UserService from '../user/services/user.service.js';
+import bcrypt from 'bcrypt';
 class AuthService {
   #userService;
   constructor() {
@@ -24,4 +24,4 @@ class AuthService {
   }
 }
 
-module.exports = new AuthService();
+export default new AuthService();

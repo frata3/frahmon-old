@@ -1,5 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
-const dotenv = require("dotenv");
+import  {PrismaClient}  from '@prisma/client';
+import dotenv from 'dotenv';
 dotenv.config();
 
 const prisma = new PrismaClient({
@@ -20,4 +20,4 @@ async function connectToDB() {
   }
 }
 
-module.exports = { connectToDB, prisma };
+export { connectToDB, prisma };

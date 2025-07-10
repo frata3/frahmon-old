@@ -1,10 +1,11 @@
-const express = require("express");
+import express from 'express';
 const router = express.Router();
-const forumController = require("../controllers/forum.thread.controller");
+import forumController from '../controllers/forum.thread.controller.js';
 
 router.get("/", forumController.getPosts);
 router.post("/create", forumController.createPost);
+router.post("/like", forumController.toggleLike);
 router.get("/create", forumController.createPostPage);
-// router.get("/posts/:id/:slug", forumController.createPostPage);
+router.get("/:id/:slug", forumController.getPost);
 
-module.exports = router;
+export default router;
