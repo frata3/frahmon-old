@@ -1,0 +1,19 @@
+<div id="create-post-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-container">
+    <form id="create-post-form" method="POST" action="/forum/create" class="modal-form">
+      <div class="modal-header">
+        <a href="#">بایگانی</a>
+        <button type="button" class="modal-close" onclick="hidePostModal()" aria-label="بستن">×</button>
+      </div>
+
+      <div class="modal-body">
+        <input type="text" name="title" class="modal-input" id="create-modal-input" placeholder="عنوان (اختیاری)">
+        <textarea name="content" class="modal-textarea" placeholder="چه چیزی در ذهن داری؟" required></textarea>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="submit-btn">ارسال پست</button>
+      </div>
+    </form>
+  </div>
+</div>

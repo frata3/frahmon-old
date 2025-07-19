@@ -12,6 +12,8 @@ import setCurrentPath from "./common/middleware/setCurrentPath.js";
 import settingsLoader from "./common/middleware/settings.js";
 import settingsRoutes from "./modules/settings/routes/settings.routes.js";
 import setAssets, { js, css } from "./common/middleware/setAssets.js";
+import { addAssetsSupport } from "./common/middleware/addAssetsSupport.js";
+
 import { graphqlHTTP } from "express-graphql";
 import schema from "./graphQL/index.js";
 
@@ -20,12 +22,16 @@ const mainRouter = Router();
 mainRouter.use(setCurrentPath);
 mainRouter.use(settingsLoader);
 mainRouter.use(settingsRoutes);
+mainRouter.use(addAssetsSupport);
+
 mainRouter.use((req, res, next) => {
-  res.locals.user = req.session?.user || null;
+  res.locals.user = req.session.user || null;
   next();
-})
+});
 mainRouter.use(
-  setAssets({}),
+  setAssets({
+
+  }),
   contentRoutes // ########################### routes ###########################
 );
 
@@ -43,8 +49,12 @@ mainRouter.use(
 mainRouter.use(
   "/me",
   setAssets({
-    css: [css("/assets/css/user/account.css"),css("/assets/css/user/create-post.css")],
-    js: [js("/scripts/account/scripts.js")],
+    css: [
+      css("/assets/css/user/account.css"),
+      css("/assets/css/user/create-post.css"),
+      css("/assets/css/user/create-post.css"),
+    ],
+    js: [js("/scripts/account/scripts.js"),js("/scripts/blog/scripts.js")],
   }),
   Authorization,
   userRoutes // ########################### routes ###########################
@@ -63,10 +73,10 @@ mainRouter.use(
   "/we",
   setAssets({
     css: [css("/assets/css/we/style.css")],
-      js: [
-        js("/socket.io/socket.io.js"),
-        js("/scripts/we/index.js", { type: "module", defer: true }),
-        js("/scripts/we/socket.js", { type: "module", defer: true }),
+    js: [
+      js("/socket.io/socket.io.js"),
+      js("/scripts/we/index.js", { type: "module", defer: true }),
+      js("/scripts/we/socket.js", { type: "module", defer: true }),
     ],
   }),
   Authorization,
@@ -76,8 +86,12 @@ mainRouter.use(
 mainRouter.use(
   "/forum",
   setAssets({
-    css: [css("/assets/css/forum/style.css")],
-    js: [js("/scripts/forum/main.js")],
+    css: [css("/assets/css/forum/index.css")],
+    js: [
+      js("/scripts/forum/main.js", { type: "module", defer: true }),
+      js("/scripts/forum/lazyLoad.js", { type: "module", defer: true }),
+      js("/scripts/forum/postPage.js", { type: "module", defer: true }),
+    ],
   }),
   forumRoutes // ########################### routes ###########################
 );
@@ -85,8 +99,8 @@ mainRouter.use(
 mainRouter.use(
   "/blog",
   setAssets({
-    css: [css("/assets/css/blog/style.css"),css("/assets/css/blog/post.css")],
-    js: [js("/scripts/blog/scripts.js")],
+    css: [css("/assets/css/blog/style.css"), css("/assets/css/blog/post.css")],
+    js: [js("/scripts/forum/main.js", { type: "module", defer: true })],
   }),
   postRoutes // ########################### routes ###########################
 );

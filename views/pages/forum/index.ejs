@@ -1,37 +1,32 @@
-<h3>📝 پست‌های فروم</h3>
-<section class="post-feed">
-  <% posts.forEach(post => { %>
-  <article class="post-card">
-    <header>
-      <a href="/@<%= post.author.username %>" class="author">
-        <%= post.author.fullname %> <br><span>@<%= post.author.username %></span>
-      </a>
-      <br>
-      <time><%= post.createdAt.toLocaleString() %></time>
-    </header>
-    <hr>
-    <% if (post.quote) { %>
-    <blockquote class="quote">
-      <%= post.quote.content %>
-      <footer>— <%= post.quote.author.fullname %></footer>
-    </blockquote>
-    <% } %>
-    <a href="/forum/<%= post.id %>/<%= post.slug %>">
-      <p class="title"><%= post.title %></p>
-      <p class="content"><%= post.content %></p>
-    </a>
-    <hr>
+<div class="forum-header"></div>
+<div id="layout">
+  <aside id="sidebar">
+    <h3>هشتگ‌های داغ</h3>
+    <ul>
+      <li>#برنامه‌نویسی</li>
+      <li>#جاوااسکریپت</li>
+      <li>#فناوری</li>
+      <!-- ... -->
+    </ul>
+    <h3>هشتگ‌های داغ</h3>
+    <ul>
+      <li>#برنامه‌نویسی</li>
+      <li>#جاوااسکریپت</li>
+      <li>#فناوری</li>
+      <!-- ... -->
+    </ul>
 
-    <div class="actions">
-      <span>💬 <%= post.replyCount %></span>
-      <span>🔁 <%= post.repostCount %></span>
-      <button 
-  class="like-btn" 
-  data-post-id="<%= post.id %>">
-  ❤️ <span class="like-count"><%= post.likeCount %></span>
-</button>
+  </aside>
 
-    </div>
-  </article>
-  <% }) %>
-</section>
+  <section id="posts-container" data-cursor="<%= nextCursor %>">
+    <% posts.forEach(post => { %>
+      <%- include("./partials/post", { post }) %>
+
+    <% }) %>
+    <div id="loading">در حال بارگذاری...</div>
+  </section>
+  
+  
+</div>
+
+<%- include("create-post-modal") %>

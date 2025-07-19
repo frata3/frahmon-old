@@ -1,10 +1,16 @@
 <nav class="left-nav">
-  <% if( user !== null ){ %>
-  <a href="/me" class="<%= currentSection === 'me' ? 'active' : 'inactive' %>">👤</a>
-  <% } else { %>
-  <a href="/me"> ورود</a>
-  <% } %>
-  <hr>
+  <div class="nav-top">
+    <% if (user) { %>
+    <a href="/me" class="profile-link <%= currentSection === 'me' ? 'active' : 'inactive' %>">
+      <img id="profile-picture" src="/assets/pictures/profile.jfif" alt="ناحیه کاربری" class="profile-picture" />
+    </a>
+    <% } else { %>
+    <a href="/me">
+      <img src="/assets/pictures/icons/person_2.svg" class="svg-icon">
+    </a>
+    <% } %>
+    
+  </div>
   <%
   const navItems = {
     me: [
@@ -12,12 +18,21 @@
       { href: typeof user !== 'null' ? `/@${user?.username}/posts` : "/me", text: typeof user !== 'null' ? "پست‌ها" : "ورود" },
       { href: "/me/users", text: "👩🏼‍🤝‍🧑🏼" },
       { href: "/me/profile", text: "🔧" },
+      { href: "/me/profile", text: "🔧" },
+      { href: "/me/profile", text: "🔧" },
+      { href: "/me/profile", text: "🔧" },
+      { href: "/me/profile", text: "🔧" },
+      { href: "/me/profile", text: "🔧" },
       { href: "/me/content", text: "📄" },
       { href: "/me/content/create", text: "📄⚙️" },
       ...(typeof user !== 'undefined' ? [{ href: "/auth/logout", text: "🚪" }] : [])
     ],
     forum: [
-      { href: "/forum/create", text: "➕" },
+      { 
+        href: "", 
+        text: "➕", 
+        onclick: typeof user !== 'null' ? "showPostModal()" : "event.preventDefault()" 
+      }
     ],
     blog: [
       { href: "/me/blog/new", text: "➕" },
@@ -28,9 +43,19 @@
   };
   const items = navItems[currentSection] || [{ href: "/", text: "🏠︎" }];
   %>
-  <% items.forEach(item => { %>
-  <a href="<%= item.href %>"><%= item.text %></a>
-  <% }); %>
-  <span></span>
-  <a href="">1</a><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a><a href="">6</a><a href="">7</a><a href="">8</a><a href="">9</a><a href="">10</a><a href="">11</a><a href="">12</a><a href="">13</a><a href="">14</a><a href="">15</a><a href="">16</a><a href="">17</a><a href="">18</a><a href="">19</a><a href="">20</a>
+  <div class="nav-scrollable">
+    <% items.forEach(item => { %>
+      <% if (item.onclick) { %>
+        <button onclick="<%= item.onclick %>" class="nav-button-link"><%= item.text %></button>
+      <% } else { %>
+        <a href="<%= item.href %>"><%= item.text %></a>
+      <% } %>
+    <% }); %>
+    
+  </div>
+  <div class="nav-bottom">
+    <button id="themeToggle">
+      <img id="themeIcon" src="/assets/pictures/icons/theme-moon.svg" alt="Toggle theme" class="svg-icon toggle-theme" />
+    </button>
+  </div>
 </nav>

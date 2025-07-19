@@ -1,114 +1,118 @@
 :root {
-  --bg-body:linear-gradient(to bottom left, #e6e6fa, #c8b8e2);
+  --bg-body: linear-gradient(to bottom left, #e6e6fa, #c8b8e2);
   --bg-light: #f9f9f9;
   --bg-dark: #1f1f27;
   --font-light: #f5f5f5;
   --font-dark: #1a1a1a;
   --teal-light: #00bfbf;
-  --teal-dark: #008080; 
+  --teal-dark: #008080;
 }
+
 .blog-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 2rem auto;
-  }
-  
-  .blog-title {
-    text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-    color: #222;
-  }
-  .blog-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center; /* وسط‌چین کردن پست‌ها */
-  }
-  
-  .blog-post {
-    background: var(--bg-light);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    flex: 1 1 calc(33.33% - 1rem); /* عرض هر پست برابر با یک سوم */
-    max-width: 300px; /* حداکثر عرض هر پست */
-    border: 1.5px solid salmon;
-    
-  }
-  
-  .blog-post:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .blog-post img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .blog-content {
-    padding: 1rem;
-  }
-  
-  .blog-post-title {
-    font-size: 1.2rem;
-    color: teal;
-    margin-bottom: 0.5rem;
-  }
-  
-  .blog-post-description {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 1rem;
-  }
-  
-  .blog-post-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  
-  .read-more {
-    text-decoration: none;
-    color: salmon;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  .read-more:hover {
-    color: #6b00cc;
-  }
-  
-  .date {
-    font-size: 0.8rem;
-    color: #777;
-  }
-  
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
-  }
-  
-  .page-link {
-    text-decoration: none;
-    margin: 0 0.3rem;
-    padding: 0.5rem 1rem;
-    color: #777;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-  }
-  
-  .page-link.active,
-  .page-link:hover {
-    background-color: #9b00ff;
-    color: #fff;
-    border-color: #9b00ff;
-  }
-  
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+.blog-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.blog-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  /* وسط‌چین کردن پست‌ها */
+}
+
+.blog-post {
+  background: var(--bg-light);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 1 1 calc(33.33% - 1rem);
+  /* عرض هر پست برابر با یک سوم */
+  max-width: 300px;
+  /* حداکثر عرض هر پست */
+  border: 1.5px solid salmon;
+
+}
+
+.blog-post:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.blog-post img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.blog-content {
+  padding: 1rem;
+}
+
+.blog-post-title {
+  font-size: 1.2rem;
+  color: teal;
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-description {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.blog-post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.read-more {
+  text-decoration: none;
+  color: salmon;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.read-more:hover {
+  color: #6b00cc;
+}
+
+.date {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.page-link {
+  text-decoration: none;
+  margin: 0 0.3rem;
+  padding: 0.5rem 1rem;
+  color: #777;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.page-link.active,
+.page-link:hover {
+  background-color: #9b00ff;
+  color: #fff;
+  border-color: #9b00ff;
+}

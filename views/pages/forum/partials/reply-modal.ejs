@@ -1,0 +1,25 @@
+<div id="reply-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-container">
+    <form id="reply-form" method="POST" action="/forum/create" class="modal-form">
+      <input type="hidden" name="parentId" id="reply-parent-id">
+
+      <div class="modal-header">
+        <a href="#">بایگانی</a>
+        <button type="button" class="modal-close" onclick="hideReplyModal()" aria-label="بستن">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="quoted-post" id="reply-quoted-content">
+          <p>در حال بارگذاری...</p>
+        </div>
+        <h2 class="modal-title" id="reply-title"></h2>
+        <textarea id="reply-textarea" class="modal-textarea" placeholder="پاسخ خود را بنویسید..." name="content"></textarea>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="submit-btn">ارسال پاسخ</button>
+      </div>
+    </form>
+  </div>
+</div>

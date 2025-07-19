@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html>
 
 <head>
   <meta charset="UTF-8">
@@ -20,10 +20,10 @@
       />
     <% }) %>
   <% } %>
-  
+ 
 </head>
 
-<body dir="rtl">
+<body>
   <span class="top-border-frame"></span>
   <span class="top-border-frame-radius"></span>
   <%- include("./nav-right") %>
@@ -31,13 +31,18 @@
   <span class="bottom-border-frame"></span>
   <%- include("./nav-left") %>
 
-  <main id="main-content">
+  <main>
     <%- body %>
     <footer></footer>
   </main>
   
 </body>
+ 
 <script src="/scripts/axios.min.js"></script>
+<script src="/scripts/main/main.js"></script>
+<script>
+  window.currentUser = <%- JSON.stringify(user || null) %>;
+</script>
 
 <% if (jsFiles && jsFiles.length) { %>
   <% jsFiles.forEach(function(file) { %>
@@ -51,6 +56,5 @@
     ></script>
   <% }) %>
 <% } %>
-
 
 </html>

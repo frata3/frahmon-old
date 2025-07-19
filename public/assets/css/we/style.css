@@ -4,10 +4,8 @@ footer {
 
 main {
     /* height: calc(100vh - 0.8rem); */
-
     /* border-bottom-left-radius: 0px; */
     overflow-y: hidden;
-
 }
 
 .chat-container {
@@ -26,9 +24,9 @@ main {
     overflow-y: auto;
     overflow-x: hidden;
     scrollbar-color: teal transparent;
-  scrollbar-width: thin;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
 }
 
 .chat-title {
@@ -44,6 +42,7 @@ main {
     border-bottom: 1px solid #a8a8a8;
     border-top: 1px solid #a8a8a8;
 }
+
 .chat-user p {
     margin: 0 auto;
     color: teal;
@@ -52,8 +51,8 @@ main {
 .chat-user.active {
     background-color: #f0f0f0;
     border-right: 3px solid #007bff;
-  }
-  
+}
+
 .chat-user:hover {
     background: #eee;
     border: 1px solid transparent;
@@ -98,7 +97,7 @@ main {
     scrollbar-color: teal transparent;
     scrollbar-width: thin;
 }
- 
+
 /* #messages {
     overflow-y: auto;
     max-height: 100%;

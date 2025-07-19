@@ -1,7 +1,17 @@
 <nav class="right-nav">
-  <a href="/" class="nav-link <%= currentPath === '/' ? 'active' : '' %>">خانه</a>
-  <a href="/blog" class="nav-link <%= currentPath.startsWith('/blog') ? 'active' : '' %>">بلاگ</a>
-  <a href="/forum" class="nav-link <%= currentPath.startsWith('/forum') ? 'active' : '' %>">فروم</a>
-  <a href="/store" class="nav-link <%= currentPath.startsWith('/store') ? 'active' : '' %>">تجارت</a>
-  <a href="/we" class="nav-link <%= currentPath.startsWith('/we') ? 'active' : '' %>">✉️</a>
+  <a href="/" class="nav-link <%= currentPath === '/' ? 'active' : '' %>">
+    <img src="/assets/pictures/icons/plant-2.svg"  class="svg-icon">
+  </a>
+  <a href="/blog" class="nav-link <%= currentPath.startsWith('/blog') ? 'active' : '' %>">
+    <img src="/assets/pictures/icons/eye-edit.svg"  class="svg-icon">
+  </a>
+  <a href="/forum" class="nav-link <%= currentPath.startsWith('/forum') ? 'active' : '' %>">
+    <img src="/assets/pictures/icons/forum.svg"  class="svg-icon">
+  </a>
+  <a href="/store" class="nav-link <%= currentPath.startsWith('/store') ? 'active' : '' %>">
+    <img src="/assets/pictures/icons/coins.svg"  class="svg-icon">
+  </a>
+  <a href="/we" class="nav-link <%= currentPath.startsWith('/we') ? 'active' : '' %>">
+    <img src="/assets/pictures/icons/send.svg"  class="svg-icon">
+  </a>
 </nav>

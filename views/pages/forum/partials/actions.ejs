@@ -1,0 +1,15 @@
+<div class="post-actions">
+  <button type="button" class="action-btn reply" data-post-id="<%= post.id %>">
+  <img src="/assets/pictures/icons/reply.svg" class="svg-icon">
+  <span class="counter reply"><%= post.replyCount %></span>
+</button>
+  <button class="action-btn repoast <%= post.isReposted ? 'reposted' : '' %>" data-post-id="<%= post.id %>">
+    <img src="/assets/pictures/icons/repost.svg" class="svg-icon">
+    <span class="counter repost"><%= post.repostCount %></span>
+  </button>
+  <button class="action-btn like" data-post-id="<%= post.id %>">
+    <img src="/assets/pictures/icons/like.svg" class="svg-icon <%= post.isLiked ? 'liked' : '' %>">
+    <span class="counter like"><%= post.likeCount %></span>
+  </button>
+</div>
+<%- include('./reply-modal') %>

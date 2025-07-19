@@ -62,11 +62,21 @@ const userResolvers = {
     },
     followUser: async (_, { targetId }, context) => {
       const userId = context.session?.user?._id;
-      if (!userId) return { success: false, message: "شما وارد نشده‌اید." };
-      console.log("graphError : "+ userId+" skip "+ targetId);
-
-      const result = await connectionService.followUser(userId, targetId);
-      return result;
+      if (!userId) {
+        return { success: false, message: "شما وارد نشده‌اید." };
+      }
+      
+      if (userId === targetId) {
+        return { success: false, message: "نمی‌توانید خودتان را دنبال کنید." };
+      }
+      
+      try {
+        const result = await connectionService.followUser(userId, targetId);
+        return result;
+      } catch (error) {
+        console.error("Follow user error:", error);
+        return { success: false, message: "خطایی در سرور رخ داد." };
+      }
     }, 
 
     unfollowUser: async (_, { targetId }, context) => {

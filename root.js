@@ -23,14 +23,14 @@ async function main() {
   await connectToForumDB();
   // await connectToShopDB();
   const app = express();
-  const port = process.env.PORT || 3000;
+  const port = process.env.EXPRESS_PORT || 3000;
   const server = http.createServer(app);
 
   const sessionMiddleware = session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URL }),
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_BLOG_URL }),
     cookie: {
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,

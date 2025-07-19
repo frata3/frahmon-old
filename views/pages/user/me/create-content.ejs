@@ -1,50 +1,133 @@
-<div class="divi">
-<h2>افزودن دسته‌بندی (Category)</h2>
-<form action="/me/content/category" method="POST">
-  <input name="name" placeholder="نام" required />
-  <input name="slug" placeholder="نامک (slug)" required />
-  <textarea name="description" placeholder="توضیحات"></textarea>
-  <button type="submit">ثبت</button>
-</form>
+<div class="content-admin">
 
-<h2>افزودن موضوع (Topic)</h2>
-<form action="/me/content/topic" method="POST">
-  <input name="name" placeholder="نام" required />
-  <input name="slug" placeholder="نامک (slug)" required />
-  <textarea name="description" placeholder="توضیحات"></textarea>
-  <br>
-  <label>انتخاب دسته‌بندی‌ها:</label>
+  <h2>افزودن دسته‌بندی (Category)</h2>
+  <form action="/me/content/category" method="POST">
+    <input name="name" placeholder="نام" required />
+    <input name="slug" placeholder="نامک (slug)" required />
+    <textarea name="description" placeholder="توضیحات"></textarea>
+    <button type="submit">ثبت</button>
+  </form>
 
-  <% categories.forEach(category => { %>
-    <span> | </span>
+  <h2>افزودن موضوع (Topic)</h2>
+  <form action="/me/content/topic" method="POST">
+    <input name="name" placeholder="نام" required />
+    <input name="slug" placeholder="نامک (slug)" required />
+    <textarea name="description" placeholder="توضیحات"></textarea>
 
-    <label dir="rtl">
-      <input type="checkbox" name="categoryIds" value="<%= category._id %>" />
-      <%= category.name %>
-    </label>
-  <% }) %>
-  <button type="submit">ثبت</button>
-</form>
+    <label>انتخاب دسته‌بندی‌ها:</label>
+    <div class="checkbox-group">
+      <% categories.forEach(category => { %>
+        <label dir="rtl">
+          <input type="checkbox" name="categoryIds" value="<%= category._id %>" />
+          <%= category.name %>
+        </label>
+      <% }) %>
+    </div>
 
-<h2>افزودن تگ (Tag)</h2>
-<form action="/me/content/tag" method="POST">
-  <input name="name" placeholder="نام" required />
-  <input name="slug" placeholder="نامک (slug)" required />
-  <br>
-  <label>انتخاب موضوع‌ها:</label>
+    <button type="submit">ثبت</button>
+  </form>
 
-  <% topics.forEach(topic => { %>
-    <span> | </span>
-    <label dir="rtl">
-      <input type="checkbox" name="topicIds" value="<%= topic._id %>" />
-      <%= topic.name %>
-    </label>
-  <% }) %>
-  <button type="submit">ثبت</button>
-</form>
+  <h2>افزودن تگ (Tag)</h2>
+  <form action="/me/content/tag" method="POST">
+    <input name="name" placeholder="نام" required />
+    <input name="slug" placeholder="نامک (slug)" required />
+
+    <label>انتخاب موضوع‌ها:</label>
+    <div class="checkbox-group">
+      <% topics.forEach(topic => { %>
+        <label dir="rtl">
+          <input type="checkbox" name="topicIds" value="<%= topic._id %>" />
+          <%= topic.name %>
+        </label>
+      <% }) %>
+    </div>
+
+    <button type="submit">ثبت</button>
+  </form>
+
 </div>
+
 <style>
-  .divi{
-    margin: 20px;
-  }
+  .content-admin {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #fefefe;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  font-family: inherit;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.content-admin h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.3rem;
+}
+
+.content-admin form {
+  margin-bottom: 2rem;
+}
+
+.content-admin input,
+.content-admin textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.content-admin textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.content-admin button[type="submit"] {
+  background-color: #20B2AA;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.content-admin button[type="submit"]:hover {
+  background-color: #178c85;
+}
+
+.content-admin label {
+  display: inline-block;
+  margin: 0.2rem 0.4rem;
+  font-size: 0.95rem;
+}
+
+.content-admin .checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.content-admin .checkbox-group label {
+  display: flex; 
+  gap: 0.4rem; 
+  background-color: #f4f4f4;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.4rem;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+
+.content-admin .checkbox-group input {
+  margin: 0.4rem 0;
+}
+
 </style>

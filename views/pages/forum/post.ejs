@@ -1,51 +1,42 @@
-<section class="post-view">
-  <article class="post-main">
-    <header>
-      <a href="/@<%= post.author.username %>" class="author">
-        <%= post.author.fullname %> <span>@<%= post.author.username %></span>
-      </a>
-      <time><%= post.createdAt.toLocaleString() %></time>
-    </header>
+<div class="forum-header"></div>
+<div id="layout">
+  <%- include("./partials/aside") %>
+  
 
-    <% if (post.quote) { %>
-    <blockquote class="quote">
-      <%= post.quote.content %>
-      <footer>— <%= post.quote.author.fullname %></footer>
-    </blockquote>
+  <section id="posts-container">
+    <% if (post.parent) { %>
+    <article class="post-card parent-post" data-href="/forum/<%= post.parent.id %>/<%= post.parent.slug %>">
+      <%- include("./partials/post", { post: post.parent }) %>
+    </article>
     <% } %>
-    <hr>
-    <p class="title"><%= post.title %></p>
-    <p class="content"><%= post.content %></p>
-    <hr>
 
-    <div class="actions">
-      <span>💬 <%= post.replyCount %></span>
-      <span>🔁 <%= post.repostCount %></span>
-      <button class="like-btn" data-post-id="<%= post.id %>">
-        ❤️ <span class="like-count"><%= post.likeCount %></span>
-      </button>
+    <article class="post-card current-post">
+      <%- include("./partials/post", { post }) %>
+    </article>
 
-    </div>
-  </article>
-
-  <form id="reply-form" method="post" action="/forum/create">
-    <textarea name="content" placeholder="پاسخ شما..." required></textarea>
-    <input type="hidden" name="parentId" value="<%= post.id %>">
-    <button type="submit">ارسال پاسخ</button>
-  </form>
-
-  <div id="replies-list">
-    <% post.replies.forEach(reply => { %>
-      <div class="reply">
-        <strong><%= reply.author.fullname %></strong>
-        <p><%= reply.content %></p>
-        <button 
-          class="like-btn" 
-          data-post-id="<%= reply.id %>">
-          ❤️ <span class="like-count"><%= reply.likeCount %></span>
-        </button>
+    <% if (user) { %>
+      <form id="reply-form" class="reply-form">
+        <input type="hidden" name="parentId" value="<%= post.id %>">
+        <textarea name="content" placeholder="پاسخ خود را بنویسید..." required></textarea>
+        <button type="submit">ارسال پاسخ</button>
+      </form>
+    <% } else { %>
+      <div class="login-prompt">
+        برای پاسخ دادن، ابتدا وارد شوید.
       </div>
-    <% }) %>
-  </div>
+    <% } %>
 
-</section>
+    <section class="replies" id="replies-list">
+      <% if (post.replies.length > 0) { %>
+      <h4 class="replies-title">پاسخ‌ها</h4>
+      <% post.replies.forEach(reply => { %>
+      <div class="reply-card" data-href="/forum/<%= reply.id %>">
+        <%- include("./partials/reply", { reply }) %>
+      </div>
+      <% }) %> <% } else { %>
+      <p class="no-replies">هنوز پاسخی ثبت نشده است.</p>
+      <% } %>
+    </section>
+  </section>
+</div>
+<%- include("create-post-modal") %>
