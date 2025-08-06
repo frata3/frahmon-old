@@ -1,15 +1,19 @@
-import { default as mongoose } from 'mongoose';
-import dotenv from 'dotenv';
-dotenv.config();
+import mongoose from 'mongoose';
 
-async function connectToDB() {
-  try {
-    await mongoose.connect(process.env.MONGODB_BLOG_URL);
-    console.log("Connected to blogDB via Express");
-  } catch (err) {
-    console.error("Mongoose DB connection failed :", err?.message ?? err);
-    throw err;
-  }
+const connections = {};       
+const pendingConnections = {};
+
+export async function getConnection(dbKey, mongoUrl) {
+  if (connections[dbKey]) return connections[dbKey];
+  if (pendingConnections[dbKey]) return await pendingConnections[dbKey];
+
+  const connectionPromise = mongoose.createConnection(mongoUrl).asPromise();
+  pendingConnections[dbKey] = connectionPromise;
+
+  const conn = await connectionPromise;
+  connections[dbKey] = conn;
+  delete pendingConnections[dbKey];
+
+  console.log(`Connected to ${dbKey}`);
+  return conn;
 }
-
-export default connectToDB;

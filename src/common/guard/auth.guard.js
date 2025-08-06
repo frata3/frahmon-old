@@ -5,7 +5,7 @@ const Authorization = async (req, res, next) => {
     if (!req.session.user || !req.session.user._id) {
       return res.redirect("/auth/login");
     }
-    const user = await UserService.findOne({ _id: req.session.user._id });
+    const user = await UserService.findForSession({ _id: req.session.user._id });
 
     if (!user) {
       return res.redirect("/auth/login");

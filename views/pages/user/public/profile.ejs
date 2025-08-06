@@ -1,0 +1,35 @@
+<div id="public-profile-page" class="profile-container">
+  <section id="profile-section" class="profile-section">
+    <div id="public-profile" class="profile-header">
+      <div class="profile-info">
+        <img
+          src="<%= user.avatar || '/assets/pictures/default-avatar.png' %>"
+          alt="avatar"
+          class="profile-avatar"
+        />
+
+        <h2 class="profile-name"><%= user.fullname %></h2>
+        <p class="profile-username">@<span id="user-data-username"><%= user.username %></span></p>
+        <input type="hidden" id="user-data-id" value="<%= user._id%>">
+        <div class="profile-follow-stats">
+          <span><strong><%= followersCount %></strong> دنبال‌کننده</span>
+          <span><strong><%= followingCount %></strong> دنبال‌کرده</span>
+        </div>
+
+        <% if (isMe) { %>
+        <a href="/me" class="btn btn-edit-profile">ویرایش پروفایل</a>
+        <% } else { %>
+          <button
+            id="follow-btn"
+            class="btn <%= isFollowing ? "btn-unfollow" : "btn-follow" %>"
+            data-following="<%= isFollowing %>"
+          >
+            <%= isFollowing ? "آنفالو" : "دنبال کردن" %>
+          </button>
+        <% } %>
+      </div>
+    </div>
+  </section>
+  <div class="profile-content" id="profile-content"></div>
+
+</div>

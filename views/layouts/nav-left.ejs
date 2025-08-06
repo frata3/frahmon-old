@@ -1,61 +1,83 @@
 <nav class="left-nav">
   <div class="nav-top">
-    <% if (user) { %>
-    <a href="/me" class="profile-link <%= currentSection === 'me' ? 'active' : 'inactive' %>">
-      <img id="profile-picture" src="/assets/pictures/profile.jfif" alt="ناحیه کاربری" class="profile-picture" />
-    </a>
+    <% if (currentUser) { %>
+      <a href="/me">
+        <img id="profile-picture" 
+             src="<%= currentUser.avatar%>" 
+             alt="ناحیه کاربری" 
+             class="profile-picture <%= currentSection === 'me' ? 'active' : 'inactive' %>" />
+      </a>
     <% } else { %>
-    <a href="/me">
-      <img src="/assets/pictures/icons/person_2.svg" class="svg-icon">
-    </a>
+      <a href="/me" class="profile-picture">
+        <img src="/assets/pictures/default-avatar.png" class="profile-picture">
+      </a>
     <% } %>
-    
   </div>
+  
+  <div class="nav-line"></div>
+  
   <%
   const navItems = {
     me: [
-      { href: typeof user !== 'null' ? `/@${user?.username}` : "/me", text: typeof user !== 'null' ? "👤 " : "ورود" },
-      { href: typeof user !== 'null' ? `/@${user?.username}/posts` : "/me", text: typeof user !== 'null' ? "پست‌ها" : "ورود" },
-      { href: "/me/users", text: "👩🏼‍🤝‍🧑🏼" },
-      { href: "/me/profile", text: "🔧" },
-      { href: "/me/profile", text: "🔧" },
-      { href: "/me/profile", text: "🔧" },
-      { href: "/me/profile", text: "🔧" },
-      { href: "/me/profile", text: "🔧" },
-      { href: "/me/profile", text: "🔧" },
-      { href: "/me/content", text: "📄" },
-      { href: "/me/content/create", text: "📄⚙️" },
-      ...(typeof user !== 'undefined' ? [{ href: "/auth/logout", text: "🚪" }] : [])
+      { text: "فروم", tab: "forum" },
+      { text: "بلاگ", tab: "blog" },
+      { text: "تجارت", tab: "posts" },
+      { text: "نظرات", tab: "comments" },
+      { text: "ذخیره‌ها", tab: "saved" },
+      { text: "کاربران", tab: "users" },
+      { text: "هویت", tab: "account" },
+      ...(typeof currentUser !== 'undefined' ? [{ href: "/auth/logout", text: "🚪" }] : [])
     ],
     forum: [
       { 
         href: "", 
         text: "➕", 
-        onclick: typeof user !== 'null' ? "showPostModal()" : "event.preventDefault()" 
+        onclick: typeof currentUser !== 'null' ? "showPostModal()" : "event.preventDefault()" 
       }
     ],
     blog: [
-      { href: "/me/blog/new", text: "➕" },
+      { href: "/blog/create", text: "➕" },
     ],
     we: [
       { href: "/we", text: "گفت‌وگوها" },
     ]
   };
-  const items = navItems[currentSection] || [{ href: "/", text: "🏠︎" }];
+  // const items = navItems[currentSection] || [{ href: "/", text: "🏠︎" }];
+const items = () => {
+  if (currentSection.startsWith("@")) {
+    return [
+      { text: "فروم", tab: "forum" },
+      { text: "بلاگ", tab: "blog" },
+    ];
+  } else {
+    return navItems[currentSection] || [{ href: "/", text: "🏠︎" }];
+  }
+};
+
+const processedItems = items();
+
   %>
+  
   <div class="nav-scrollable">
-    <% items.forEach(item => { %>
-      <% if (item.onclick) { %>
-        <button onclick="<%= item.onclick %>" class="nav-button-link"><%= item.text %></button>
-      <% } else { %>
-        <a href="<%= item.href %>"><%= item.text %></a>
-      <% } %>
+    <% processedItems.forEach(item => { %>
+      <div class="nav-scrollable-item" data-tab="<%= item.tab %>">
+        <% if (item.tab) { %>
+          <button class="nav-button-link"><%= item.text %></button>
+        <% } else if (item.onclick) { %>
+          <button onclick="<%= item.onclick %>" class="nav-button-link"><%= item.text %></button>
+        <% } else { %>
+          <a href="<%= item.href %>" class="nav-link"><%= item.text %></a>
+        <% } %>
+      </div>
     <% }); %>
-    
   </div>
+  
+  <div class="nav-line"></div>
+  
   <div class="nav-bottom">
-    <button id="themeToggle">
+    <button id="themeToggle" class="switch-theme">
       <img id="themeIcon" src="/assets/pictures/icons/theme-moon.svg" alt="Toggle theme" class="svg-icon toggle-theme" />
     </button>
   </div>
+  
 </nav>

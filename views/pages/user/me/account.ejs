@@ -3,32 +3,30 @@
   <div class="profile-grid">
     <form class="profile-form" data-field="email">
       <label>ایمیل</label>
-      <input type="text" name="value" value="<%= user.email %>">
+      <input type="text" name="value" value="<%= currentUser.email %>">
       <button type="submit">ذخیره</button>
       <div class="msg"></div>
     </form>
 
     <form class="profile-form" data-field="username">
       <label>نام کاربری</label>
-      <input type="text" name="value" value="<%= user.username %>">
+      <input type="text" name="value" value="<%= currentUser.username %>">
       <button type="submit">ذخیره</button>
       <div class="msg"></div>
     </form>
 
     <form class="profile-form" data-field="fullname">
       <label>نام کامل</label>
-      <input type="text" name="value" value="<%= user.fullname %>">
+      <input type="text" name="value" value="<%= currentUser.fullname %>">
       <button type="submit">ذخیره</button>
       <div class="msg"></div>
     </form>
-
-    <form class="profile-form" data-field="address">
-      <label>آدرس</label>
-      <input type="text" name="value" value="<%= user.address || '' %>">
+    <form class="profile-form" data-field="avatar">
+      <label> تصویر پروفایل</label>
+      <input type="text" name="value" value="<%= currentUser.avatar %>">
       <button type="submit">ذخیره</button>
       <div class="msg"></div>
     </form>
-
     <form class="profile-form" data-field="password">
       <label>رمز عبور جدید</label>
       <input type="password" name="value" placeholder="********">

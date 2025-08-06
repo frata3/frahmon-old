@@ -1,6 +1,6 @@
-import bcrypt from 'bcrypt';
-import userService from '../../../modules/user/services/user.service.js';
-import connectionService from '../../../modules/user/services/user.connection.service.js';
+import bcrypt from "bcrypt";
+import userService from "../../../modules/user/services/user.service.js";
+import connectionService from "../../../modules/user/services/user.connection.service.js";
 
 const userResolvers = {
   Query: {
@@ -19,14 +19,11 @@ const userResolvers = {
     updatePersonalInfo: async (_, { field, value }, context) => {
       const userId = context.session?.user?._id;
       if (!userId) return { success: false, message: "شما وارد نشده‌اید." };
-
       const user = await userService.findById(userId);
       if (!user) return { success: false, message: "کاربر پیدا نشد." };
-
       if (!user.schema.path(field)) {
         return { success: false, message: "فیلد نامعتبر است." };
       }
-
       if (field === "email") {
         const existingUser = await userService.isEmailTaken(value);
         if (existingUser && existingUser._id.toString() !== userId) {
@@ -36,7 +33,6 @@ const userResolvers = {
           };
         }
       }
-
       if (field === "username") {
         const existingUser = await userService.isUsernameTaken(value);
         if (existingUser && existingUser._id.toString() !== userId) {
@@ -46,7 +42,6 @@ const userResolvers = {
           };
         }
       }
-
       if (field === "password") {
         const isSame = await bcrypt.compare(value, user.password);
         if (isSame) {
@@ -56,7 +51,6 @@ const userResolvers = {
           };
         }
       }
-
       await userService.update(user, field, value);
       return { success: true, message: "اطلاعات بروزرسانی شد." };
     },
@@ -65,11 +59,9 @@ const userResolvers = {
       if (!userId) {
         return { success: false, message: "شما وارد نشده‌اید." };
       }
-      
       if (userId === targetId) {
         return { success: false, message: "نمی‌توانید خودتان را دنبال کنید." };
       }
-      
       try {
         const result = await connectionService.followUser(userId, targetId);
         return result;
@@ -77,32 +69,31 @@ const userResolvers = {
         console.error("Follow user error:", error);
         return { success: false, message: "خطایی در سرور رخ داد." };
       }
-    }, 
-
+    },
     unfollowUser: async (_, { targetId }, context) => {
       const userId = context.session?.user?._id;
       if (!userId) return { success: false, message: "شما وارد نشده‌اید." };
-
       const result = await connectionService.unfollowUser(userId, targetId);
       return result;
     },
-
     acceptFollowRequest: async (_, { requesterId }, context) => {
       const userId = context.session?.user?._id;
       if (!userId) return { success: false, message: "شما وارد نشده‌اید." };
-
-      const result = await connectionService.acceptFollowRequest(userId, requesterId);
+      const result = await connectionService.acceptFollowRequest(
+        userId,
+        requesterId
+      );
       return result;
     },
-
     rejectFollowRequest: async (_, { requesterId }, context) => {
       const userId = context.session?.user?._id;
       if (!userId) return { success: false, message: "شما وارد نشده‌اید." };
-
-      const result = await connectionService.rejectFollowRequest(userId, requesterId);
+      const result = await connectionService.rejectFollowRequest(
+        userId,
+        requesterId
+      );
       return result;
     },
   },
 };
-
 export default userResolvers;

@@ -1,0 +1,41 @@
+<section id="blog-container-create">
+  <form method="POST" action="/blog/create" class="blog-form-create">
+    <h1 class="blog-form-title">ایجاد پست جدید</h1>
+    
+    <div class="form-group">
+      <label for="title">عنوان پست</label>
+      <input type="text" id="title" name="title" required />
+    </div>
+    <div class="form-group">
+      <label for="description">توضیحات پست </label>
+      <input type="text" id="description" name="description" required />
+    </div>
+    <div id="blog-editor-container">
+    <!-- Toolbar -->
+    <div id="editor-toolbar" class="toolbar">
+      <button type="button" data-action="bold"><b>B</b></button>
+      <button type="button" data-action="italic"><i>I</i></button>
+      <button type="button" data-action="code">Code</button>
+      <button type="button" data-action="highlight">Highlight</button>
+      <button type="button" data-action="link">🔗 Link</button>
+      <button type="button" data-action="image">🖼️ Image</button>
+  
+      <select data-action="align">
+        <option value="">Align</option>
+        <option value="left">↤ Left</option>
+        <option value="center">↔ Center</option>
+        <option value="right">↦ Right</option>
+      </select>
+    </div>
+  
+    <!-- Editor -->
+    <div id="editor" class="editor"></div>
+  
+    <!-- Hidden input to store final content -->
+    <input type="hidden" name="content" id="hidden-content" />
+  </div>
+  
+    <button type="submit" class="btn-submit" id="submit-post">انتشار</button>
+  </form>
+  
+  </section>

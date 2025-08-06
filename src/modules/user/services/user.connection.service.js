@@ -6,27 +6,48 @@ class ConnectionService {
     autoBind(this);
     this.#Model = ConnectionModel;
   }
-
   async findOne(query) {
     return await this.#Model.findOne(query);
   }
   async countDocuments(query) {
     return await this.#Model.countDocuments(query);
   }
-  async getFollowers(userId) {
+  async getFollowersCount(userId) {
     const connections = await this.#Model
       .find({ target: userId, type: "follow", status: "active" })
       .populate("source", "username fullname");
     return connections.map((c) => c.source);
   }
-
-  async getFollowings(userId) {
+  async getFollowingsCount(userId) {
     const connections = await this.#Model
       .find({ source: userId, type: "follow", status: "active" })
       .populate("target", "username fullname");
     return connections.map((c) => c.target);
   }
-
+  async countFollowers(userId) {
+    return await this.#Model.countDocuments({
+      target: userId,
+      type: "follow",
+      status: "active"
+    });
+  } 
+  async countFollowing(userId) {
+    return await this.#Model.countDocuments({
+      source: userId,
+      type: "follow",
+      status: "active"
+    });
+  }
+  async listFollowers(userId) {
+    return await this.#Model
+      .find({ target: userId, type: "follow", status: "active" })
+      .populate("source", "username fullname avatar");
+  }
+  async listFollowing(userId) {
+    return await this.#Model
+      .find({ source: userId, type: "follow", status: "active" })
+      .populate("target", "username fullname avatar");
+  }  
   async getConnectionStatus(sourceId, targetId) {
     if (!sourceId || !targetId) return "none";
     const connection = await this.#Model.findOne({
@@ -36,7 +57,6 @@ class ConnectionService {
     });
     return connection ? connection.status : "none";
   }
-
   async followUser(sourceId, targetId) {
     if (sourceId === targetId) {
       return { success: false, message: "نمی‌توانید خودتان را دنبال کنید." };
@@ -67,7 +87,6 @@ class ConnectionService {
     await newConnection.save();
     return { success: true, message: "با موفقیت دنبال شد." };
   }
-
   async unfollowUser(sourceId, targetId) {
     const deleted = await this.#Model.findOneAndDelete({
       source: sourceId,
@@ -82,7 +101,6 @@ class ConnectionService {
 
     return { success: true, message: "دنبال کردن لغو شد." };
   }
-
   async acceptFollowRequest(targetId, sourceId) {
     const connection = await this.#Model.findOne({
       source: sourceId,
@@ -100,7 +118,6 @@ class ConnectionService {
 
     return { success: true, message: "درخواست پذیرفته شد." };
   }
-
   async rejectFollowRequest(targetId, sourceId) {
     const connection = await this.#Model.findOneAndDelete({
       source: sourceId,

@@ -1,0 +1,15 @@
+<div class="post-card post-forum">
+    <a href="/forum/<%= post.id %>" target="_blank">
+      <h2 class="post-title"><%= post.title %></h2>
+    </a>
+    <p class="post-desc">
+      <%= post.content.length > 150 ? post.content.substring(0, 150) + '...' : post.content %>
+    </p>
+    <div class="post-meta">
+      <span>💬 انجمن</span>
+      <span><%= new Date(post.createdAt).toLocaleDateString('fa-IR') %></span>
+      <span>👁 <%= post.viewCount %></span>
+      <span>❤️ <%= post.likeCount %></span>
+    </div>
+  </div>
+  

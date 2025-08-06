@@ -2,7 +2,7 @@ import autoBind from 'auto-bind';
 import CategoryModel from '../models/content.category.model.js';
 import TopicModel from '../models/content.topic.model.js';
 import TagModel from '../models/content.tag.model.js';
-import postService from '../../post/post.service.js';
+import postService from '../../blog/blog.service.js';
 
 class ContentService {
   #categoryModel;

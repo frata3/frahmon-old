@@ -1,6 +1,6 @@
 <div id="reply-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
-  <div class="modal-container">
-    <form id="reply-form" method="POST" action="/forum/create" class="modal-form">
+  <div class="modal-container" id="reply-modal">
+    <form id="reply-form" class="modal-form">
       <input type="hidden" name="parentId" id="reply-parent-id">
 
       <div class="modal-header">
@@ -14,7 +14,6 @@
         </div>
         <h2 class="modal-title" id="reply-title"></h2>
         <textarea id="reply-textarea" class="modal-textarea" placeholder="پاسخ خود را بنویسید..." name="content"></textarea>
-
       </div>
 
       <div class="modal-footer">

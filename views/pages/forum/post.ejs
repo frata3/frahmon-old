@@ -1,36 +1,24 @@
 <div class="forum-header"></div>
-<div id="layout">
+<div id="forum-layout">
   <%- include("./partials/aside") %>
   
 
   <section id="posts-container">
     <% if (post.parent) { %>
-    <article class="post-card parent-post" data-href="/forum/<%= post.parent.id %>/<%= post.parent.slug %>">
-      <%- include("./partials/post", { post: post.parent }) %>
+    <article class="post-card parent-post">
+      <%- include("./partials/card", { post: post.parent }) %>
     </article>
     <% } %>
 
     <article class="post-card current-post">
-      <%- include("./partials/post", { post }) %>
+      <%- include("./partials/card", { post }) %>
     </article>
-
-    <% if (user) { %>
-      <form id="reply-form" class="reply-form">
-        <input type="hidden" name="parentId" value="<%= post.id %>">
-        <textarea name="content" placeholder="پاسخ خود را بنویسید..." required></textarea>
-        <button type="submit">ارسال پاسخ</button>
-      </form>
-    <% } else { %>
-      <div class="login-prompt">
-        برای پاسخ دادن، ابتدا وارد شوید.
-      </div>
-    <% } %>
 
     <section class="replies" id="replies-list">
       <% if (post.replies.length > 0) { %>
       <h4 class="replies-title">پاسخ‌ها</h4>
       <% post.replies.forEach(reply => { %>
-      <div class="reply-card" data-href="/forum/<%= reply.id %>">
+      <div class="reply-card">
         <%- include("./partials/reply", { reply }) %>
       </div>
       <% }) %> <% } else { %>

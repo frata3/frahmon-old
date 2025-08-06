@@ -1,3 +1,4 @@
+export const currentUser = JSON.parse(document.querySelector('meta[name="current-user"]').content);
 const toggleBtn = document.getElementById("themeToggle");
 const themeIcon = document.getElementById("themeIcon");
 

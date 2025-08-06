@@ -1,2 +1,15 @@
-<h1>به ناحیه کاربری خوش آمدید!</h1>
-<p>این صفحه اصلی ناحیه کاربری است.</p>
+<div id="me-page" class="me-container">
+  <section id="me-profile" class="me-profile">
+    <div>
+      <img src="<%= user.avatar || "/assets/pictures/profile.jfif"%>" alt="avatar" class="me-avatar ">
+      <a href="/@<%= user.username %>">
+        <h2 class="me-name"><%= user.fullname %></h2>
+      </a>
+      <div class="me-follow-stats">
+        <span><strong><%= user.followersCount %></strong> دنبال‌کننده</span>
+        <span><strong><%= user.followingCount %></strong> دنبال‌کرده</span>
+      </div>
+    </div>
+  </section>
+  <div class="me-content" id="me-content"></div>
+</div>

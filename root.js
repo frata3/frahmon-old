@@ -2,12 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import expressEjsLayouts from "express-ejs-layouts";
 import router from "./src/app.routes.js";
-import connectToMongoDB from "./src/config/mongoose.config.js";
 import { connectToDB as connectToForumDB } from "./src/config/prisma.config.js";
-
-// const { connectToDB: connectToShopDB } = require("./src/config/sequelize.config");
 import session from "express-session";
-
 import flash from "connect-flash";
 import MongoStore from "connect-mongo";
 import notFoundHandler from "./src/common/exception/not-found.handler.js";
@@ -19,9 +15,7 @@ import WeSocket from "./src/modules/we/socket/we.socket.js";
 dotenv.config();
 
 async function main() {
-  await connectToMongoDB();
   await connectToForumDB();
-  // await connectToShopDB();
   const app = express();
   const port = process.env.EXPRESS_PORT || 3000;
   const server = http.createServer(app);

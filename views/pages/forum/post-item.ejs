@@ -1,0 +1,12 @@
+    <% if (item.post) { %>
+      <%- include("./partials/card", { post: item.post }) %>
+    <% } else if (item.reply) { %>
+      <%- include("./partials/card", { post: item.parent }) %>
+      <section class="best-replies">
+        <%- include("./partials/reply", { reply: item.reply }) %>
+      </section>
+
+
+  
+    <% } %>
+  

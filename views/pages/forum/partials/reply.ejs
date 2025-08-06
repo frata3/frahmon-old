@@ -1,7 +1,7 @@
 <div class="reply-card">
   <div class="post-base">
     <a class="post-overlay-link" href="/forum/<%= reply.id %>" tabindex="-1"></a>
-    <%- include("./post-header", { post: reply }) %>
+    <%- include("./card-header", { post: reply }) %>
 
     <p class="post-content"><%= reply.content.length > 280 ? reply.content.substring(0, 280) + '...' : reply.content %></p>
     <%- include("./actions", { post: reply }) %>

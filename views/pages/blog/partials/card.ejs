@@ -1,0 +1,97 @@
+<div class="post">
+  <a class="post-overlay-link" href="/blog/<%= post._id %>/<%= post.slug %> %>" tabindex="-1"></a>
+
+
+  <div class="blog-image-container">
+    <img src="<%= post.thumbnail || '/assets/pictures/111.png' %>" alt="تصویر مقاله" class="blog-image">
+  </div>
+
+  <div class="blog-content">
+    <h3 class="blog-post-title"><%= post.title %></h3>
+    <p class="blog-post-description"><%= post.description %></p>
+
+    <div class="blog-post-info">
+      <div class="blog-post-time">
+        <time class="post-date"><%= toJalali(post.createdAt) %></time>
+        <span class="reading-time">۵ دقیقه مطالعه</span>
+      </div>
+    </div>
+
+    <div class="blog-post-info">
+      <div class="blog-post-tags">
+        <span class="tag">#برنامه_نویسی</span>
+        <span class="tag">#سوال_جواب_چرا</span>
+        <span class="tag">#نرم_افزار</span>     
+
+        <!-- <% if (post.tags && post.tags.length) { %>
+              <% post.tags.forEach(tag => { %>
+                <span class="tag">#<%= tag %></span>
+              <% }) %>
+            <% } %> -->
+      </div>
+      <div class="blog-post-stats">
+        <span class="meta-item">
+          <%= post.likesCount || 54%>
+          <img src="/assets/pictures/icons/like.svg" class="svg-icon">
+        </span>
+        <span class="meta-item">
+          <%= post.commentsCount || 23%>
+          <img src="/assets/pictures/icons/reply.svg" class="svg-icon">
+        </span>
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+  <div class="post-footer">
+    <a href="/@<%= post.author.username %>" class="author-link" onclick="event.stopPropagation()">
+      <img src="<%= post.author.avatar || '/assets/pictures/header.jpg' %>" alt="avatar" class="avatar">
+      <div class="post-meta">
+        <span class="author-name"><%= post.author.fullname %></span>
+        <img src="/assets/pictures/icons/point.svg" class="svg-icon time-split" alt="•">
+        <span class="username">@<%= post.author.username %></span>
+      </div>
+    </a>
+
+    <!-- <div class="post-footer-right"> -->
+    <button class="more-options-button" aria-label="More options" data-post-id="<%= post._id %>">
+      <img src="/assets/pictures/icons/more.svg" class="svg-icon more">
+    </button>
+    <div class="more-options-menu hidden">
+
+      <% if (post.author._id === currentUser?._id) { %>
+      <button class="menu-item option-edit" data-post-id="<%= post._id %>">
+        <img src="/assets/pictures/icons/point.svg" class="svg-icon">
+        <span>ویرایش</span>
+      </button>
+      <button class="menu-item option-delete" data-post-id="<%= post._id %>">
+        <img src="/assets/pictures/icons/point.svg" class="svg-icon">
+        <span>حذف</span>
+      </button>
+      <% } %>
+      <button class="menu-item option-copy-link" data-post-id="<%= post._id %>">
+        <img src="/assets/pictures/icons/point.svg" class="svg-icon">
+        <span>کپی لینک</span>
+      </button>
+      <button class="menu-item option" data-post-id="<%= post._id %>">
+        <img src="/assets/pictures/icons/point.svg" class="svg-icon">
+        <span>مسدودیت</span>
+      </button>
+      <button class="menu-item option" data-post-id="<%= post._id %>">
+        <img src="/assets/pictures/icons/point.svg" class="svg-icon">
+        <span>بی‌صدا</span>
+      </button>
+      <button class="menu-item option" data-post-id="<%= post._id %>">
+        <img src="/assets/pictures/icons/point.svg" class="svg-icon">
+        <span>گزارش</span>
+      </button>
+    </div>
+    <!-- </div> -->
+  </div>
+
+  </a>
+
+</div>

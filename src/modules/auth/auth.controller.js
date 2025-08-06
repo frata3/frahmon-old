@@ -8,12 +8,11 @@ class AuthController {
     this.#service = AuthService;
   }
   async registerPage(req, res, next) {
-    addAssets(res, {
-      css: ["/assets/css/auth/style.css"],
-      js: []
-    });
-    
     try {
+      res.addAssets({
+        css: ["/assets/css/auth/style.css"],
+        js: ["/script"]
+      });
       res.render("pages/auth/register", {
         title: "ساخت حساب",
       });
@@ -34,12 +33,11 @@ class AuthController {
     }
   }
   async loginPage(req, res, next) {
-    addAssets(res, {
-      css: ["/assets/css/auth/style.css"],
-      js: []
-    });
-    
     try {
+      res.addAssets({
+        css: ["/assets/css/auth/style.css"]
+      });
+      
       res.render("pages/auth/login", {
         title: "ورود به حساب",
       });

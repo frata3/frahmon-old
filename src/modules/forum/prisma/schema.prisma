@@ -11,6 +11,7 @@ model User {
   id       String @id @default(uuid())
   username String @unique
   fullname String
+  avatar   String @default("/assets/pictures/default-avatar.png")
 
   posts Post[] @relation("UserPosts")
   likes Like[] @relation("UserLikes")
@@ -18,9 +19,10 @@ model User {
 
 model Post {
   id        String   @id
-  content   String
+  slug      String?
   title     String?
-  slug      String?  @unique
+  type      String   @default("forum")
+  content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

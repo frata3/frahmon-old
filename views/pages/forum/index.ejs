@@ -1,6 +1,6 @@
 <div class="forum-header"></div>
-<div id="layout">
-  <aside id="sidebar">
+<div id="forum-layout">
+  <aside id="forum-sidebar">
     <h3>هشتگ‌های داغ</h3>
     <ul>
       <li>#برنامه‌نویسی</li>
@@ -17,14 +17,28 @@
     </ul>
 
   </aside>
+  <section id="posts-container" data-cursor="<%= nextCursor || '' %>">
+    
+  <% if (posts.length < 1) { %>
+    <p>هنوز پستی ساخته نشده</p>
+  <% } %>
+  <% posts.forEach(item => { %>
+    <%- include("./post-item", { item }) %>
+    <div class="middle-line-post">
+      <div class="start"></div>
+      <div class="corner-radius-left"></div>
+      <div class="corner-wrap">
+        <div class="curve-corner"></div>
+        <div class="v-line"></div>
+        <img src="/assets/pictures/icons/plant-2.svg" class="svg-icon vertical-end">
+      </div>
+      <div class="corner-radius-right"></div>
+    </div>
+  <% }) %>
 
-  <section id="posts-container" data-cursor="<%= nextCursor %>">
-    <% posts.forEach(post => { %>
-      <%- include("./partials/post", { post }) %>
+  <div id="loading">در حال بارگذاری...</div>
+</section>
 
-    <% }) %>
-    <div id="loading">در حال بارگذاری...</div>
-  </section>
   
   
 </div>

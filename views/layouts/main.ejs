@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="current-user" content='<%- JSON.stringify(currentUser || null) %>'>
   <title><%= title %></title>
   <link rel="icon" href="data:,">
 
@@ -35,25 +36,33 @@
     <%- body %>
     <footer></footer>
   </main>
+
+  <div id="confirm-modal" class="confirm-modal-overlay hidden">
+    <div class="modal-box">
+      <p id="confirm-message">آیا مطمئنی؟</p>
+      <div class="modal-actions">
+        <button id="confirm-yes" class="btn btn-danger">بله</button>
+        <button id="confirm-no" class="btn btn-secondary">خیر</button>
+      </div>
+    </div>
+  </div>
   
 </body>
  
-<script src="/scripts/axios.min.js"></script>
-<script src="/scripts/main/main.js"></script>
-<script>
-  window.currentUser = <%- JSON.stringify(user || null) %>;
-</script>
+<script src="/scripts/lib/axios.min.js"></script>
+<script src="/scripts/main/main.js" type="module" defer></script>
 
 <% if (jsFiles && jsFiles.length) { %>
   <% jsFiles.forEach(function(file) { %>
     <script 
       src="<%= file.src %>"
-      <% if (file.type) { %> type="<%= file.type %>" <% } %>
-      <% if (file.defer) { %> defer <% } %>
-      <% if (file.async) { %> async <% } %>
-      <% if (file.nomodule) { %> nomodule <% } %>
-      <% if (file.crossorigin) { %> crossorigin="<%= file.crossorigin %>" <% } %>
-    ></script>
+          <%= file.type ? `type=${file.type}` : "" %>
+          <%= file.defer ? "defer" : "" %>
+          <%= file.async ? "async" : "" %>
+          <%= file.nomodule ? "nomodule" : "" %>
+          <%= file.crossorigin ? `crossorigin="${file.crossorigin}"` : "" %>
+      > </script>
+
   <% }) %>
 <% } %>
 

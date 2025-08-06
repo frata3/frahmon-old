@@ -1,0 +1,26 @@
+<article class="post-card" 
+         data-id="<%= post.id %>" 
+         data-type="<%= post.parentId ? 'reply' : 'post' %>">
+  <div class="post-base">
+    <a class="post-overlay-link" href="/forum/<%= post.id %>/<%= post.slug %> %>" tabindex="-1"></a>
+
+    <%- include("./card-header", { post }) %>
+
+    <% if (post.quote) { %>
+    <blockquote class="quote-box">
+      <div class="quote-content"><%= post.quote.content %></div>
+      <span class="quote-author">— <%= post.quote.author.fullname %></span>
+    </blockquote>
+    <% } %>
+
+    <% if (post.title) { %>
+    <h3 class="post-title"><%= post.title %></h3>
+    <% } %>
+    <p class="post-content"><%= post.content.length > 280 ? post.content.substring(0, 280) + '...' : post.content %></p>
+
+    <%- include("./actions", { post }) %>
+  </div>
+
+  
+</article>
+

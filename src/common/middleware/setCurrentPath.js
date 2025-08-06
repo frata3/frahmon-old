@@ -4,6 +4,5 @@ export default function setCurrentPath(req, res, next) {
 
   res.locals.currentPath = path;
   res.locals.currentSection = section;
-
   next();
 };
