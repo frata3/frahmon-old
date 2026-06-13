@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 import bcrypt from "bcrypt";
-import syncUserToAllModules from "../../../common/utils/syncUser.util.js";
+import syncUserToAllModules from "../../../config/syncUser.config.js";
 import { getConnection } from "../../../config/mongoose.config.js";
 
 const UserSchema = new Schema(
@@ -21,8 +21,8 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-UserSchema.post("save", async function (doc) {
-  await syncUserToAllModules(doc);
+UserSchema.post("save", async (user) => {
+  await syncUserToAllModules(user);
 });
 
 const coreConnection = await getConnection(

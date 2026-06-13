@@ -1,0 +1,67 @@
+<div class="order-container">
+  <h2>سفارش شماره <%= order.id %></h2>
+  <div class="order-info">
+    <p>وضعیت: <%= order.status %></p>
+    <p class="total-amount">مبلغ کل: <%= order.total_amount %> تومان</p>
+    <p class="discount-amount">تخفیف: <%= order.discount_amount || 0 %> تومان</p>
+    <p class="final-amount">مبلغ نهایی: <%= order.final_amount %> تومان</p>
+  </div>
+  <h3>محصولات</h3>
+  <div class="items">
+    <% order.items.forEach(item => { %>
+    <div class="item">
+      <span><%= item.product.title %></span>
+      <span>تعداد: <%= item.count %></span>
+      <span>قیمت واحد: <%= item.product.price %> تومان</span>
+      <span>جمع: <%= item.product.price * item.count %> تومان</span>
+    </div>
+    <% }) %>
+  </div>
+  <div class="applied-discounts-section">
+    <h3>کدهای تخفیف اعمال شده</h3>
+    <div class="applied-discounts">
+      <% if (order.discounts && order.discounts.length > 0) { %>
+        <% order.discounts.forEach(discount => { %>
+          <div class="applied-discount-item" data-discount-id="<%= discount.id %>">
+            <span class="discount-code">کد: <mark><%= discount.code %></mark></span>
+            <span class="discount-value">
+              <% if (discount.amount) { %>
+                مبلغ: <mark><%= discount.amount %> تومان</mark>
+              <% } else { %>
+                درصد: <mark><%= discount.percent %>%</mark>
+              <% } %>
+            </span>
+            <span class="discount-type">نوع: <%= discount.type === 'product' ? 'محصول' : 'سبد خرید' %></span>
+            <button class="btn-remove-discount" data-discount-id="<%= discount.id %>" data-order-id="<%= order.id %>">
+              حذف
+            </button>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p class="no-discounts">هیچ کد تخفیفی اعمال نشده است</p>
+      <% } %>
+    </div>
+  </div>
+  <div class="add-discount-section">
+    <h3>اعمال کد تخفیف جدید</h3>
+    <div class="discount-input-group">
+      <input type="text" id="discountCode" name="discountCode" placeholder="کد تخفیف را وارد کنید">
+      <button class="btn-submit-discount" data-order-id="<%= order.id %>">
+        <span>اعمال تخفیف</span>
+      </button>
+    </div>
+  </div>
+  <% if (order.discountBreakdown && order.discountBreakdown.length > 0) { %>
+  <div class="discount-breakdown-section">
+    <h4>جزئیات تخفیف‌ها</h4>
+    <div class="discount-breakdown">
+      <% order.discountBreakdown.forEach(breakdown => { %>
+        <div class="breakdown-item">
+          <span>کد <mark><%= breakdown.code %></mark>: <%= breakdown.discountAmount %> تومان</span>
+          <span>(<%= breakdown.affectedItems %> محصول)</span>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+  <% } %>
+</div>

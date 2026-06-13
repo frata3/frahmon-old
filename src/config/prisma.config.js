@@ -10,7 +10,7 @@ const prisma = new PrismaClient({
   },
 });
 
-async function connectToDB() {
+async function connectToForumDB() {
   try {
     await prisma.$connect();
     console.log("Connected to PostgreSQL via Prisma");
@@ -20,4 +20,4 @@ async function connectToDB() {
   }
 }
 
-export { connectToDB, prisma };
+export { connectToForumDB, prisma };

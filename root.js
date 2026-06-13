@@ -1,8 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
-import expressEjsLayouts from "express-ejs-layouts";
 import router from "./src/app.routes.js";
-import { connectToDB as connectToForumDB } from "./src/config/prisma.config.js";
+import swaggerConfig from "./src/config/swagger.config.js";
+import expressEjsLayouts from "express-ejs-layouts";
+import { connectToForumDB } from "./src/config/prisma.config.js";
+import { connectToMarketDB} from "./src/config/sequelize.config.js";
+import { syncSequelizeModels} from "./src/config/sequelize.init.config.js";
 import session from "express-session";
 import flash from "connect-flash";
 import MongoStore from "connect-mongo";
@@ -16,10 +19,12 @@ dotenv.config();
 
 async function main() {
   await connectToForumDB();
+  await connectToMarketDB();
+  await syncSequelizeModels();
   const app = express();
   const port = process.env.EXPRESS_PORT || 3000;
   const server = http.createServer(app);
-
+  swaggerConfig(app)
   const sessionMiddleware = session({
     secret: process.env.SESSION_SECRET,
     resave: false,

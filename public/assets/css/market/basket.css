@@ -1,0 +1,134 @@
+.baskets {
+    max-width: 960px;
+    margin: 24px auto;
+    display: flex;
+    gap: 20px;
+    padding: 0 12px;
+    flex-direction: row;
+  }
+  
+  .basket {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .basket-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .seller {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: 1px solid var(--teal-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .avatar span {
+    font-weight: 700;
+    color: var(--salmon);
+  }
+  
+  .seller-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .seller-name {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--font);
+  }
+  
+  .seller-username {
+    margin: 0;
+    font-size: 12px;
+    color: var(--font-muted);
+  }
+  
+  .items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px dashed var(--border);
+    border-radius: var(--border-radius-small);
+    padding: 10px 12px;
+    background: var(--bg-main);
+  }
+  
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .item .title {
+    font-size: 15px;
+    color: var(--font);
+  }
+  
+  .item .meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--font-muted);
+  }
+  
+  .line-total {
+    font-weight: 700;
+    color: var(--font);
+  }
+  
+  .basket-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+    margin-top: 4px;
+  }
+  
+  .subtotal-label {
+    color: var(--font-muted);
+  }
+  
+  .grand-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    padding: 14px 16px;
+    font-size: 18px;
+    color: var(--font);
+  }
+  

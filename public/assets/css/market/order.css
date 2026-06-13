@@ -1,0 +1,132 @@
+.order-container {
+  margin: 2rem ;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+
+.order-info {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.order-info p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.items {
+  margin-bottom: 30px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+}
+
+.applied-discounts-section {
+  margin: 20px 0;
+  padding: 15px;
+  background: #e8f5e8;
+  border-radius: 8px;
+}
+
+.applied-discount-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background: white;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #d4edda;
+}
+
+.applied-discount-item mark {
+  background-color: #d1ecf1;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.btn-remove-discount {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-remove-discount:hover {
+  background-color: #c82333;
+}
+
+.add-discount-section {
+  margin: 20px 0;
+  padding: 15px;
+  background: #fff3cd;
+  border-radius: 8px;
+}
+
+.discount-input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#discountCode {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.btn-submit-discount {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-submit-discount:hover {
+  background-color: #218838;
+}
+
+.discount-breakdown-section {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.breakdown-item:last-child {
+  border-bottom: none;
+}
+
+.no-discounts {
+  color: #6c757d;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}

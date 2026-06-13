@@ -1,0 +1,9 @@
+<% if(!currentUser) {%>
+<p>ابتدا وارد شوید</p>
+<% } %>
+<section class="baskets">
+  <% (baskets || []).forEach((basket, i) => { %>
+  <%- include("./partials/basket-card", { basket, i }) %>
+  <% }) %>
+
+</section>

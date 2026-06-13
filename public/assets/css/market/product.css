@@ -1,0 +1,136 @@
+.product-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.product-card {
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--inner-shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--font);
+  margin: 0;
+}
+
+.product-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 16px;
+  color: var(--font-muted);
+}
+
+.product-price {
+  font-weight: 700;
+  color: var(--teal);
+  font-size: 20px;
+}
+
+.product-count {
+  font-size: 14px;
+  color: var(--font-muted);
+}
+
+.product-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--font);
+}
+
+.product-attributes {
+  margin-top: 16px;
+}
+
+.product-attributes h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--font);
+}
+
+.product-attributes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.product-attributes li {
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-small);
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.attr-key {
+  font-weight: 600;
+  color: var(--font);
+}
+
+.attr-value {
+  margin-left: 4px;
+  color: var(--font-muted);
+}
+
+.btn-add-to-cart {
+  background: var(--salmon);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s ease;
+}
+
+.btn-add-to-cart:hover {
+  background: var(--salmon-hover);
+}
+
+.cart-actions {
+  margin-top: 16px;
+}
+
+.quantity-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-small);
+  padding: 6px 12px;
+}
+
+.quantity-controls button {
+  background: var(--teal);
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.quantity-controls button:hover {
+  background: var(--teal-hover);
+}
+
+.quantity-controls .quantity {
+  font-weight: 600;
+  color: var(--font);
+  min-width: 24px;
+  text-align: center;
+}

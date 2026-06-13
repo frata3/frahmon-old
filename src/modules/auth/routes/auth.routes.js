@@ -1,10 +1,10 @@
 import { Router } from "express";
-import AuthController from "./auth.controller.js";
+import AuthController from "../controllers/auth.controller.js";
 const router = Router();
 
-router.get("/register", AuthController.registerPage);
-router.get("/login", AuthController.loginPage);
+router.get("/", AuthController.renderAuthPage);
 
+router.post("/check-email", AuthController.checkEmail);
 router.post("/register", AuthController.register);
 router.post("/login", AuthController.login);
 

@@ -1,0 +1,39 @@
+<div class="form-container">
+  <form action="/market/product/new" method="POST" class="product-form">
+    
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" required />
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" id="price" name="price" step="0.01" required />
+    </div>
+
+    <div class="form-group">
+      <label for="count">Count</label>
+      <input type="number" id="count" name="count" required />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="4"></textarea>
+    </div>
+
+    <!-- Attributes Section -->
+    <div class="form-group">
+      <label>Attributes</label>
+      <div id="attributes-container">
+        <div class="attribute-pair">
+          <input type="text" name="attributes[0][key]" placeholder="Key (e.g. color)" required />
+          <input type="text" name="attributes[0][value]" placeholder="Value (e.g. red)" required />
+          <button type="button" class="btn-remove">✕</button>
+        </div>
+      </div>
+      <button type="button" id="btn-add" class="btn-add">+ Add Attribute</button>
+    </div>
+
+    <button type="submit" class="btn-submit">Save Product</button>
+  </form>
+</div>

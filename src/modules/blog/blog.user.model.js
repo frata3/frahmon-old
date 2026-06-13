@@ -6,6 +6,7 @@ const BlogUserSchema = new Schema(
     _id: String,
     username: String,
     fullname: String,
+    avatar: {type: String, default: "/assets/pictures/default-avatar.png"},
   },
   { timestamps: true }
 );

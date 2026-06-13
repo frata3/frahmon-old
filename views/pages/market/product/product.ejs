@@ -1,0 +1,54 @@
+<div class="product-container">
+  <div class="product-card">
+    
+    <h1 class="product-title"><%= product.title %></h1>
+    <div class="seller-info">
+      <h3 class="seller-name">
+        <%= product?.seller?.fullname || product?.seller?.username || "فروشنده" %>
+      </h3>
+      <p class="seller-username">
+        @<%= product?.seller?.username || "username" %>
+      </p>
+    </div>
+
+    <div class="product-meta">
+      <span class="product-price">$<%= product.price %></span>
+      <span class="product-count">Stock: <%= product.count %></span>
+    </div>
+
+    <p class="product-description"><%= product.description %></p>
+
+    <% if (product.details && product.details.length > 0) { %>
+      <div class="product-attributes">
+        <h3>Attributes</h3>
+        <ul>
+          <% product.details.forEach(attr => { %>
+            <li>
+              <span class="attr-key"><%= attr.key %>:</span>
+              <span class="attr-value"><%= attr.value %></span>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
+    <div class="cart-actions">
+      <% if (product.addedCount && product.addedCount > 0) { %>
+        <div class="quantity-controls" data-product-id="<%= product.id %>" data-seller-id="<%= product.sellerId %>">
+          <button class="btn-decrease">➖</button>
+          <span class="quantity"><%= product.addedCount %></span>
+          <button class="btn-increase">➕</button>
+        </div>
+      <% } else { %>
+        <button 
+          class="btn-add-to-cart" 
+          data-product-id="<%= product.id %>" 
+          data-seller-id="<%= product.sellerId %>">
+          <span>➕ افزودن به سبد خرید</span>
+        </button>
+      <% } %>
+    </div>
+    
+    
+  </div>
+</div>

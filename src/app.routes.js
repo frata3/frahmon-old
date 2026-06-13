@@ -1,13 +1,14 @@
 import { Router } from "express";
-import authRoutes from "./modules/auth/auth.routes.js";
+import authRoutes from "./modules/auth/routes/auth.routes.js";
 import { graphqlHTTP } from "express-graphql";
 import schema from "./graphQL/index.js";
 import userRoutes from "./modules/user/routes/user.routes.js";
 import Authorization from "./common/guard/auth.guard.js";
-import postRoutes from "./modules/blog/blog.routes.js";
 import homeRoutes from "./modules/home/home.routes.js";
-import weRoutes from "./modules/we/routes/we.routes.js";
+import postRoutes from "./modules/blog/blog.routes.js";
 import forumRoutes from "./modules/forum/forum.routes.js";
+import marketRoutes from "./modules/market/routes/market.routes.js";
+import weRoutes from "./modules/we/routes/we.routes.js";
 import userPublicRoutes from "./modules/user/routes/user.public.routes.js";
 import setCurrentPath from "./common/middleware/setCurrentPath.js";
 // import contentRoutes from "./modules/content/routes/content.routes.js";
@@ -38,6 +39,7 @@ mainRouter.use("/graphql", graphqlHTTP({ schema, graphiql: true }));
 mainRouter.use("/me", Authorization, userRoutes);
 mainRouter.use("/forum", forumRoutes);
 mainRouter.use("/blog", postRoutes);
+mainRouter.use("/market", marketRoutes);
 mainRouter.use("/@:username", userPublicRoutes);
 
 mainRouter.use(

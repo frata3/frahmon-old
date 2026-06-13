@@ -1,0 +1,58 @@
+<% let sellerTotal = 0; %> 
+<section class="basket">
+    <header class="basket-header">
+      <div class="seller">
+        <div class="avatar">
+          <span>
+            <%= (basket?.seller?.fullname || basket?.seller?.username || "?").toString().trim().charAt(0).toUpperCase() %>
+          </span>
+        </div>
+        <div class="seller-info">
+          <h2 class="seller-name">
+            <%= basket?.seller?.fullname || basket?.seller?.username || "فروشنده" %>
+          </h2>
+          <p class="seller-username">
+            @<%= basket?.seller?.username || "username" %>
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <ul class="items">
+      <% (basket.items || []).forEach((item) => { 
+               const price = Number(item?.product?.price) || 0;
+               const count = Number(item?.count) || 0;
+               const lineTotal = price * count;
+               sellerTotal += lineTotal;
+          %>
+      <li class="item">
+        <div class="item-info">
+          <div class="title"><%= item?.product?.title || "بدون عنوان" %></div>
+          <div class="meta">
+            <span class="count"><%= count %>×</span>
+            <span class="price"><%= price.toLocaleString() %></span>
+          </div>
+        </div>
+      </li>
+      <% }) %>
+    </ul>
+
+    <section class="basket-footer">
+      <div class="subtotal-label">جمع سبد فروشنده</div>
+      <div class="subtotal-value"><%= sellerTotal.toLocaleString() %></div>
+    </section>
+    <div class="footer-basket">
+        <button 
+          class="btn-add-to-order" 
+          data-basket-id="<%= basket.id %>" 
+          data-seller-id="<%= basket.sellerId %>">
+          <span class="btn-value-add">ثبت سفارش</span>
+        </button>
+        <button 
+          class="btn-remove-basket" 
+          data-basket-id="<%= basket.id %>" 
+          data-seller-id="<%= basket.sellerId %>">
+          <span class="btn-value-remove">حذف سبد </span>
+        </button>
+      </div>
+  </section>

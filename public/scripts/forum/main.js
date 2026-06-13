@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const openBelow = buttonRect.bottom + menuHeight < viewportHeight;
 
       menu.classList.remove("above", "below");
-      menu.classList.add(openBelow ? "below" : "above");
+      menu.classList.add(openBelow ? "below" : "above"); 
 
       const buttonOffsetTop = isOptionsBtn.offsetTop;
       const buttonOffsetLeft = isOptionsBtn.offsetLeft;

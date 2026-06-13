@@ -1,0 +1,13 @@
+<% if (products.length < 1) { %>
+    <p>هنوز پستی ساخته نشده</p>
+    <% } %>
+  <section class="blog-container">
+  <div class="blog-grid">
+
+    <% products.forEach(product => { %>
+      <%- include("./partials/product-card", { product }) %>
+    <% }) %>
+</div>
+
+    <div id="loading">در حال بارگذاری...</div>
+  </section>

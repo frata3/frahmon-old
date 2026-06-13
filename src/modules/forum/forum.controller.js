@@ -1,7 +1,7 @@
 import autoBind from "auto-bind";
 import forumService from "./forum.service.js";
 import { nanoid } from "nanoid";
-import syncUserToAllModules from "../../common/utils/syncUser.util.js";
+import syncUserToAllModules from "../../config/syncUser.config.js";
 import generateSlug from "../../common/utils/slugify.util.js";
 
 class ForumController {
@@ -123,7 +123,6 @@ class ForumController {
         });
       }
 
-      // اگر صفحه اول هست
       res.addAssets({
         css: ["/assets/css/forum/index.css"],
         js: [

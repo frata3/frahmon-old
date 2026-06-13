@@ -1,0 +1,98 @@
+.form-container {
+  margin: 1rem 5rem;
+  padding: 24px;
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--inner-shadow);
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--font);
+}
+
+input,
+textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-small);
+  font-size: 14px;
+  color: var(--font);
+  font-family: inherit;
+  background: var(--bg-main);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid var(--teal);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 128, 128, 0.2);
+}
+
+.btn-submit {
+  background: var(--teal);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s ease;
+}
+
+.attribute-pair {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.attribute-pair input {
+  flex: 1;
+}
+
+.btn-add {
+  background: var(--salmon);
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 12px;
+  border: none;
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.btn-add:hover {
+  background: var(--salmon-hover);
+}
+
+.btn-remove {
+  background: transparent;
+  border: none;
+  color: var(--font-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s ease;
+}
+
+.btn-remove:hover {
+  color: var(--salmon);
+}
